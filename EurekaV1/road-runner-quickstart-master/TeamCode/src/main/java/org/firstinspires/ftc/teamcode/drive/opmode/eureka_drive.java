@@ -16,7 +16,7 @@ public class eureka_drive extends LinearOpMode {
 //    double prevError_gyro = 0;
 
     double kp_pole_mid = 0.04;
-    double kd_pole_mid = 0.01;
+    double kd_pole_mid = 0.05;
     double ki_pole_mid = 0;
     double prevError_pole_mid = 0;
 
