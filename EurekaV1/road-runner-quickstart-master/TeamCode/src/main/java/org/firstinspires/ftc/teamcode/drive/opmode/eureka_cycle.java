@@ -39,7 +39,7 @@ public class eureka_cycle extends LinearOpMode {
 
     //NEW VALUES AT 5:1 elevator ratio
 //    public static int LOW = 330;   // 320
-//    public static int MID = 700;   //740           //   counts value
+//    public static int MID = 700;   //740           // counts value
 //    public static int HIGH = 1110; //1160
 
     //NEW VALUES AT 3:1 elevator ratio
