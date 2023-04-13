@@ -38,9 +38,15 @@ public class eureka_cycle extends LinearOpMode {
     //    public static int HIGH = 1760;
 
     //NEW VALUES AT 5:1 elevator ratio
-    public static int LOW = 330;   // 320
-    public static int MID = 700;   //740           // counts value
-    public static int HIGH = 1110; //1160
+//    public static int LOW = 330;   // 320
+//    public static int MID = 700;   //740           // counts value
+//    public static int HIGH = 1110; //1160
+
+    //NEW VALUES AT 3:1 elevator ratio
+    public static int LOW = 183;   // 320
+    public static int MID = 387;   //740           // counts value
+    public static int HIGH = 620; //1160
+
     public static int MAX = 1150;   // MAX IS 1175 , dont go above this value
     public static int MIN = 290;
     public static int TEST = 1100; //1100   //700 previous value
@@ -317,19 +323,19 @@ public class eureka_cycle extends LinearOpMode {
 
                 ElevateRight.setTargetPosition(HIGH);
                 ElevateRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                ElevateRight.setPower(0.8);
+                ElevateRight.setPower(1);
 
                 ElevateLeft.setTargetPosition(HIGH);
                 ElevateLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                ElevateLeft.setPower(0.8);
+                ElevateLeft.setPower(1);
             } else if (gamepad1.dpad_down) {
                 ElevateRight.setTargetPosition(0);
                 ElevateRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                ElevateRight.setPower(0.8);
+                ElevateRight.setPower(0.95);
 
                 ElevateLeft.setTargetPosition(0);
                 ElevateLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                ElevateLeft.setPower(0.8);
+                ElevateLeft.setPower(0.95);
 
             }
             else if(gamepad1.start){
