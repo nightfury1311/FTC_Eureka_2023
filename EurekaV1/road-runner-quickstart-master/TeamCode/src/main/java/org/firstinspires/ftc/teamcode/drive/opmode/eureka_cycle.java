@@ -37,15 +37,15 @@ public class eureka_cycle extends LinearOpMode {
     //    public static int MID = 1150;
     //    public static int HIGH = 1760;
 
-    //NEW VALUES AT 5:1 elevator ratio
-//    public static int LOW = 330;   // 320
-//    public static int MID = 700;   //740           // counts value
-//    public static int HIGH = 1110; //1160
+    // NEW VALUES AT 5:1 elevator ratio
+    public static int LOW = 330;   // 320
+    public static int MID = 700;   //740           // counts value
+    public static int HIGH = 1110; //1160
 
-    //NEW VALUES AT 3:1 elevator ratio
-    public static int LOW = 183;   // 320
-    public static int MID = 387;   //740           // counts value
-    public static int HIGH = 620; //1160
+//    //NEW VALUES AT 3:1 elevator ratio
+//    public static int LOW = 183;   // 320
+//    public static int MID = 387;   //740           // counts value
+//    public static int HIGH = 610; //1160
 
     public static int MAX = 1150;   // MAX IS 1175 , dont go above this value
     public static int MIN = 290;
@@ -363,7 +363,7 @@ public class eureka_cycle extends LinearOpMode {
                 SlideLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                 SlideLeft.setPower(0.95);
 
-                sleep(900);
+                sleep(1000);
                 servoRotation.setPosition(ROTATE_DROP);
                 SlideRight.setTargetPosition(270);
                 SlideRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
