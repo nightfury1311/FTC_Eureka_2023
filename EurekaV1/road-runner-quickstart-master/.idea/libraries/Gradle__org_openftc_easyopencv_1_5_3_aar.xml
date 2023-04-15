@@ -3,7 +3,6 @@
     <CLASSES>
       <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/5387646dcb15be1fb844527b263ba8e9/transformed/jetified-easyopencv-1.5.3/jars/classes.jar!/" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-3/5387646dcb15be1fb844527b263ba8e9/transformed/jetified-easyopencv-1.5.3/AndroidManifest.xml" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/5387646dcb15be1fb844527b263ba8e9/transformed/jetified-easyopencv-1.5.3/res" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.openftc/easyopencv/1.5.3/573a866dc1c3f9005aa3d93b9d27aae6d58b99f5/easyopencv-1.5.3-javadoc.jar!/" />

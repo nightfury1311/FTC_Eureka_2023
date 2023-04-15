@@ -270,7 +270,6 @@ public class eureka_cycle extends LinearOpMode {
 
                 sleep(200);
 
-
                 servoLeft.setPosition(DROP_ARM_LEFT);
                 servoRight.setPosition(DROP_ARM_RIGHT);
 
@@ -338,6 +337,10 @@ public class eureka_cycle extends LinearOpMode {
                 ElevateLeft.setPower(0.95);
 
             }
+
+
+            //////////////START CYCLE////////////////////////
+
             else if(gamepad1.start){
 
                 SlideRight.setTargetPosition(MAX);
@@ -413,75 +416,8 @@ public class eureka_cycle extends LinearOpMode {
                 SlideLeft.setPower(0.8);
 
             }
-//            else if(gamepad1.start){              4.1s unreliable cycle
-//
-//                SlideRight.setTargetPosition(MAX);
-//                SlideRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-//                SlideRight.setPower(0.7);
-//
-//                SlideLeft.setTargetPosition(MAX);
-//                SlideLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-//                SlideLeft.setPower(0.7);
-//
-//                sleep(100);
-//                servoGripper.setPosition(GRIPPER_CLOSE);
-//                sleep(200);
-//
-//                servoLeft.setPosition(HOME_ARM);
-//                servoRight.setPosition(HOME_ARM);
-//
-//                sleep(400);
-//                servoRotation.setPosition(ROTATE_DROP);
-//                SlideRight.setTargetPosition(270);
-//                SlideRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-//                SlideRight.setPower(0.95);
-//
-//                SlideLeft.setTargetPosition(270);
-//                SlideLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-//                SlideLeft.setPower(0.95);
-//
-//                sleep(300);
-//
-//                servoLeft.setPosition(DROP_ARM_LEFT);
-//                servoRight.setPosition(DROP_ARM_RIGHT);
-//
-//                sleep(800);
-//
-//                servoGripper.setPosition(GRIPPER_OPEN);
-//                sleep(200);
-//                servoLeft.setPosition(PICK_ARM_LEFT);
-//                servoRight.setPosition(PICK_ARM_RIGHT);
-//                sleep(200);
-//                ElevateRight.setTargetPosition(HIGH);
-//                ElevateRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-//                ElevateRight.setPower(0.8);
-//
-//                ElevateLeft.setTargetPosition(HIGH);
-//                ElevateLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-//                ElevateLeft.setPower(0.8);
-//
-//                servoRotation.setPosition(ROTATE_PICK);
-//
-//                sleep(1000);
-//
-//                ElevateLeft.setTargetPosition(0);
-//                ElevateLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-//                ElevateLeft.setPower(1);
-//                ElevateRight.setTargetPosition(0);
-//                ElevateRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-//                ElevateRight.setPower(1);
-//
-//                SlideRight.setTargetPosition(TEST);
-//                SlideRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-//                SlideRight.setPower(0.8);
-//
-//                SlideLeft.setTargetPosition(TEST);
-//                SlideLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-//                SlideLeft.setPower(0.8);
-//
-//            }
-            else if(gamepad1.x){
 
+            else if(gamepad1.x){
 
                 servoLeft.setPosition(GROUND_ARM_LEFT);
                 servoRight.setPosition(GROUND_ARM_RIGHT);
@@ -593,8 +529,6 @@ public class eureka_cycle extends LinearOpMode {
                 servoGripper.setPosition(GRIPPER_OPEN);
             }
 
-
-
             //ManualIncrement
             if(gamepad2.dpad_down){
                 ElevateRight.setTargetPosition(ElevateRight.getCurrentPosition()-50);
@@ -621,66 +555,6 @@ public class eureka_cycle extends LinearOpMode {
                 SlideLeft.setPower(0.5);
             }
 
-            //              WORKINGGGGGGGGGG CODEEEEEEEEEE DONT TOUCHHHHHHHHHHH
-//            SlideRight.setTargetPosition(MAX);
-//            SlideRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-//            SlideRight.setPower(0.7);
-//
-//            SlideLeft.setTargetPosition(MAX);
-//            SlideLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-//            SlideLeft.setPower(0.7);
-//
-//            sleep(100);
-//            servoGripper.setPosition(GRIPPER_CLOSE);
-//            sleep(200);
-//            servoRotation.setPosition(ROTATE_DROP);
-//            servoLeft.setPosition(DROP_ARM_LEFT);
-//            servoRight.setPosition(DROP_ARM_RIGHT);
-//
-//            SlideRight.setTargetPosition(MIN);
-//            SlideRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-//            SlideRight.setPower(0.95);
-//
-//            SlideLeft.setTargetPosition(MIN);
-//            SlideLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-//            SlideLeft.setPower(0.95);
-//
-//            sleep(1200);
-//
-//            servoGripper.setPosition(GRIPPER_OPEN);
-//            sleep(200);
-//            servoLeft.setPosition(PICK_ARM_LEFT);
-//            servoRight.setPosition(PICK_ARM_RIGHT);
-//            sleep(200);
-//            ElevateRight.setTargetPosition(HIGH);
-//            ElevateRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-//            ElevateRight.setPower(1);
-//
-//            ElevateLeft.setTargetPosition(HIGH);
-//            ElevateLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-//            ElevateLeft.setPower(1);
-//
-//            servoRotation.setPosition(ROTATE_PICK);
-//
-//            sleep(1200);
-//
-//            ElevateLeft.setTargetPosition(0);
-//            ElevateLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-//            ElevateLeft.setPower(1);
-//            ElevateRight.setTargetPosition(0);
-//            ElevateRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-//            ElevateRight.setPower(1);
-//
-//            SlideRight.setTargetPosition(TEST);
-//            SlideRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-//            SlideRight.setPower(0.8);
-//
-//            SlideLeft.setTargetPosition(TEST);
-//            SlideLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-//            SlideLeft.setPower(0.8);
-//            }
-
-
             telemetry.addData("Servo Gripper Position", servoGripper.getPosition());
             telemetry.addData("Servo Left Position", servoLeft.getPosition());
             telemetry.addData("Servo Right Position", servoRight.getPosition());
@@ -694,8 +568,6 @@ public class eureka_cycle extends LinearOpMode {
             telemetry.addData("Current SlideRight", SlideRight.getCurrent(CurrentUnit.AMPS));
             telemetry.addData("SlideRight", SlideRight.getCurrentPosition());
             telemetry.update();
-
-
 
         }
 
