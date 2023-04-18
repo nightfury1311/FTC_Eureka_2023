@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.drive.opmode;
+package org.firstinspires.ftc.teamcode.drive.Teleop;
 
 
 import static org.firstinspires.ftc.teamcode.util.AngleFunction.angleWrap;
