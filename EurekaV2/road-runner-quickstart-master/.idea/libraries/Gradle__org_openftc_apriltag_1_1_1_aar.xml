@@ -1,9 +1,9 @@
 <component name="libraryTable">
   <library name="Gradle: org.openftc:apriltag:1.1.1@aar">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/cb2768fd0b0c902f3f5185bba2333c6d/transformed/jetified-apriltag-1.1.1/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/cb2768fd0b0c902f3f5185bba2333c6d/transformed/jetified-apriltag-1.1.1/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/cb2768fd0b0c902f3f5185bba2333c6d/transformed/jetified-apriltag-1.1.1/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/2913b681e70c68467e019ebca340646d/transformed/jetified-apriltag-1.1.1/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/2913b681e70c68467e019ebca340646d/transformed/jetified-apriltag-1.1.1/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/2913b681e70c68467e019ebca340646d/transformed/jetified-apriltag-1.1.1/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.openftc/apriltag/1.1.1/afc329d027d74de72ca3e0284a34973a0524c38/apriltag-1.1.1-javadoc.jar!/" />

@@ -560,6 +560,7 @@ public class eureka_cycle extends LinearOpMode {
             telemetry.addData("Servo Right Position", servoRight.getPosition());
             telemetry.addData("Servo Rotation Positon", servoRotation.getPosition());
             telemetry.addData("Current ElevateLeft", ElevateLeft.getCurrent(CurrentUnit.AMPS));
+
             telemetry.addData("ElevateLeft", ElevateLeft.getCurrentPosition());
             telemetry.addData("Current ElevateRight", ElevateRight.getCurrent(CurrentUnit.AMPS));
             telemetry.addData("ElevateRight", ElevateRight.getCurrentPosition());
