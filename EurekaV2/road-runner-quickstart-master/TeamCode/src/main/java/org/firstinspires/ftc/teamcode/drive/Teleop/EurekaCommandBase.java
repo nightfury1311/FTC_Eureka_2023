@@ -25,6 +25,7 @@ import org.firstinspires.ftc.teamcode.drive.CommandBase.ElevatorLow;
 import org.firstinspires.ftc.teamcode.drive.CommandBase.ElevatorMid;
 import org.firstinspires.ftc.teamcode.drive.TeleopSubsystems.Drive;
 import org.firstinspires.ftc.teamcode.drive.TeleopSubsystems.Elevator;
+import org.firstinspires.ftc.teamcode.drive.TeleopSubsystems.Servos;
 
 import java.util.function.BooleanSupplier;
 import  com.acmerobotics.dashboard.config.Config;
@@ -46,7 +47,7 @@ public class EurekaCommandBase extends CommandOpMode {
     Elevator elevator;
     Drive drive;
     GamepadEx driver;
-    Button  liftHighButton, liftMidButton, liftLowButton, liftHomeButton;
+    Button  liftHighButton, liftMidButton, liftLowButton, liftHomeButton, gripperButton;
     @Override
     public void initialize() {
 
@@ -56,6 +57,7 @@ public class EurekaCommandBase extends CommandOpMode {
         liftMidButton = new GamepadButton(driver, GamepadKeys.Button.Y);
         liftLowButton = new GamepadButton(driver, GamepadKeys.Button.A);
         liftHomeButton = new GamepadButton(driver, GamepadKeys.Button.DPAD_DOWN);
+        gripperButton = new GamepadButton(driver, GamepadKeys.Button.RIGHT_BUMPER);
 
         this.elevator = new Elevator(hardwareMap);
         this.drive = new Drive(hardwareMap, telemetry, this);

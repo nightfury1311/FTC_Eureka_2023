@@ -3,21 +3,22 @@ package org.firstinspires.ftc.teamcode.drive.TeleopSubsystems;
 import com.acmerobotics.dashboard.config.Config;
 import com.arcrobotics.ftclib.command.SubsystemBase;
 import com.qualcomm.robotcore.hardware.HardwareMap;
-import com.qualcomm.robotcore.hardware.Servo;
+import com.arcrobotics.ftclib.hardware.ServoEx;
+import com.arcrobotics.ftclib.hardware.SimpleServo;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 
 public class Servos extends SubsystemBase {
-    public static Servo servoGripper;
-    public static Servo servoLeft;
-    public static Servo servoRight;
-    public static Servo servoRotation;
+    public static ServoEx servoGripper;
+    public static ServoEx servoLeft;
+    public static ServoEx servoRight;
+    public static ServoEx servoRotation;
 
     public Servos(final HardwareMap hMap, Telemetry telemetry) {
-        servoGripper = hMap.get(Servo.class, "servoGripper");
-        servoLeft = hMap.get(Servo.class, "servoLeft");
-        servoRight = hMap.get(Servo.class, "servoRight");
-        servoRotation = hMap.get(Servo.class, "servoRotation");
+        servoGripper = hMap.get(SimpleServo.class, "servoGripper");
+        servoLeft = hMap.get(SimpleServo.class, "servoLeft");
+        servoRight = hMap.get(SimpleServo.class, "servoRight");
+        servoRotation = hMap.get(SimpleServo.class, "servoRotation");
     }
 
     public static class Gripper {

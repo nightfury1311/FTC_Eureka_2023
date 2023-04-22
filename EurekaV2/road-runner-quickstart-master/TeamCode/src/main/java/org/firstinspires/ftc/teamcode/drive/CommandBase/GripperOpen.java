@@ -7,12 +7,12 @@ import org.firstinspires.ftc.teamcode.drive.TeleopSubsystems.Servos;
 
 public class GripperOpen extends CommandBase {
 
-        public Servos servos;
+        public Servos serv;
 
 
     public GripperOpen(Servos servos){
-        this.servos = servos;
-        addRequirements(servos);
+        this.serv = serv;
+        addRequirements(serv);
     }
 
     @Override

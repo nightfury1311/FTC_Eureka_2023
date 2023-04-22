@@ -7,11 +7,11 @@ import org.firstinspires.ftc.teamcode.drive.TeleopSubsystems.Servos;
 
 public class GripperRotateDrop extends CommandBase {
 
-    public Servos servos;
+    public Servos serv;
 
 
     public GripperRotateDrop(Servos servos){
-        this.servos = servos;
+        this.serv = servos;
         addRequirements(servos);
     }
 
