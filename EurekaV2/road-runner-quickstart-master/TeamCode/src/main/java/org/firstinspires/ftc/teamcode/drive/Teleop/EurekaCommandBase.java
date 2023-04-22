@@ -21,7 +21,9 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 import org.firstinspires.ftc.teamcode.drive.CommandBase.ElevatorHigh;
 
 import org.firstinspires.ftc.teamcode.drive.CommandBase.ElevatorHome;
+import org.firstinspires.ftc.teamcode.drive.CommandBase.ElevatorLow;
 import org.firstinspires.ftc.teamcode.drive.CommandBase.ElevatorMid;
+import org.firstinspires.ftc.teamcode.drive.TeleopSubsystems.Drive;
 import org.firstinspires.ftc.teamcode.drive.TeleopSubsystems.Elevator;
 
 import java.util.function.BooleanSupplier;
@@ -38,12 +40,13 @@ import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
 @Config
-@TeleOp(name = "EurekaCommandBase")
+@TeleOp(name = "EurekaCMD")
 public class EurekaCommandBase extends CommandOpMode {
 
     Elevator elevator;
+    Drive drive;
     GamepadEx driver;
-    Button  liftHighButton, liftHomeButton, liftMidButton;
+    Button  liftHighButton, liftMidButton, liftLowButton, liftHomeButton;
     @Override
     public void initialize() {
 
@@ -51,15 +54,18 @@ public class EurekaCommandBase extends CommandOpMode {
 
         liftHighButton = new GamepadButton(driver, GamepadKeys.Button.DPAD_UP);
         liftMidButton = new GamepadButton(driver, GamepadKeys.Button.Y);
+        liftLowButton = new GamepadButton(driver, GamepadKeys.Button.A);
         liftHomeButton = new GamepadButton(driver, GamepadKeys.Button.DPAD_DOWN);
-        
+
         this.elevator = new Elevator(hardwareMap);
+        this.drive = new Drive(hardwareMap, telemetry, this);
 
         liftHighButton.whenPressed(new ParallelCommandGroup(new ElevatorHigh(elevator)));
         liftMidButton.whenPressed(new ParallelCommandGroup(new ElevatorMid(elevator)));
+        liftLowButton.toggleWhenPressed(new ParallelCommandGroup(new ElevatorLow(elevator)), (new ElevatorHome(elevator)));
         liftHomeButton.whenPressed(new ParallelCommandGroup(new ElevatorHome(elevator)));
 
-
+        register(drive);
             }
         }
 
