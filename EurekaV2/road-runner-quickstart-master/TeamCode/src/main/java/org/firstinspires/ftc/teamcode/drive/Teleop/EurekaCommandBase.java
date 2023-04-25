@@ -66,7 +66,6 @@ public class EurekaCommandBase extends CommandOpMode {
         liftMidButton.whenPressed(new ParallelCommandGroup(new ElevatorMid(elevator)));
         liftLowButton.toggleWhenPressed(new ParallelCommandGroup(new ElevatorLow(elevator)), (new ElevatorHome(elevator)));
         liftHomeButton.whenPressed(new ParallelCommandGroup(new ElevatorHome(elevator)));
-
         register(drive);
             }
         }
