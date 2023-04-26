@@ -68,9 +68,9 @@ public class CMDTest extends LinearOpMode {
 
             if (gamepad1.dpad_up)
             {
-                elevator_sub.extendTo(elevator_sub.POSITIONS[elevator_sub.HIGH_POLE]);
+                elevator_sub.extendTo(elevator_sub.HIGH_POLE);
             } else if (gamepad1.dpad_down) {
-                elevator_sub.extendTo(elevator_sub.POSITIONS[elevator_sub.HOME]);
+                elevator_sub.extendTo(elevator_sub.HOME);
             }
 
         }

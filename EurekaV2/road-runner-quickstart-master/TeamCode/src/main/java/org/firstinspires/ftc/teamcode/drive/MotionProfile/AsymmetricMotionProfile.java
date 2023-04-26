@@ -4,8 +4,7 @@ public class AsymmetricMotionProfile {
     public double initialPosition;
     public double finalPosition;
     public double distance;
-    public double t1, t2, t3;
-    public double totalTime;
+    public double t1, t2, t3;    public double totalTime;
     public double accelStopPosition;
     public double accelStopVelocity;
     public boolean flipped = false;

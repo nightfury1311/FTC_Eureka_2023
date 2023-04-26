@@ -29,7 +29,7 @@ public class elevator_sub extends SubsystemBase {
     public static double Kf = 0.1;
 
     public final int HOME = 0, LOW_POLE = 1, MID_POLE = 2, HIGH_POLE = 3;
-    public final int[] POSITIONS = {0, 300, 600, 1100};  //Junction Height for dropping cones normally
+    public final int[] POSITIONS = {0, 183, 387, 620, 10};    //Junction Height for dropping cones normally
 
     private double leftPower = 0;
     private double rightPower = 0;
