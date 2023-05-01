@@ -5,20 +5,28 @@ import com.arcrobotics.ftclib.command.SubsystemBase;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.arcrobotics.ftclib.hardware.ServoEx;
 import com.arcrobotics.ftclib.hardware.SimpleServo;
+import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 
-public class Servos extends SubsystemBase {
-    public static ServoEx servoGripper;
-    public static ServoEx servoLeft;
-    public static ServoEx servoRight;
-    public static ServoEx servoRotation;
+public class Servos {
+//    public class Servos extends SubsystemBase {
+    public static Servo servoGripper;
+    public static Servo servoActive;
+    public static Servo servoLeftF;
+    public static Servo servoLeftB;
+    public static Servo servoRightF;
+    public static Servo servoRightB;
+    public  static Servo servoRotate;
 
-    public Servos(final HardwareMap hMap, Telemetry telemetry) {
-        servoGripper = hMap.get(SimpleServo.class, "servoGripper");
-        servoLeft = hMap.get(SimpleServo.class, "servoLeft");
-        servoRight = hMap.get(SimpleServo.class, "servoRight");
-        servoRotation = hMap.get(SimpleServo.class, "servoRotation");
+    public Servos(final HardwareMap hardwareMap, Telemetry telemetry) {
+        servoGripper = hardwareMap.get(Servo.class, "servoGripper");
+        servoActive = hardwareMap.get(Servo.class, "servoActive");
+        servoLeftF = hardwareMap.get(Servo.class, "servoLeftF");
+        servoLeftB = hardwareMap.get(Servo.class, "servoLeftB");
+        servoRightF = hardwareMap.get(Servo.class, "servoRightF");
+        servoRightB = hardwareMap.get(Servo.class, "servoRightB");
+        servoRotate = hardwareMap.get(Servo.class, "servoRotate");
     }
 
     public static class Gripper {
@@ -44,99 +52,126 @@ public class Servos extends SubsystemBase {
 
         public static void rotateDrop() {
             rotateState = "DROP";
-            servoRotation.setPosition(rotateDrop);
+            servoRotate.setPosition(rotateDrop);
         }
         public static void rotatePick() {
             rotateState = "PICK";
-            servoRotation.setPosition(rotatePick);
+            servoRotate.setPosition(rotatePick);
         }
     }
-
     public static class Arm {
 
         public static String armState = "INIT";
 
         public static final double DropLeft = 0.12;
-        public static final double DropRight = 0.88;
+        public static final double DropRight = 1-DropLeft;
         public static final double Init = 0.5;
         public static final double UPLeft = 0.6;
-        public static final double UPRight = 0.4;
+        public static final double UPRight = 1-UPLeft;
         public static final double PickLeftOne = 0.78;
-        public static final double PickRightOne = 0.22;
+        public static final double PickRightOne = 1-PickLeftOne;
         public static final double PickLeftTwo = 0.82;
-        public static final double PickRightTwo = 0.18;
+        public static final double PickRightTwo = 1-PickLeftTwo;
         public static final double PickLeftThree = 0.86;
-        public static final double PickRightThree = 0.14;
+        public static final double PickRightThree = 1-PickLeftThree;
         public static final double PickLeftFour = 0.9;
-        public static final double PickRightFour = 0.1;
+        public static final double PickRightFour = 1-PickLeftFour;
         public static final double PickLeftFive = 0.98; //0.95
-        public static final double PickRightFive = 0.02; //0.05
-
+        public static final double PickRightFive = 1-PickLeftFive; //0.05
 
         public static final double LegalLeft = 0.2;
-        public static final double LegalRight = 0.8;
+        public static final double LegalRight = 1-LegalLeft;
 
-        private static final double PickLeftOneMid = 0.76;
-        private static final double PickRightOneMid = 0.24;
+        public static final double ActiveUp = 1;
+        public static final double ActiveMid = 0.5;
+        public static final double ActiveDown = 0;
+
+        public static void goActiveUp() {
+            armState = "ActiveUp";
+            servoActive.setPosition(ActiveUp);
+        }
+        public static void goActiveDown() {
+            armState = "ActiveDown";
+            servoActive.setPosition(ActiveDown);
+        }
+        public static void goActiveMid() {
+            armState = "ActiveMid";
+            servoActive.setPosition(ActiveMid);
+        }
+
+
 
         public static void goLegal() {
             armState = "Legal";
-            servoLeft.setPosition(LegalLeft);
-            servoRight.setPosition(LegalRight);
+            servoLeftF.setPosition(LegalLeft);
+            servoLeftB.setPosition(LegalLeft);
+            servoRightF.setPosition(LegalRight);
+            servoRightB.setPosition(LegalRight);
         }
 
         public static void goUP() {
             armState = "UP";
-            servoLeft.setPosition(UPLeft);
-            servoRight.setPosition(UPRight);
+            servoLeftF.setPosition(UPLeft);
+            servoLeftB.setPosition(UPLeft);
+            servoRightF.setPosition(UPRight);
+            servoRightB.setPosition(UPRight);
         }
 
         public static void goDrop() {
             armState = "DROP";
-            servoLeft.setPosition(DropLeft);
-            servoRight.setPosition(DropRight);
+            servoLeftF.setPosition(DropLeft);
+            servoLeftB.setPosition(DropLeft);
+            servoRightF.setPosition(DropRight);
+            servoRightB.setPosition(DropRight);
         }
 
         public static void goInit() {
             armState = "INIT";
-            servoLeft.setPosition(Init);
-            servoRight.setPosition(Init);
+            servoLeftF.setPosition(Init);
+            servoLeftB.setPosition(Init);
+            servoRightF.setPosition(Init);
+            servoRightB.setPosition(Init);
         }
 
-        public static void goPickCone1Mid() {
-            armState = "ONEMID";
-            servoLeft.setPosition(PickLeftOneMid);
-            servoRight.setPosition(PickRightOneMid);
-        }
 
         public static void goPickCone1() {
             armState = "ONE";
-            servoLeft.setPosition(PickLeftOne);
-            servoRight.setPosition(PickRightOne);
+            servoLeftF.setPosition(PickLeftOne);
+            servoLeftB.setPosition(PickLeftOne);
+            servoRightF.setPosition(PickRightOne);
+            servoRightB.setPosition(PickRightOne);
         }
 
         public static void goPickCone2() {
             armState = "TWO";
-            servoLeft.setPosition(PickLeftTwo);
-            servoRight.setPosition(PickRightTwo);
+            servoLeftF.setPosition(PickLeftTwo);
+            servoLeftB.setPosition(PickLeftTwo);
+            servoRightF.setPosition(PickRightTwo);
+            servoRightB.setPosition(PickRightTwo);
         }
 
         public static void goPickCone3() {
             armState = "THREE";
-            servoLeft.setPosition(PickLeftThree);
-            servoRight.setPosition(PickRightThree);
+            servoLeftF.setPosition(PickLeftThree);
+            servoLeftB.setPosition(PickLeftThree);
+            servoRightF.setPosition(PickRightThree);
+            servoRightB.setPosition(PickRightThree);
         }
 
         public static void goPickCone4() {
             armState = "FOUR";
-            servoLeft.setPosition(PickLeftFour);
-            servoRight.setPosition(PickRightFour);
+            servoLeftF.setPosition(PickLeftFour);
+            servoLeftB.setPosition(PickLeftFour);
+            servoRightF.setPosition(PickRightFour);
+            servoRightB.setPosition(PickRightFour);
         }
 
         public static void goPickCone5() {
             armState = "FIVE";
-            servoLeft.setPosition(PickLeftFive);
-            servoRight.setPosition(PickRightFive);
+            servoLeftF.setPosition(PickLeftFive);
+            servoLeftB.setPosition(PickLeftFive);
+            servoRightF.setPosition(PickRightFive);
+            servoRightB.setPosition(PickRightFive);
         }
     }
 }

@@ -59,7 +59,7 @@ public class EurekaCommandBase extends CommandOpMode {
         liftHomeButton = new GamepadButton(driver, GamepadKeys.Button.DPAD_DOWN);
         gripperButton = new GamepadButton(driver, GamepadKeys.Button.RIGHT_BUMPER);
 
-        this.elevator = new Elevator(hardwareMap);
+        this.elevator = new Elevator(hardwareMap, telemetry);
         this.drive = new Drive(hardwareMap, telemetry, this);
 
         liftHighButton.whenPressed(new ParallelCommandGroup(new ElevatorHigh(elevator)));

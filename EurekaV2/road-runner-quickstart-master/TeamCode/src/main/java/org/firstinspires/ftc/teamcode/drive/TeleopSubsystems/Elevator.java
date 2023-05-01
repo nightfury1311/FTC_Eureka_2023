@@ -5,18 +5,21 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
-    public class Elevator extends SubsystemBase {
+import org.firstinspires.ftc.robotcore.external.Telemetry;
+import org.firstinspires.ftc.robotcore.external.navigation.CurrentUnit;
 
-        DcMotorEx ElevateLeft, ElevateRight;
+public class Elevator{
+//    public class Elevator extends SubsystemBase {
+        public DcMotorEx ElevateLeft, ElevateRight;
 
         public final int HOME = 0, LOW_POLE = 1, MID_POLE = 2, HIGH_POLE = 3;
         //    public final int[] POSITIONS = {0, 600, 1130, 1765, 20};     //OLD VALUES at 9:1 elevator ratio
 //        public final int[] POSITIONS = {0, 330, 700, 1110, 30};       //NEW VALUES at 5:1 elevator ratio
             public final int[] POSITIONS = {0, 183, 387, 620, 10};       //NEW VALUES at 3:1 elevator ratio
 
-    public Elevator(final HardwareMap hMap) {
-        ElevateLeft = hMap.get(DcMotorEx.class, "ElevateLeft");
-        ElevateRight = hMap.get(DcMotorEx.class, "ElevateRight");
+    public Elevator(final HardwareMap hardwareMap, Telemetry telemetry) {
+        ElevateLeft = hardwareMap.get(DcMotorEx.class, "ElevateLeft");
+        ElevateRight = hardwareMap.get(DcMotorEx.class, "ElevateRight");
     }
         public void extendTo(int position){
             ElevateLeft.setTargetPosition(position);
@@ -27,6 +30,17 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
             ElevateRight.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
             ElevateRight.setPower(0.9);
         }
+    public double[] getPosition(){
+        return new double[]{ElevateLeft.getCurrentPosition(), ElevateRight.getCurrentPosition()};
+    }
+    public void reset() {
+        ElevateLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        ElevateRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+    }
+    public double[] getCurrent(){
+        return new double[]{
+                ElevateLeft.getCurrent(CurrentUnit.MILLIAMPS), ElevateRight.getCurrent(CurrentUnit.MILLIAMPS)};
+    }
         public void extendToHighPole(){
             extendTo(POSITIONS[HIGH_POLE]);
         }

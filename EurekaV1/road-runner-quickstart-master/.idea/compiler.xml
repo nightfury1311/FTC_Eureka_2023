@@ -2,6 +2,8 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <bytecodeTargetLevel target="11">
+      <module name="Eureka.EurekaV1.road-runner-quickstart-master.FtcRobotController" target="17" />
+      <module name="Eureka.EurekaV1.road-runner-quickstart-master.TeamCode" target="17" />
       <module name="EurekaV1.road-runner-quickstart-master.FtcRobotController" target="17" />
       <module name="EurekaV1.road-runner-quickstart-master.TeamCode" target="17" />
     </bytecodeTargetLevel>
