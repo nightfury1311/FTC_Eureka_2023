@@ -63,7 +63,7 @@ public class Servos {
 
         public static String armState = "INIT";
 
-        public static final double DropLeft = 0.12;
+        public static final double DropLeft = 0.2;
         public static final double DropRight = 1-DropLeft;
         public static final double Init = 0.5;
         public static final double UPLeft = 0.6;
@@ -78,6 +78,9 @@ public class Servos {
         public static final double PickRightFour = 1-PickLeftFour;
         public static final double PickLeftFive = 0.98; //0.95
         public static final double PickRightFive = 1-PickLeftFive; //0.05
+
+        public static final double PickLeft = 1;
+        public static final double PickRight = 1-PickLeftTwo;
 
         public static final double LegalLeft = 0.2;
         public static final double LegalRight = 1-LegalLeft;
@@ -116,7 +119,13 @@ public class Servos {
             servoRightF.setPosition(UPRight);
             servoRightB.setPosition(UPRight);
         }
-
+        public static void goPick() {
+            armState = "PICK";
+            servoLeftF.setPosition(PickLeft);
+            servoLeftB.setPosition(PickLeft);
+            servoRightF.setPosition(PickRight);
+            servoRightB.setPosition(PickRight);
+        }
         public static void goDrop() {
             armState = "DROP";
             servoLeftF.setPosition(DropLeft);

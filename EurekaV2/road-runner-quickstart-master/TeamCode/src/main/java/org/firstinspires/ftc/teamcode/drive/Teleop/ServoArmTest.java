@@ -11,10 +11,10 @@ public class ServoArmTest extends LinearOpMode {
     Servo servoLeftB;
     Servo servoRightF;
     Servo servoRightB;
-    public static double PICK_ARM_LEFT = 1;
-    public static double PICK_ARM_RIGHT = 0;
-    public static double DROP_ARM_LEFT = 0.2;
-    public static double DROP_ARM_RIGHT = 0.8;
+    public static double PICK_ARM_LEFT = 0.6;
+    public static double PICK_ARM_RIGHT = 0.4;
+    public static double DROP_ARM_LEFT = 0.4;
+    public static double DROP_ARM_RIGHT = 0.6;
     public static double HOME_ARM = 0.5;
 
     @Override
