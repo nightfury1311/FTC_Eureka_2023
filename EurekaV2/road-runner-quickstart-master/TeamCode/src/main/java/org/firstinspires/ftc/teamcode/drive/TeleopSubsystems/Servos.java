@@ -22,10 +22,10 @@ public class Servos {
     public Servos(final HardwareMap hardwareMap, Telemetry telemetry) {
         servoGripper = hardwareMap.get(Servo.class, "servoGripper");
         servoActive = hardwareMap.get(Servo.class, "servoActive");
-        servoLeftF = hardwareMap.get(Servo.class, "servoLeftF");
-        servoLeftB = hardwareMap.get(Servo.class, "servoLeftB");
-        servoRightF = hardwareMap.get(Servo.class, "servoRightF");
-        servoRightB = hardwareMap.get(Servo.class, "servoRightB");
+        servoLeftF = hardwareMap.get(Servo.class, "servoLF");
+        servoLeftB = hardwareMap.get(Servo.class, "servoLB");
+        servoRightF = hardwareMap.get(Servo.class, "servoRF");
+        servoRightB = hardwareMap.get(Servo.class, "servoRB");
         servoRotate = hardwareMap.get(Servo.class, "servoRotate");
     }
 
