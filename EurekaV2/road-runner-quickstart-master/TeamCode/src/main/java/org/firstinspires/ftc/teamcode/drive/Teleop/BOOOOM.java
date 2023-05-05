@@ -70,6 +70,7 @@ public class BOOOOM extends LinearOpMode {
 
     public static double ACTIVE_PICK = 0.88;    // active gripping position
     public static double ACTIVE_STABLE = 0.5;   // stable four bar position
+    public static double ACTIVE_LOW = 0.69;
 
     public static double ACTIVE_DROP = 0.3;
 
@@ -468,25 +469,29 @@ public class BOOOOM extends LinearOpMode {
             else if(gamepad1.dpad_right){
                 servoGripper.setPosition(GRIPPER_CLOSE);
                 sleep(300);
+                servoActive.setPosition(ACTIVE_STABLE);
                 servoLF.setPosition(HOME_ARM);
                 servoLB.setPosition(HOME_ARM);
                 servoRF.setPosition(HOME_ARM);
                 servoRB.setPosition(HOME_ARM);
 
 
-                SlideRight.setTargetPosition(0);
-                SlideRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                SlideRight.setPower(0.6);
-
-                SlideLeft.setTargetPosition(0);
-                SlideLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                SlideLeft.setPower(0.6);
+//                SlideRight.setTargetPosition(0);
+//                SlideRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+//                SlideRight.setPower(0.6);
+//
+//                SlideLeft.setTargetPosition(0);
+//                SlideLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+//                SlideLeft.setPower(0.6);
             }
             else if(gamepad1.dpad_left){
-                servoLF.setPosition(PICK_ARM_LEFT);
-                servoLB.setPosition(PICK_ARM_LEFT);
-                servoRF.setPosition(PICK_ARM_RIGHT);
-                servoRB.setPosition(PICK_ARM_RIGHT);
+                servoGripper.setPosition(GRIPPER_CLOSE);
+                sleep(300);
+                servoActive.setPosition(ACTIVE_LOW);
+                servoLF.setPosition(HOME_ARM);
+                servoLB.setPosition(HOME_ARM);
+                servoRF.setPosition(HOME_ARM);
+                servoRB.setPosition(HOME_ARM);
 
             }
             if(gamepad1.right_trigger>0.7)
