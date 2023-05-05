@@ -51,9 +51,9 @@ public class BOOOOM extends LinearOpMode {
     public static int MID = 387;   //740           //counts value
     public static int HIGH = 610; //1160
 
-    public static int MAX = 1150;   // MAX IS 1175 , dont go above this value
+    public static int MAX = 1800;   // MAX IS 1175 , dont go above this value
     public static int MIN = 290;
-    public static int TEST = 1100; //1100   //700 previous value
+    public static int TEST = 800; //1100   //700 previous value
 
     public static double GRIPPER_OPEN = 0.5 ;
     public static double GRIPPER_CLOSE = 0.7;
@@ -118,6 +118,7 @@ public class BOOOOM extends LinearOpMode {
         drive.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         while (opModeInInit()) {
             servoLock.setPosition(UNLOCK);
+            servoRotate.setPosition(ROTATE_PICK);
             servoGripper.setPosition(GRIPPER_OPEN);
             servoLF.setPosition(HOME_ARM);
             servoLB.setPosition(HOME_ARM);
@@ -127,18 +128,18 @@ public class BOOOOM extends LinearOpMode {
 //
             ElevateLeft.setTargetPosition(0);
             ElevateLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            ElevateLeft.setPower(0.5);
+            ElevateLeft.setPower(0.3);
             ElevateRight.setTargetPosition(0);
             ElevateRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            ElevateRight.setPower(0.5);
+            ElevateRight.setPower(0.3);
 
             SlideRight.setTargetPosition(0);
             SlideRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            SlideRight.setPower(0.2);
+            SlideRight.setPower(0.4);
 
             SlideLeft.setTargetPosition(0);
             SlideLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            SlideLeft.setPower(0.2);
+            SlideLeft.setPower(0.4);
         }
 //        waitForStart();
         while (opModeIsActive()) {
@@ -206,7 +207,7 @@ public class BOOOOM extends LinearOpMode {
 //                SlideLeft.setPower(0.6);
 
                 servoGripper.setPosition(GRIPPER_OPEN);
-                sleep(500);
+                sleep(300);
                 servoActive.setPosition(ACTIVE_PICK);
                 servoLF.setPosition(PICK_ARM_LEFT);
                 servoLB.setPosition(PICK_ARM_LEFT);
@@ -214,13 +215,94 @@ public class BOOOOM extends LinearOpMode {
                 servoRB.setPosition(PICK_ARM_RIGHT);
 
                 servoRotate.setPosition(ROTATE_PICK);
-//                SlideRight.setTargetPosition(TEST);
+                SlideRight.setTargetPosition(TEST);
+                SlideRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                SlideRight.setPower(0.6);
+
+                SlideLeft.setTargetPosition(TEST);
+                SlideLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                SlideLeft.setPower(0.6);
+            }
+            if (gamepad2.left_bumper) {      // cone pickup
+
+//                SlideRight.setTargetPosition(MIN);
 //                SlideRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 //                SlideRight.setPower(0.6);
 //
-//                SlideLeft.setTargetPosition(TEST);
+//                SlideLeft.setTargetPosition(MIN);
 //                SlideLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 //                SlideLeft.setPower(0.6);
+
+                servoGripper.setPosition(GRIPPER_OPEN);
+                sleep(200);
+                servoActive.setPosition(ACTIVE_PICK);
+                servoLF.setPosition(PICK_ARM_LEFT);
+                servoLB.setPosition(PICK_ARM_LEFT);
+                servoRF.setPosition(PICK_ARM_RIGHT);
+                servoRB.setPosition(PICK_ARM_RIGHT);
+
+                servoRotate.setPosition(ROTATE_PICK);
+                SlideRight.setTargetPosition(MAX);
+                SlideRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                SlideRight.setPower(0.8);
+
+                SlideLeft.setTargetPosition(MAX);
+                SlideLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                SlideLeft.setPower(0.8);
+            }
+            else if (gamepad2.right_bumper) {           // cone transfer
+//                SlideRight.setTargetPosition(MAX);
+//                SlideRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+//                SlideRight.setPower(0.7);
+//
+//                SlideLeft.setTargetPosition(MAX);
+//                SlideLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+//                SlideLeft.setPower(0.7);
+
+//                sleep(100);
+
+                servoGripper.setPosition(GRIPPER_CLOSE);
+                sleep(200);
+
+                servoLF.setPosition(HOME_ARM);
+                servoLB.setPosition(HOME_ARM);
+                servoRF.setPosition(HOME_ARM);
+                servoRB.setPosition(HOME_ARM);
+                servoActive.setPosition(ACTIVE_STABLE);
+
+                SlideRight.setTargetPosition(0);
+                SlideRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                SlideRight.setPower(0.9);
+
+                SlideLeft.setTargetPosition(0);
+                SlideLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                SlideLeft.setPower(0.9);
+
+
+                sleep(600);
+                servoRotate.setPosition(ROTATE_DROP);
+//                sleep(300);
+
+                servoActive.setPosition(ACTIVE_DROP);
+                sleep(400);
+                servoLF.setPosition(DROP_ARM_LEFT);
+                servoLB.setPosition(DROP_ARM_LEFT);
+                servoRF.setPosition(DROP_ARM_RIGHT);
+                servoRB.setPosition(DROP_ARM_RIGHT);
+
+                sleep(400);
+
+                servoGripper.setPosition(GRIPPER_OPEN);
+                sleep(200);
+                servoLock.setPosition(LOCK);
+                servoLF.setPosition(HOME_ARM);
+                servoLB.setPosition(HOME_ARM);
+                servoRF.setPosition(HOME_ARM);
+                servoRB.setPosition(HOME_ARM);
+                servoRotate.setPosition(ROTATE_PICK);
+                sleep(200);
+
+                servoActive.setPosition(ACTIVE_STABLE);
             }
 
 //            //************************ CONE TRANSFER CYCLE *******************************
@@ -238,25 +320,33 @@ public class BOOOOM extends LinearOpMode {
                 servoGripper.setPosition(GRIPPER_CLOSE);
                 sleep(200);
 
+                servoLF.setPosition(HOME_ARM);
+                servoLB.setPosition(HOME_ARM);
+                servoRF.setPosition(HOME_ARM);
+                servoRB.setPosition(HOME_ARM);
+                servoActive.setPosition(ACTIVE_STABLE);
 
-//                SlideRight.setTargetPosition(0);
-//                SlideRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-//                SlideRight.setPower(0.7);
-//
-//                SlideLeft.setTargetPosition(0);
-//                SlideLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-//                SlideLeft.setPower(0.7);
+                SlideRight.setTargetPosition(0);
+                SlideRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                SlideRight.setPower(0.7);
 
+                SlideLeft.setTargetPosition(0);
+                SlideLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                SlideLeft.setPower(0.7);
+
+
+                sleep(200);
                 servoRotate.setPosition(ROTATE_DROP);
 //                sleep(300);
 
                 servoActive.setPosition(ACTIVE_DROP);
+                sleep(400);
                 servoLF.setPosition(DROP_ARM_LEFT);
                 servoLB.setPosition(DROP_ARM_LEFT);
                 servoRF.setPosition(DROP_ARM_RIGHT);
                 servoRB.setPosition(DROP_ARM_RIGHT);
 
-                sleep(800);
+                sleep(500);
 
                 servoGripper.setPosition(GRIPPER_OPEN);
                 sleep(200);
@@ -467,9 +557,10 @@ public class BOOOOM extends LinearOpMode {
 //            }
 
             else if(gamepad1.dpad_right){
+                servoRotate.setPosition(ROTATE_PICK);
                 servoGripper.setPosition(GRIPPER_CLOSE);
                 sleep(300);
-                servoActive.setPosition(ACTIVE_STABLE);
+                servoActive.setPosition(ACTIVE_LOW);
                 servoLF.setPosition(HOME_ARM);
                 servoLB.setPosition(HOME_ARM);
                 servoRF.setPosition(HOME_ARM);
@@ -485,13 +576,14 @@ public class BOOOOM extends LinearOpMode {
 //                SlideLeft.setPower(0.6);
             }
             else if(gamepad1.dpad_left){
-                servoGripper.setPosition(GRIPPER_CLOSE);
+                servoRotate.setPosition(ROTATE_PICK);
+                servoGripper.setPosition(GRIPPER_OPEN);
                 sleep(300);
-                servoActive.setPosition(ACTIVE_LOW);
-                servoLF.setPosition(HOME_ARM);
-                servoLB.setPosition(HOME_ARM);
-                servoRF.setPosition(HOME_ARM);
-                servoRB.setPosition(HOME_ARM);
+                servoActive.setPosition(ACTIVE_PICK);
+                servoLF.setPosition(PICK_ARM_LEFT);
+                servoLB.setPosition(PICK_ARM_LEFT);
+                servoRF.setPosition(PICK_ARM_RIGHT);
+                servoRB.setPosition(PICK_ARM_RIGHT);
 
             }
             if(gamepad1.right_trigger>0.7)
@@ -536,6 +628,60 @@ public class BOOOOM extends LinearOpMode {
             else if(gamepad2.b){
                 servoLock.setPosition(UNLOCK);
             }
+//            if(gamepad2.left_trigger>0.9)
+//            {
+//                SlideRight.setTargetPosition(1500);
+//                SlideRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+//                SlideRight.setPower(0.8);
+//
+//                SlideLeft.setTargetPosition(1500);
+//                SlideLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+//                SlideLeft.setPower(0.8);
+//            } else if (gamepad2.left_trigger>0.8) {
+//                SlideRight.setTargetPosition(1200);
+//                SlideRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+//                SlideRight.setPower(0.8);
+//
+//                SlideLeft.setTargetPosition(1200);
+//                SlideLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+//                SlideLeft.setPower(0.8);
+//            }
+//            else if (gamepad2.left_trigger>0.7) {
+//                SlideRight.setTargetPosition(900);
+//                SlideRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+//                SlideRight.setPower(0.8);
+//
+//                SlideLeft.setTargetPosition(900);
+//                SlideLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+//                SlideLeft.setPower(0.8);
+//            }
+//            else if (gamepad2.left_trigger>0.6) {
+//                SlideRight.setTargetPosition(600);
+//                SlideRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+//                SlideRight.setPower(0.8);
+//
+//                SlideLeft.setTargetPosition(600);
+//                SlideLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+//                SlideLeft.setPower(0.8);
+//            }
+//            else if (gamepad2.left_trigger>0.3) {
+//                SlideRight.setTargetPosition(600);
+//                SlideRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+//                SlideRight.setPower(0.8);
+//
+//                SlideLeft.setTargetPosition(600);
+//                SlideLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+//                SlideLeft.setPower(0.8);
+//            }
+//            else if (gamepad2.left_trigger>0.1) {
+//                SlideRight.setTargetPosition(100);
+//                SlideRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+//                SlideRight.setPower(0.8);
+//
+//                SlideLeft.setTargetPosition(100);
+//                SlideLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+//                SlideLeft.setPower(0.8);
+//            }
 
             telemetry.addData("Servo Gripper Position", servoGripper.getPosition());
             telemetry.addData("Servo Left Position", servoLF.getPosition());
