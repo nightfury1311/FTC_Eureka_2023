@@ -103,8 +103,8 @@ public class APOC extends LinearOpMode {
 
 
             telemetry.addData("Servo Gripper Position", servos.servoGripper.getPosition());
-            telemetry.addData("Servo Left Position", servos.servoLeftF.getPosition());
-            telemetry.addData("Servo Right Position", servos.servoRightF.getPosition());
+            telemetry.addData("Servo Left Position", servos.servoLF.getPosition());
+            telemetry.addData("Servo Right Position", servos.servoRF.getPosition());
             telemetry.addData("Servo Rotation Position", servos.servoRotate.getPosition());
             telemetry.addData("Current ElevateLeft", elevator.ElevateLeft.getCurrent(CurrentUnit.AMPS));
             telemetry.addData("ElevateLeft", elevator.ElevateLeft.getCurrentPosition());

@@ -51,9 +51,12 @@ public class BOOOOM extends LinearOpMode {
     public static int MID = 387;   //740           //counts value
     public static int HIGH = 610; //1160
 
-    public static int MAX = 1800;   // MAX IS 1175 , dont go above this value
-    public static int MIN = 290;
-    public static int TEST = 800; //1100   //700 previous value
+
+//   //OLD VALUES AT 9:1 slider ratio
+//    public static int MAX = 1800;   //
+//    public static int TEST = 800; //
+    public static int MAX = 1100;   //
+    public static int TEST = 400; //
 
     public static double GRIPPER_OPEN = 0.5 ;
     public static double GRIPPER_CLOSE = 0.7;

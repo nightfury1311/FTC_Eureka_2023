@@ -12,27 +12,31 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 public class Servos {
 //    public class Servos extends SubsystemBase {
     public static Servo servoGripper;
+    public static Servo servoLF;
+    public static Servo servoLB;
+    public static Servo servoRF;
+    public static Servo servoRB;
+    public static Servo servoRotate;
     public static Servo servoActive;
-    public static Servo servoLeftF;
-    public static Servo servoLeftB;
-    public static Servo servoRightF;
-    public static Servo servoRightB;
-    public  static Servo servoRotate;
+    public static Servo servoLock;
 
     public Servos(final HardwareMap hardwareMap, Telemetry telemetry) {
         servoGripper = hardwareMap.get(Servo.class, "servoGripper");
         servoActive = hardwareMap.get(Servo.class, "servoActive");
-        servoLeftF = hardwareMap.get(Servo.class, "servoLF");
-        servoLeftB = hardwareMap.get(Servo.class, "servoLB");
-        servoRightF = hardwareMap.get(Servo.class, "servoRF");
-        servoRightB = hardwareMap.get(Servo.class, "servoRB");
+        servoLF = hardwareMap.get(Servo.class, "servoLF");
+        servoLB = hardwareMap.get(Servo.class, "servoLB");
+        servoRF = hardwareMap.get(Servo.class, "servoRF");
+        servoRB = hardwareMap.get(Servo.class, "servoRB");
         servoRotate = hardwareMap.get(Servo.class, "servoRotate");
     }
 
     public static class Gripper {
         public static String gripperState = "OPEN";
-        private static final double gripperOpenPosition = 0.32;
-        private static final double gripperClosePosition = 0;
+        private static final double gripperOpenPosition = 0.5;
+        private static final double gripperClosePosition = 0.7;
+
+        private static final double Lock = 0;
+        private static final double Unlock = 0.25;
 
         public static void openGripper() {
             gripperState = "OPEN";
@@ -43,12 +47,21 @@ public class Servos {
             gripperState = "CLOSED";
             servoGripper.setPosition(gripperClosePosition);
         }
+
+        public static void Lock() {
+            gripperState = "LOCK";
+            servoLock.setPosition(Lock);
+        }
+        public static void Unlock() {
+            gripperState = "LOCK";
+            servoLock.setPosition(Unlock);
+        }
     }
 
     public static class Rotate {
         public static String rotateState = "PICK";
-        private static final double rotateDrop = 0.65;
-        private static final double rotatePick = 0;
+        private static final double rotateDrop = 0.82;
+        private static final double rotatePick = 0.17;
 
         public static void rotateDrop() {
             rotateState = "DROP";
@@ -63,11 +76,9 @@ public class Servos {
 
         public static String armState = "INIT";
 
-        public static final double DropLeft = 0.2;
+        public static final double DropLeft = 0.25;
         public static final double DropRight = 1-DropLeft;
         public static final double Init = 0.5;
-        public static final double UPLeft = 0.6;
-        public static final double UPRight = 1-UPLeft;
         public static final double PickLeftOne = 0.78;
         public static final double PickRightOne = 1-PickLeftOne;
         public static final double PickLeftTwo = 0.82;
@@ -76,8 +87,6 @@ public class Servos {
         public static final double PickRightThree = 1-PickLeftThree;
         public static final double PickLeftFour = 0.9;
         public static final double PickRightFour = 1-PickLeftFour;
-        public static final double PickLeftFive = 0.98; //0.95
-        public static final double PickRightFive = 1-PickLeftFive; //0.05
 
         public static final double PickLeft = 1;
         public static final double PickRight = 1-PickLeftTwo;
@@ -85,102 +94,88 @@ public class Servos {
         public static final double LegalLeft = 0.2;
         public static final double LegalRight = 1-LegalLeft;
 
-        public static final double ActiveUp = 1;
-        public static final double ActiveMid = 0.5;
-        public static final double ActiveDown = 0;
+        public static final double ActivePick = 0.88;
+        public static final double ActiveStable = 0.5;
+        public static final double ActiveDrop = 0.3;
 
-        public static void goActiveUp() {
-            armState = "ActiveUp";
-            servoActive.setPosition(ActiveUp);
+        public static void goActivePick() {
+            armState = "ActivePick";
+            servoActive.setPosition(ActivePick);
         }
-        public static void goActiveDown() {
-            armState = "ActiveDown";
-            servoActive.setPosition(ActiveDown);
+        public static void goActiveStable() {
+            armState = "ActiveStable";
+            servoActive.setPosition(ActiveStable);
         }
-        public static void goActiveMid() {
-            armState = "ActiveMid";
-            servoActive.setPosition(ActiveMid);
+        public static void goActiveDrop() {
+            armState = "ActiveDrop";
+            servoActive.setPosition(ActiveDrop);
         }
 
 
 
         public static void goLegal() {
             armState = "Legal";
-            servoLeftF.setPosition(LegalLeft);
-            servoLeftB.setPosition(LegalLeft);
-            servoRightF.setPosition(LegalRight);
-            servoRightB.setPosition(LegalRight);
+            servoLF.setPosition(LegalLeft);
+            servoLB.setPosition(LegalLeft);
+            servoRF.setPosition(LegalRight);
+            servoRB.setPosition(LegalRight);
         }
 
-        public static void goUP() {
-            armState = "UP";
-            servoLeftF.setPosition(UPLeft);
-            servoLeftB.setPosition(UPLeft);
-            servoRightF.setPosition(UPRight);
-            servoRightB.setPosition(UPRight);
-        }
         public static void goPick() {
             armState = "PICK";
-            servoLeftF.setPosition(PickLeft);
-            servoLeftB.setPosition(PickLeft);
-            servoRightF.setPosition(PickRight);
-            servoRightB.setPosition(PickRight);
+            servoLF.setPosition(PickLeft);
+            servoLB.setPosition(PickLeft);
+            servoRF.setPosition(PickRight);
+            servoRB.setPosition(PickRight);
         }
         public static void goDrop() {
             armState = "DROP";
-            servoLeftF.setPosition(DropLeft);
-            servoLeftB.setPosition(DropLeft);
-            servoRightF.setPosition(DropRight);
-            servoRightB.setPosition(DropRight);
+            servoLF.setPosition(DropLeft);
+            servoLB.setPosition(DropLeft);
+            servoRF.setPosition(DropRight);
+            servoRB.setPosition(DropRight);
         }
 
         public static void goInit() {
             armState = "INIT";
-            servoLeftF.setPosition(Init);
-            servoLeftB.setPosition(Init);
-            servoRightF.setPosition(Init);
-            servoRightB.setPosition(Init);
+            servoLF.setPosition(Init);
+            servoLB.setPosition(Init);
+            servoRF.setPosition(Init);
+            servoRB.setPosition(Init);
         }
 
 
         public static void goPickCone1() {
             armState = "ONE";
-            servoLeftF.setPosition(PickLeftOne);
-            servoLeftB.setPosition(PickLeftOne);
-            servoRightF.setPosition(PickRightOne);
-            servoRightB.setPosition(PickRightOne);
+            servoLF.setPosition(PickLeftOne);
+            servoLB.setPosition(PickLeftOne);
+            servoRF.setPosition(PickRightOne);
+            servoRB.setPosition(PickRightOne);
         }
 
         public static void goPickCone2() {
             armState = "TWO";
-            servoLeftF.setPosition(PickLeftTwo);
-            servoLeftB.setPosition(PickLeftTwo);
-            servoRightF.setPosition(PickRightTwo);
-            servoRightB.setPosition(PickRightTwo);
+            servoLF.setPosition(PickLeftTwo);
+            servoLB.setPosition(PickLeftTwo);
+            servoRF.setPosition(PickRightTwo);
+            servoRB.setPosition(PickRightTwo);
         }
 
         public static void goPickCone3() {
             armState = "THREE";
-            servoLeftF.setPosition(PickLeftThree);
-            servoLeftB.setPosition(PickLeftThree);
-            servoRightF.setPosition(PickRightThree);
-            servoRightB.setPosition(PickRightThree);
+            servoLF.setPosition(PickLeftThree);
+            servoLB.setPosition(PickLeftThree);
+            servoRF.setPosition(PickRightThree);
+            servoRB.setPosition(PickRightThree);
         }
 
         public static void goPickCone4() {
             armState = "FOUR";
-            servoLeftF.setPosition(PickLeftFour);
-            servoLeftB.setPosition(PickLeftFour);
-            servoRightF.setPosition(PickRightFour);
-            servoRightB.setPosition(PickRightFour);
+            servoLF.setPosition(PickLeftFour);
+            servoLB.setPosition(PickLeftFour);
+            servoRF.setPosition(PickRightFour);
+            servoRB.setPosition(PickRightFour);
         }
 
-        public static void goPickCone5() {
-            armState = "FIVE";
-            servoLeftF.setPosition(PickLeftFive);
-            servoLeftB.setPosition(PickLeftFive);
-            servoRightF.setPosition(PickRightFive);
-            servoRightB.setPosition(PickRightFive);
-        }
     }
 }

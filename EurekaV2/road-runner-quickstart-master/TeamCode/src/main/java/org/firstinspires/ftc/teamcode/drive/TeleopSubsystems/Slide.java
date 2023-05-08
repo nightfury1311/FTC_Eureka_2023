@@ -18,7 +18,7 @@ public class Slide {
         SlideLeft = hardwareMap.get(DcMotorEx.class, "SlideLeft");
         SlideRight = hardwareMap.get(DcMotorEx.class, "SlideRight");
         SlideRight.setDirection(DcMotorEx.Direction.REVERSE);
-        SlideLeft.setDirection(DcMotorSimple.Direction.REVERSE);
+//        SlideLeft.setDirection(DcMotorSimple.Direction.REVERSE);
     }
     public void extendTo(int position){
 
