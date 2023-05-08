@@ -55,8 +55,8 @@ public class BOOOOM extends LinearOpMode {
 //   //OLD VALUES AT 9:1 slider ratio
 //    public static int MAX = 1800;   //
 //    public static int TEST = 800; //
-    public static int MAX = 1100;   //
-    public static int TEST = 400; //
+    public static int MAX = 1300;   //
+    public static int TEST = 500; //
 
     public static double GRIPPER_OPEN = 0.5 ;
     public static double GRIPPER_CLOSE = 0.7;
@@ -220,11 +220,11 @@ public class BOOOOM extends LinearOpMode {
                 servoRotate.setPosition(ROTATE_PICK);
                 SlideRight.setTargetPosition(TEST);
                 SlideRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                SlideRight.setPower(0.6);
+                SlideRight.setPower(1);
 
                 SlideLeft.setTargetPosition(TEST);
                 SlideLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                SlideLeft.setPower(0.6);
+                SlideLeft.setPower(1);
             }
             if (gamepad2.left_bumper) {      // cone pickup
 
@@ -247,11 +247,11 @@ public class BOOOOM extends LinearOpMode {
                 servoRotate.setPosition(ROTATE_PICK);
                 SlideRight.setTargetPosition(MAX);
                 SlideRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                SlideRight.setPower(0.8);
+                SlideRight.setPower(1);
 
                 SlideLeft.setTargetPosition(MAX);
                 SlideLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                SlideLeft.setPower(0.8);
+                SlideLeft.setPower(1);
             }
             else if (gamepad2.right_bumper) {           // cone transfer
 //                SlideRight.setTargetPosition(MAX);
@@ -331,11 +331,11 @@ public class BOOOOM extends LinearOpMode {
 
                 SlideRight.setTargetPosition(0);
                 SlideRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                SlideRight.setPower(0.7);
+                SlideRight.setPower(0.9);
 
                 SlideLeft.setTargetPosition(0);
                 SlideLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                SlideLeft.setPower(0.7);
+                SlideLeft.setPower(0.9);
 
 
                 sleep(200);
@@ -381,11 +381,11 @@ public class BOOOOM extends LinearOpMode {
 
                 ElevateRight.setTargetPosition(LOW);
                 ElevateRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                ElevateRight.setPower(0.4);
+                ElevateRight.setPower(0.6);
 
                 ElevateLeft.setTargetPosition(LOW);
                 ElevateLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                ElevateLeft.setPower(0.4);
+                ElevateLeft.setPower(0.6);
             }
             else if (gamepad1.y) {
 
