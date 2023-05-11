@@ -22,6 +22,7 @@ public class Servos {
 
     public Servos(final HardwareMap hardwareMap, Telemetry telemetry) {
         servoGripper = hardwareMap.get(Servo.class, "servoGripper");
+        servoLock = hardwareMap.get(Servo.class, "servoLock");
         servoActive = hardwareMap.get(Servo.class, "servoActive");
         servoLF = hardwareMap.get(Servo.class, "servoLF");
         servoLB = hardwareMap.get(Servo.class, "servoLB");
@@ -32,11 +33,11 @@ public class Servos {
 
     public static class Gripper {
         public static String gripperState = "OPEN";
-        private static final double gripperOpenPosition = 0.5;
-        private static final double gripperClosePosition = 0.7;
+        public static final double gripperOpenPosition = 0.5;
+        public static final double gripperClosePosition = 0.7;
 
-        private static final double Lock = 0;
-        private static final double Unlock = 0.28;
+        public static final double Lock = 0;
+        public static final double Unlock = 0.28;
 
         public static void openGripper() {
             gripperState = "OPEN";
@@ -60,8 +61,8 @@ public class Servos {
 
     public static class Rotate {
         public static String rotateState = "PICK";
-        private static final double rotateDrop = 0.82;
-        private static final double rotatePick = 0.17;
+        public static final double rotateDrop = 0.82;
+        public static final double rotatePick = 0.17;
 
         public static void rotateDrop() {
             rotateState = "DROP";
@@ -89,7 +90,7 @@ public class Servos {
         public static final double PickRightFour = 1-PickLeftFour;
 
         public static final double PickLeft = 1;
-        public static final double PickRight = 1-PickLeftTwo;
+        public static final double PickRight = 1-PickLeft;
 
         public static final double LegalLeft = 0.2;
         public static final double LegalRight = 1-LegalLeft;

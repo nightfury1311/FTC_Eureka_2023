@@ -13,7 +13,7 @@ public class Slide {
     public DcMotorEx SlideLeft, SlideRight;
 
     public int HOME = 0, MIN = 1, CONE1 = 2, CONE2= 3, CONE3=4, CONE4=5, CONE5=6, MAX = 7, MAXMID = 8, ULTRAMID=9, ULTRAPROMAX=10, PRE=11;
-    public static int[] POSITIONS = {0, 310, 1360, 1320, 1300, 1270, 1240, 1420, 1450, 1550, 1700, 320 };
+    public static int[] POSITIONS = {0, 310, 1360, 1320, 1300, 1270, 1300, 1420, 1450, 1550, 1700, 320 };
     public Slide(HardwareMap hardwareMap, Telemetry telemetry) {
         SlideLeft = hardwareMap.get(DcMotorEx.class, "SlideLeft");
         SlideRight = hardwareMap.get(DcMotorEx.class, "SlideRight");

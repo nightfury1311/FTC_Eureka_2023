@@ -15,7 +15,7 @@ public class Elevator{
         public final int HOME = 0, LOW_POLE = 1, MID_POLE = 2, HIGH_POLE = 3;
         //    public final int[] POSITIONS = {0, 600, 1130, 1765, 20};     //OLD VALUES at 9:1 elevator ratio
 //        public final int[] POSITIONS = {0, 330, 700, 1110, 30};       //NEW VALUES at 5:1 elevator ratio
-            public final int[] POSITIONS = {0, 183, 387, 620, 10};       //NEW VALUES at 3:1 elevator ratio
+            public final int[] POSITIONS = {0, 183, 387, 610, 10};       //NEW VALUES at 3:1 elevator ratio
 
     public Elevator(final HardwareMap hardwareMap, Telemetry telemetry) {
         ElevateLeft = hardwareMap.get(DcMotorEx.class, "ElevateLeft");
