@@ -36,7 +36,7 @@ public class Servos {
         private static final double gripperClosePosition = 0.7;
 
         private static final double Lock = 0;
-        private static final double Unlock = 0.25;
+        private static final double Unlock = 0.28;
 
         public static void openGripper() {
             gripperState = "OPEN";

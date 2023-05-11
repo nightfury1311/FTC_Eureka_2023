@@ -58,6 +58,8 @@ public class BOOOOM extends LinearOpMode {
     public static int MAX = 1300;   //
     public static int TEST = 500; //
 
+    public static int GRIP = 540;
+
     public static double GRIPPER_OPEN = 0.5 ;
     public static double GRIPPER_CLOSE = 0.7;
     public static double PICK_ARM_LEFT = 1;
@@ -78,7 +80,7 @@ public class BOOOOM extends LinearOpMode {
     public static double ACTIVE_DROP = 0.3;
 
     public static double LOCK = 0;
-    public static double UNLOCK = 0.25;
+    public static double UNLOCK = 0.28;
 
     public static double speed = 0.9;
     public static double turn = 0.6;
@@ -178,7 +180,7 @@ public class BOOOOM extends LinearOpMode {
                 servoRF.setPosition(HOME_ARM);
                 servoRB.setPosition(HOME_ARM);
                 servoRotate.setPosition(ROTATE_PICK);
-
+                servoActive.setPosition(ACTIVE_STABLE);
                 SlideRight.setTargetPosition(0);
                 SlideRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                 SlideRight.setPower(0.6);
@@ -201,14 +203,6 @@ public class BOOOOM extends LinearOpMode {
 
             if (gamepad1.left_bumper) {      // cone pickup
 
-//                SlideRight.setTargetPosition(MIN);
-//                SlideRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-//                SlideRight.setPower(0.6);
-//
-//                SlideLeft.setTargetPosition(MIN);
-//                SlideLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-//                SlideLeft.setPower(0.6);
-
                 servoGripper.setPosition(GRIPPER_OPEN);
                 sleep(300);
                 servoActive.setPosition(ACTIVE_PICK);
@@ -228,14 +222,6 @@ public class BOOOOM extends LinearOpMode {
             }
             if (gamepad2.left_bumper) {      // cone pickup
 
-//                SlideRight.setTargetPosition(MIN);
-//                SlideRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-//                SlideRight.setPower(0.6);
-//
-//                SlideLeft.setTargetPosition(MIN);
-//                SlideLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-//                SlideLeft.setPower(0.6);
-
                 servoGripper.setPosition(GRIPPER_OPEN);
                 sleep(200);
                 servoActive.setPosition(ACTIVE_PICK);
@@ -254,15 +240,14 @@ public class BOOOOM extends LinearOpMode {
                 SlideLeft.setPower(1);
             }
             else if (gamepad2.right_bumper) {           // cone transfer
-//                SlideRight.setTargetPosition(MAX);
-//                SlideRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-//                SlideRight.setPower(0.7);
-//
-//                SlideLeft.setTargetPosition(MAX);
-//                SlideLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-//                SlideLeft.setPower(0.7);
 
-//                sleep(100);
+                SlideRight.setTargetPosition(GRIP);
+                SlideRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                SlideRight.setPower(1);
+
+                SlideLeft.setTargetPosition(GRIP);
+                SlideLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                SlideLeft.setPower(1);
 
                 servoGripper.setPosition(GRIPPER_CLOSE);
                 sleep(200);
@@ -275,25 +260,25 @@ public class BOOOOM extends LinearOpMode {
 
                 SlideRight.setTargetPosition(0);
                 SlideRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                SlideRight.setPower(0.9);
+                SlideRight.setPower(1);
 
                 SlideLeft.setTargetPosition(0);
                 SlideLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                SlideLeft.setPower(0.9);
+                SlideLeft.setPower(1);
 
 
-                sleep(600);
+                sleep(300);
                 servoRotate.setPosition(ROTATE_DROP);
 //                sleep(300);
 
                 servoActive.setPosition(ACTIVE_DROP);
-                sleep(400);
+                sleep(300);
                 servoLF.setPosition(DROP_ARM_LEFT);
                 servoLB.setPosition(DROP_ARM_LEFT);
                 servoRF.setPosition(DROP_ARM_RIGHT);
                 servoRB.setPosition(DROP_ARM_RIGHT);
 
-                sleep(400);
+                sleep(200);
 
                 servoGripper.setPosition(GRIPPER_OPEN);
                 sleep(200);
@@ -310,15 +295,6 @@ public class BOOOOM extends LinearOpMode {
 
 //            //************************ CONE TRANSFER CYCLE *******************************
             else if (gamepad1.right_bumper) {           // cone transfer
-//                SlideRight.setTargetPosition(MAX);
-//                SlideRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-//                SlideRight.setPower(0.7);
-//
-//                SlideLeft.setTargetPosition(MAX);
-//                SlideLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-//                SlideLeft.setPower(0.7);
-
-//                sleep(100);
 
                 servoGripper.setPosition(GRIPPER_CLOSE);
                 sleep(200);
@@ -420,7 +396,7 @@ public class BOOOOM extends LinearOpMode {
             }
             //small start cycle for fun
 
-            else if (gamepad1.start) {
+            else if (gamepad2.start) {
                 servoGripper.setPosition(GRIPPER_CLOSE);
                 sleep(200);
                 servoRotate.setPosition(ROTATE_DROP);
@@ -470,6 +446,90 @@ public class BOOOOM extends LinearOpMode {
                 ElevateLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                 ElevateLeft.setPower(0.7);
 
+
+            }
+
+
+            ///////////////////REAL CYCLEE////////////////////////
+
+            else if (gamepad1.start) {
+                SlideRight.setTargetPosition(GRIP);
+                SlideRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                SlideRight.setPower(1);
+
+                SlideLeft.setTargetPosition(GRIP);
+                SlideLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                SlideLeft.setPower(1);
+
+                servoGripper.setPosition(GRIPPER_CLOSE);
+                sleep(200);
+
+                servoLF.setPosition(HOME_ARM);
+                servoLB.setPosition(HOME_ARM);
+                servoRF.setPosition(HOME_ARM);
+                servoRB.setPosition(HOME_ARM);
+                servoActive.setPosition(ACTIVE_STABLE);
+
+                SlideRight.setTargetPosition(0);
+                SlideRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                SlideRight.setPower(1);
+
+                SlideLeft.setTargetPosition(0);
+                SlideLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                SlideLeft.setPower(1);
+
+
+                sleep(200);
+                servoRotate.setPosition(ROTATE_DROP);
+//                sleep(300);
+
+                servoActive.setPosition(ACTIVE_DROP);
+                sleep(200);
+                servoLF.setPosition(DROP_ARM_LEFT);
+                servoLB.setPosition(DROP_ARM_LEFT);
+                servoRF.setPosition(DROP_ARM_RIGHT);
+                servoRB.setPosition(DROP_ARM_RIGHT);
+
+                sleep(300);
+
+                servoGripper.setPosition(GRIPPER_OPEN);
+                sleep(200);
+                servoLock.setPosition(LOCK);
+                servoLF.setPosition(PICK_ARM_LEFT);
+                servoLB.setPosition(PICK_ARM_LEFT);
+                servoRF.setPosition(PICK_ARM_RIGHT);
+                servoRB.setPosition(PICK_ARM_RIGHT);
+                servoRotate.setPosition(ROTATE_PICK);
+                servoActive.setPosition(ACTIVE_PICK);
+                sleep(200);
+
+                ElevateRight.setTargetPosition(HIGH);
+                ElevateRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                ElevateRight.setPower(1);
+
+                ElevateLeft.setTargetPosition(HIGH);
+                ElevateLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                ElevateLeft.setPower(1);
+                sleep(800);
+
+                SlideRight.setTargetPosition(TEST);
+                SlideRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                SlideRight.setPower(0.7);
+
+                SlideLeft.setTargetPosition(TEST);
+                SlideLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                SlideLeft.setPower(0.7);
+
+                sleep(200);
+                servoLock.setPosition(UNLOCK);
+
+                ElevateRight.setTargetPosition(0);
+                ElevateRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                ElevateRight.setPower(0.7);
+
+                ElevateLeft.setTargetPosition(0);
+                ElevateLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                ElevateLeft.setPower(0.7);
 
             }
 
