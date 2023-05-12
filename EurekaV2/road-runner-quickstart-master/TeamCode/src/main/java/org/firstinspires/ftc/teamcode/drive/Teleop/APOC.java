@@ -23,7 +23,7 @@ import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
 import org.firstinspires.ftc.teamcode.drive.TeleopSubsystems.Elevator;
 import org.firstinspires.ftc.teamcode.drive.TeleopSubsystems.Servos;
 import org.firstinspires.ftc.teamcode.drive.TeleopSubsystems.Slide;
-
+@Disabled
 @Config
 @TeleOp(name = "APOC")
 public class APOC extends LinearOpMode {
