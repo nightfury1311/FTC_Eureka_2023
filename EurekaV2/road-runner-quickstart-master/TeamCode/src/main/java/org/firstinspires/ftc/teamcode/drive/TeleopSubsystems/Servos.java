@@ -37,7 +37,7 @@ public class Servos {
         public static final double gripperClosePosition = 0.7;
 
         public static final double Lock = 0;
-        public static final double Unlock = 0.28;
+        public static final double Unlock = 0.3;
 
         public static void openGripper() {
             gripperState = "OPEN";
@@ -77,10 +77,10 @@ public class Servos {
 
         public static String armState = "INIT";
 
-        public static final double DropLeft = 0.25;
+        public static final double DropLeft = 0.27;
         public static final double DropRight = 1-DropLeft;
         public static final double Init = 0.5;
-        public static final double PickLeftOne = 0.85;
+        public static final double PickLeftOne = 0.83;
         public static final double PickRightOne = 1-PickLeftOne;
         public static final double PickLeftTwo = 0.88;
         public static final double PickRightTwo = 1-PickLeftTwo;
@@ -89,7 +89,7 @@ public class Servos {
         public static final double PickLeftFour = 0.96;
         public static final double PickRightFour = 1-PickLeftFour;
 
-        public static final double PickLeft = 1;
+        public static final double PickLeft = 0.98;
         public static final double PickRight = 1-PickLeft;
 
         public static final double LegalLeft = 0.4;
@@ -99,9 +99,9 @@ public class Servos {
         public static final double ActivePick4 = 0.86;
         public static final double ActivePick3 = 0.85;
         public static final double ActivePick2 = 0.82;
-        public static final double ActivePick1 = 0.79;
+        public static final double ActivePick1 = 0.76;
         public static final double ActiveStable = 0.5;
-        public static final double ActiveDrop = 0.3;
+        public static final double ActiveDrop = 0.28;
 
         public static void goActivePick() {
             armState = "ActivePick";

@@ -61,7 +61,7 @@ public class RedRightCentreHigh extends LinearOpMode {
                 .addTemporalMarker(()->{slide.extendTo(slide.POSITIONS[slide.HOME]);Servos.Rotate.rotateDrop();Servos.Arm.goActiveDrop();})
                 .UNSTABLE_addTemporalMarkerOffset(0.6,()->Servos.Arm.goDrop())
                 .UNSTABLE_addTemporalMarkerOffset(0.8,()->Servos.Gripper.openGripper())
-                .UNSTABLE_addTemporalMarkerOffset(1.0,()->{Servos.Gripper.Lock();Servos.Arm.goInit();Servos.Rotate.rotatePick();})
+                .UNSTABLE_addTemporalMarkerOffset(0.9,()->{Servos.Gripper.Lock();Servos.Arm.goInit();Servos.Rotate.rotatePick();})
                 .lineToLinearHeading(new Pose2d(12,-20, Math.toRadians(196)))
 
 
@@ -84,7 +84,7 @@ public class RedRightCentreHigh extends LinearOpMode {
                 .addTemporalMarker(()->{slide.extendTo(slide.POSITIONS[slide.HOME]);Servos.Rotate.rotateDrop();Servos.Arm.goActiveDrop();})
                 .UNSTABLE_addTemporalMarkerOffset(0.6,()->Servos.Arm.goDrop())
                 .UNSTABLE_addTemporalMarkerOffset(0.8,()->Servos.Gripper.openGripper())
-                .UNSTABLE_addTemporalMarkerOffset(1.0,()->{Servos.Gripper.Lock();Servos.Arm.goInit();Servos.Rotate.rotatePick();})
+                .UNSTABLE_addTemporalMarkerOffset(0.9,()->{Servos.Gripper.Lock();Servos.Arm.goInit();Servos.Rotate.rotatePick();})
                 .lineToLinearHeading(new Pose2d(12,-20, Math.toRadians(196)))
 
                 ///// DROP CONE 2
@@ -106,7 +106,7 @@ public class RedRightCentreHigh extends LinearOpMode {
                 .addTemporalMarker(()->{slide.extendTo(slide.POSITIONS[slide.HOME]);Servos.Rotate.rotateDrop();Servos.Arm.goActiveDrop();})
                 .UNSTABLE_addTemporalMarkerOffset(0.6,()->Servos.Arm.goDrop())
                 .UNSTABLE_addTemporalMarkerOffset(0.8,()->Servos.Gripper.openGripper())
-                .UNSTABLE_addTemporalMarkerOffset(1.0,()->{Servos.Gripper.Lock();Servos.Arm.goInit();Servos.Rotate.rotatePick();})
+                .UNSTABLE_addTemporalMarkerOffset(0.9,()->{Servos.Gripper.Lock();Servos.Arm.goInit();Servos.Rotate.rotatePick();})
                 .lineToLinearHeading(new Pose2d(12,-20, Math.toRadians(196)))
 
                 ///// DROP CONE 3
@@ -128,7 +128,7 @@ public class RedRightCentreHigh extends LinearOpMode {
                 .addTemporalMarker(()->{slide.extendTo(slide.POSITIONS[slide.HOME]);Servos.Rotate.rotateDrop();Servos.Arm.goActiveDrop();})
                 .UNSTABLE_addTemporalMarkerOffset(0.6,()->Servos.Arm.goDrop())
                 .UNSTABLE_addTemporalMarkerOffset(0.8,()->Servos.Gripper.openGripper())
-                .UNSTABLE_addTemporalMarkerOffset(1.0,()->{Servos.Gripper.Lock();Servos.Arm.goInit();Servos.Rotate.rotatePick();})
+                .UNSTABLE_addTemporalMarkerOffset(0.9,()->{Servos.Gripper.Lock();Servos.Arm.goInit();Servos.Rotate.rotatePick();})
                 .lineToLinearHeading(new Pose2d(12,-20, Math.toRadians(196)))
 
                 ///// DROP CONE 4
@@ -143,15 +143,15 @@ public class RedRightCentreHigh extends LinearOpMode {
                 ////// GO TO PICK CONE 5
                 .lineToLinearHeading(new Pose2d(19,-12, Math.toRadians(180)))
                 .UNSTABLE_addTemporalMarkerOffset(-0.8,()->{slide.extendTo(slide.POSITIONS[slide.CONE5]);Servos.Arm.goPick();})
-
-                .addTemporalMarker(()->{slide.extendTo(slide.POSITIONS[slide.CONE5]);Servos.Gripper.closeGripper();})
                 .waitSeconds(0.2)
+                .addTemporalMarker(()->{Servos.Gripper.closeGripper();})
+                .waitSeconds(0.3)
                 .addTemporalMarker(()->Servos.Arm.goInit())
                 .waitSeconds(0.3)
                 .addTemporalMarker(()->{slide.extendTo(slide.POSITIONS[slide.HOME]);Servos.Rotate.rotateDrop();Servos.Arm.goActiveDrop();})
                 .UNSTABLE_addTemporalMarkerOffset(0.6,()->Servos.Arm.goDrop())
                 .UNSTABLE_addTemporalMarkerOffset(0.8,()->Servos.Gripper.openGripper())
-                .UNSTABLE_addTemporalMarkerOffset(1.0,()->{Servos.Gripper.Lock();Servos.Arm.goInit();Servos.Rotate.rotatePick();})
+                .UNSTABLE_addTemporalMarkerOffset(0.9,()->{Servos.Gripper.Lock();Servos.Arm.goInit();Servos.Rotate.rotatePick();})
                 .lineToLinearHeading(new Pose2d(12,-20, Math.toRadians(196)))
 
                 ///// DROP CONE 4
