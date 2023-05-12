@@ -80,22 +80,26 @@ public class Servos {
         public static final double DropLeft = 0.25;
         public static final double DropRight = 1-DropLeft;
         public static final double Init = 0.5;
-        public static final double PickLeftOne = 0.78;
+        public static final double PickLeftOne = 0.85;
         public static final double PickRightOne = 1-PickLeftOne;
-        public static final double PickLeftTwo = 0.82;
+        public static final double PickLeftTwo = 0.88;
         public static final double PickRightTwo = 1-PickLeftTwo;
-        public static final double PickLeftThree = 0.86;
+        public static final double PickLeftThree = 0.91;
         public static final double PickRightThree = 1-PickLeftThree;
-        public static final double PickLeftFour = 0.9;
+        public static final double PickLeftFour = 0.96;
         public static final double PickRightFour = 1-PickLeftFour;
 
         public static final double PickLeft = 1;
         public static final double PickRight = 1-PickLeft;
 
-        public static final double LegalLeft = 0.2;
+        public static final double LegalLeft = 0.4;
         public static final double LegalRight = 1-LegalLeft;
 
         public static final double ActivePick = 0.88;
+        public static final double ActivePick4 = 0.86;
+        public static final double ActivePick3 = 0.85;
+        public static final double ActivePick2 = 0.82;
+        public static final double ActivePick1 = 0.79;
         public static final double ActiveStable = 0.5;
         public static final double ActiveDrop = 0.3;
 
@@ -110,6 +114,22 @@ public class Servos {
         public static void goActiveDrop() {
             armState = "ActiveDrop";
             servoActive.setPosition(ActiveDrop);
+        }
+        public static void goActivePick1() {
+            armState = "ActivePick";
+            servoActive.setPosition(ActivePick1);
+        }
+        public static void goActivePick2() {
+            armState = "ActivePick2";
+            servoActive.setPosition(ActivePick2);
+        }
+        public static void goActivePick3() {
+            armState = "ActivePick3";
+            servoActive.setPosition(ActivePick3);
+        }
+        public static void goActivePick4() {
+            armState = "ActivePick";
+            servoActive.setPosition(ActivePick4);
         }
 
 

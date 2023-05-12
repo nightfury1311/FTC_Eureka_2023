@@ -12,8 +12,8 @@ import org.firstinspires.ftc.robotcore.external.navigation.CurrentUnit;
 public class Slide {
     public DcMotorEx SlideLeft, SlideRight;
 
-    public int HOME = 0, MIN = 1, CONE1 = 2, CONE2= 3, CONE3=4, CONE4=5, CONE5=6, MAX = 7, MAXMID = 8, ULTRAMID=9, ULTRAPROMAX=10, PRE=11;
-    public static int[] POSITIONS = {0, 310, 1360, 1320, 1300, 1270, 1300, 1420, 1450, 1550, 1700, 320 };
+    public int HOME = 0, MIN = 1, CONE1 = 2, CONE2= 3, CONE3=4, CONE4=5, CONE5=6, MAX = 7;
+    public static int[] POSITIONS = {0, 300, 1150, 1200, 1240, 1270, 1300, 1320};
     public Slide(HardwareMap hardwareMap, Telemetry telemetry) {
         SlideLeft = hardwareMap.get(DcMotorEx.class, "SlideLeft");
         SlideRight = hardwareMap.get(DcMotorEx.class, "SlideRight");
@@ -65,18 +65,6 @@ public class Slide {
     public void extendToMAX(){
         extendTo(POSITIONS[MAX]);
     }
-    public void extendToMAXMID(){
-        extendTo(POSITIONS[MAXMID]);
-    }
-    public void extendToULTRAMID(){
-        extendTo(POSITIONS[ULTRAMID]);
-    }
-    public void extendToULTRAPROMAX(){
-        extendTo(POSITIONS[ULTRAPROMAX]);
-    }
-    public void extendToPRE(){
-        extendTo(POSITIONS[PRE]);
-    }
 
     public void extendToHomeSlow(){
         extendToSlow(POSITIONS[HOME]);
@@ -91,18 +79,6 @@ public class Slide {
     }
     public void extendToMAXSlow(){
         extendToSlow(POSITIONS[MAX]);
-    }
-    public void extendToMAXMIDSlow(){
-        extendToSlow(POSITIONS[MAXMID]);
-    }
-    public void extendToULTRAMIDSlow(){
-        extendToSlow(POSITIONS[ULTRAMID]);
-    }
-    public void extendToULTRAPROMAXSlow(){
-        extendToSlow(POSITIONS[ULTRAPROMAX]);
-    }
-    public void extendToPRESlow(){
-        extendToSlow(POSITIONS[PRE]);
     }
 
 }
