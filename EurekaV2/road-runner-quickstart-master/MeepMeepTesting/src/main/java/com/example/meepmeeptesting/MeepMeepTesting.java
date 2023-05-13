@@ -16,58 +16,55 @@ public class MeepMeepTesting {
                 .setConstraints(60, 60, Math.toRadians(180), Math.toRadians(180), 11.8)
                 .followTrajectorySequence(drive ->
                                 drive.trajectorySequenceBuilder(new Pose2d(31, -62, Math.toRadians(90)))
-                                        .lineToConstantHeading(new Vector2d(12, -55))
-                                        .lineToLinearHeading(new Pose2d(12,-20, Math.toRadians(196)))
+                                        .lineToConstantHeading(new Vector2d(35, -55))
+                                        .lineToLinearHeading(new Pose2d(35,-3, Math.toRadians(164)))  // dropping position
 
                                         //PRELOAD
-
-                                        .waitSeconds(1)
-
-
-                                        .lineToLinearHeading(new Pose2d(14,-12, Math.toRadians(180)))
-                                        //1st Cone Pick
-                                        .waitSeconds(2)
-                                        .lineToLinearHeading(new Pose2d(12,-20, Math.toRadians(196)))
-                                        //1st Cone Drop
-                                        .waitSeconds(1)
-
-                                        .lineToLinearHeading(new Pose2d(14,-12, Math.toRadians(180)))
-                                        //2nd Cone Pick
-                                        .waitSeconds(2)
-                                        .lineToLinearHeading(new Pose2d(12,-20, Math.toRadians(196)))
-                                        //2nd Cone Drop
-                                        .waitSeconds(1)
-
-                                        .lineToLinearHeading(new Pose2d(14,-12, Math.toRadians(180)))
-                                        //3rd Cone Pick
-                                        .waitSeconds(2)
-                                        .lineToLinearHeading(new Pose2d(12,-20, Math.toRadians(196)))
-                                        //3rd Cone Drop
-                                        .waitSeconds(1)
-
-                                        .lineToLinearHeading(new Pose2d(14,-12, Math.toRadians(180)))
-                                        //4th Cone Pick
-                                        .waitSeconds(2)
-                                        .lineToLinearHeading(new Pose2d(12,-20, Math.toRadians(196)))
-                                        //4th Cone Drop
-                                        .waitSeconds(1)
-
-                                        .lineToLinearHeading(new Pose2d(14,-12, Math.toRadians(180)))
-                                        //5th Cone Pick
-                                        .waitSeconds(2)
-                                        .lineToLinearHeading(new Pose2d(12,-20, Math.toRadians(196)))
-                                        //5th Cone Drop
-                                        .waitSeconds(1)
-
-
-
-
-                                        .build()
+//
+//                                        .waitSeconds(1)
+//
+//
+//                                        .lineToLinearHeading(new Pose2d(14,-12, Math.toRadians(180)))
+//                                        //1st Cone Pick
+//                                        .waitSeconds(2)
+//                                        .lineToLinearHeading(new Pose2d(12,-20, Math.toRadians(196)))
+//                                        //1st Cone Drop
+//                                        .waitSeconds(1)
+//
+//                                        .lineToLinearHeading(new Pose2d(14,-12, Math.toRadians(180)))
+//                                        //2nd Cone Pick
+//                                        .waitSeconds(2)
+//                                        .lineToLinearHeading(new Pose2d(12,-20, Math.toRadians(196)))
+//                                        //2nd Cone Drop
+//                                        .waitSeconds(1)
+//
+//                                        .lineToLinearHeading(new Pose2d(14,-12, Math.toRadians(180)))
+//                                        //3rd Cone Pick
+//                                        .waitSeconds(2)
+//                                        .lineToLinearHeading(new Pose2d(12,-20, Math.toRadians(196)))
+//                                        //3rd Cone Drop
+//                                        .waitSeconds(1)
+//
+//                                        .lineToLinearHeading(new Pose2d(14,-12, Math.toRadians(180)))
+//                                        //4th Cone Pick
+//                                        .waitSeconds(2)
+//                                        .lineToLinearHeading(new Pose2d(12,-20, Math.toRadians(196)))
+//                                        //4th Cone Drop
+//                                        .waitSeconds(1)
+//
+//                                        .lineToLinearHeading(new Pose2d(14,-12, Math.toRadians(180)))
+//                                        //5th Cone Pick
+//                                        .waitSeconds(2)
+//                                        .lineToLinearHeading(new Pose2d(12,-20, Math.toRadians(196)))
+//                                        //5th Cone Drop
+//                                        .waitSeconds(1)
+//
+//                                        .build()
 
 //                        drive.trajectorySequenceBuilder(new Pose2d(32, -62, Math.toRadians(180)))
 //                                .lineToConstantHeading(new Vector2d(12, -60))
 //                                .lineToLinearHeading(new Pose2d(12,-20, Math.toRadians(196)))
-//                                .build()
+                                .build()
                 );
 
         meepMeep.setBackground(MeepMeep.Background.FIELD_POWERPLAY_OFFICIAL)
