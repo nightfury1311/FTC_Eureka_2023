@@ -221,7 +221,7 @@ public class BOOOOM extends LinearOpMode {
                 SlideLeft.setPower(0.7);
             }
             else if (gamepad2.left_bumper) {      // cone pickup
-
+                
                 servoGripper.setPosition(GRIPPER_OPEN);
                 servoActive.setPosition(ACTIVE_PICK);
                 servoRotate.setPosition(ROTATE_PICK);
@@ -542,8 +542,6 @@ public class BOOOOM extends LinearOpMode {
 
             }
 
-            //////////////START CYCLE////////////////////////
-
 
             else if(gamepad1.dpad_right){
                 servoRotate.setPosition(ROTATE_PICK);
@@ -555,26 +553,34 @@ public class BOOOOM extends LinearOpMode {
                 servoRF.setPosition(HOME_ARM);
                 servoRB.setPosition(HOME_ARM);
 
+                SlideRight.setTargetPosition(0);
+                SlideRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                SlideRight.setPower(0.7);
 
-//                SlideRight.setTargetPosition(0);
-//                SlideRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-//                SlideRight.setPower(0.6);
-//
-//                SlideLeft.setTargetPosition(0);
-//                SlideLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-//                SlideLeft.setPower(0.6);
+                SlideLeft.setTargetPosition(0);
+                SlideLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                SlideLeft.setPower(0.7);
             }
             else if(gamepad1.dpad_left){
                 servoRotate.setPosition(ROTATE_PICK);
                 servoGripper.setPosition(GRIPPER_OPEN);
-                sleep(300);
                 servoActive.setPosition(ACTIVE_PICK);
+                sleep(300);
                 servoLF.setPosition(PICK_ARM_LEFT);
                 servoLB.setPosition(PICK_ARM_LEFT);
                 servoRF.setPosition(PICK_ARM_RIGHT);
                 servoRB.setPosition(PICK_ARM_RIGHT);
-
             }
+            else if(gamepad1.x){
+                servoRotate.setPosition(ROTATE_PICK);
+                servoActive.setPosition(ACTIVE_PICK);
+                sleep(300);
+                servoLF.setPosition(PICK_ARM_LEFT);
+                servoLB.setPosition(PICK_ARM_LEFT);
+                servoRF.setPosition(PICK_ARM_RIGHT);
+                servoRB.setPosition(PICK_ARM_RIGHT);
+            }
+
             if(gamepad1.right_trigger>0.7)
             {
                 servoGripper.setPosition(GRIPPER_OPEN);
