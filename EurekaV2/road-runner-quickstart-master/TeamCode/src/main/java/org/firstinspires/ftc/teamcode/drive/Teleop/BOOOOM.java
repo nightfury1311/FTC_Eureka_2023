@@ -204,33 +204,34 @@ public class BOOOOM extends LinearOpMode {
             if (gamepad1.left_bumper) {      // cone pickup
 
                 servoGripper.setPosition(GRIPPER_OPEN);
-                sleep(300);
                 servoActive.setPosition(ACTIVE_PICK);
+                servoRotate.setPosition(ROTATE_PICK);
+                sleep(300);
                 servoLF.setPosition(PICK_ARM_LEFT);
                 servoLB.setPosition(PICK_ARM_LEFT);
                 servoRF.setPosition(PICK_ARM_RIGHT);
                 servoRB.setPosition(PICK_ARM_RIGHT);
-
-                servoRotate.setPosition(ROTATE_PICK);
+                sleep(400);
                 SlideRight.setTargetPosition(TEST);
                 SlideRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                SlideRight.setPower(1);
+                SlideRight.setPower(0.7);
 
                 SlideLeft.setTargetPosition(TEST);
                 SlideLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                SlideLeft.setPower(1);
+                SlideLeft.setPower(0.7);
             }
             if (gamepad2.left_bumper) {      // cone pickup
 
                 servoGripper.setPosition(GRIPPER_OPEN);
-                sleep(200);
                 servoActive.setPosition(ACTIVE_PICK);
+                servoRotate.setPosition(ROTATE_PICK);
+                sleep(200);
+
                 servoLF.setPosition(PICK_ARM_LEFT);
                 servoLB.setPosition(PICK_ARM_LEFT);
                 servoRF.setPosition(PICK_ARM_RIGHT);
                 servoRB.setPosition(PICK_ARM_RIGHT);
 
-                servoRotate.setPosition(ROTATE_PICK);
                 SlideRight.setTargetPosition(MAX);
                 SlideRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                 SlideRight.setPower(1);
@@ -241,14 +242,14 @@ public class BOOOOM extends LinearOpMode {
             }
             else if (gamepad2.right_bumper) {           // cone transfer
 
-                SlideRight.setTargetPosition(GRIP);
+                SlideRight.setTargetPosition(MAX+20);
                 SlideRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                 SlideRight.setPower(1);
 
-                SlideLeft.setTargetPosition(GRIP);
+                SlideLeft.setTargetPosition(MAX+20);
                 SlideLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                 SlideLeft.setPower(1);
-
+                sleep(100);
                 servoGripper.setPosition(GRIPPER_CLOSE);
                 sleep(200);
 
@@ -295,7 +296,14 @@ public class BOOOOM extends LinearOpMode {
 
 //            //************************ CONE TRANSFER CYCLE *******************************
             else if (gamepad1.right_bumper) {           // cone transfer
+                SlideRight.setTargetPosition(TEST+50);
+                SlideRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                SlideRight.setPower(0.9);
 
+                SlideLeft.setTargetPosition(TEST+50);
+                SlideLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                SlideLeft.setPower(0.9);
+                sleep(100);
                 servoGripper.setPosition(GRIPPER_CLOSE);
                 sleep(200);
 
@@ -453,13 +461,14 @@ public class BOOOOM extends LinearOpMode {
             ///////////////////REAL CYCLEE////////////////////////
 
             else if (gamepad1.start) {
-                SlideRight.setTargetPosition(GRIP);
+                SlideRight.setTargetPosition(TEST+50);
                 SlideRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                SlideRight.setPower(1);
+                SlideRight.setPower(0.9);
 
-                SlideLeft.setTargetPosition(GRIP);
+                SlideLeft.setTargetPosition(TEST+50);
                 SlideLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                SlideLeft.setPower(1);
+                SlideLeft.setPower(0.9);
+                sleep(100);
 
                 servoGripper.setPosition(GRIPPER_CLOSE);
                 sleep(200);
