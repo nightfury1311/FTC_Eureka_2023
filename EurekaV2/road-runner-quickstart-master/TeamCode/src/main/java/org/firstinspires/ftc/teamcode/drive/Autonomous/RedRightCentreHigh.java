@@ -163,7 +163,7 @@ public class RedRightCentreHigh extends LinearOpMode {
                 .addTemporalMarker(()->elevator.extendTo(elevator.POSITIONS[elevator.HOME]))
                 .waitSeconds(0.2)
 
-                .lineToLinearHeading(new Pose2d(12,-20, Math.toRadians(90)))
+                .lineToLinearHeading(new Pose2d(13,-20, Math.toRadians(90)))
                 .waitSeconds(2)
 
 
@@ -171,7 +171,6 @@ public class RedRightCentreHigh extends LinearOpMode {
         waitForStart();
 
         drive.followTrajectorySequence(pre);
-
 
     }
 
