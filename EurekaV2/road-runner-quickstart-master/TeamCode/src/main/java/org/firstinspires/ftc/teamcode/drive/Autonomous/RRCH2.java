@@ -21,7 +21,7 @@ import org.openftc.easyopencv.OpenCvCameraRotation;
 import java.util.ArrayList;
 
 @Autonomous
-public class RRCH extends LinearOpMode
+public class RRCH2 extends LinearOpMode
 {
     Elevator elevator = null;
     Servos servos = null;
@@ -100,26 +100,26 @@ public class RRCH extends LinearOpMode
         TrajectorySequence pre =drive.trajectorySequenceBuilder(startPose)
 
                 ////// DROP PRELOAD
-//                .lineToConstantHeading(new Vector2d(12, -55))
-//                .lineToLinearHeading(new Pose2d(12,-20, Math.toRadians(196)))  // dropping position
-
+                //.lineToConstantHeading(new Vector2d(12, -55))
+                //.lineToLinearHeading(new Pose2d(12,-20, Math.toRadians(196)))  // dropping position
                 .lineToLinearHeading(new Pose2d(12, -60, Math.toRadians(180)))
-                .lineToLinearHeading(new Pose2d(12,-20, Math.toRadians(196)))
+                .lineToLinearHeading(new Pose2d(12,-20, Math.toRadians(196)))  // dropping position
                 .addTemporalMarker(()->elevator.extendTo(elevator.POSITIONS[elevator.HIGH_POLE]))
                 .waitSeconds(0.5)
-                .addTemporalMarker(()->{Servos.Gripper.Unlock();Servos.Arm.goActivePick1();})
-                .waitSeconds(0.05)
                 .addTemporalMarker(()->elevator.extendTo(elevator.POSITIONS[elevator.HOME]))
+                .waitSeconds(0.05)
+                .addTemporalMarker(()->{Servos.Gripper.Unlock();Servos.Arm.goActivePick1();})
+
 
 
                 ////// GO TO PICK CONE 1
                 .lineToLinearHeading(new Pose2d(20,-12, Math.toRadians(180)))                 //picking position
-                .UNSTABLE_addTemporalMarkerOffset(-0.8,()->{slide.extendTo(slide.POSITIONS[slide.CONE1]);Servos.Arm.goPickCone1();})
+                .UNSTABLE_addTemporalMarkerOffset(-0.9,()->{slide.extendTo(slide.POSITIONS[slide.CONE1]);Servos.Arm.goPickCone1();})
 
                 .addTemporalMarker(()->{slide.extendTo(slide.POSITIONS[slide.CONE2]);Servos.Gripper.closeGripper();})
-                .waitSeconds(0.2)
+                .waitSeconds(0.1)
                 .addTemporalMarker(()->Servos.Arm.goInit())
-                .waitSeconds(0.3)
+                .waitSeconds(0.1)
                 .addTemporalMarker(()->{slide.extendTo(slide.POSITIONS[slide.HOME]);Servos.Rotate.rotateDrop();Servos.Arm.goActiveDrop();})
                 .UNSTABLE_addTemporalMarkerOffset(0.6,()->Servos.Arm.goDrop())
                 .UNSTABLE_addTemporalMarkerOffset(0.8,()->Servos.Gripper.openGripper())
@@ -131,18 +131,18 @@ public class RRCH extends LinearOpMode
                 .waitSeconds(0.2)
                 .addTemporalMarker(()->elevator.extendTo(elevator.POSITIONS[elevator.HIGH_POLE]))
                 .waitSeconds(0.7)
-                .addTemporalMarker(()->{Servos.Gripper.Unlock();Servos.Arm.goActivePick2();})
-                .waitSeconds(0.05)
                 .addTemporalMarker(()->elevator.extendTo(elevator.POSITIONS[elevator.HOME]))
+                .waitSeconds(0.05)
+                .addTemporalMarker(()->{Servos.Gripper.Unlock();Servos.Arm.goActivePick2();})
 
                 ////// GO TO PICK CONE 2
                 .lineToLinearHeading(new Pose2d(19,-12, Math.toRadians(180)))
-                .UNSTABLE_addTemporalMarkerOffset(-0.8,()->{slide.extendTo(slide.POSITIONS[slide.CONE2]);Servos.Arm.goPickCone2();})
+                .UNSTABLE_addTemporalMarkerOffset(-0.9,()->{slide.extendTo(slide.POSITIONS[slide.CONE2]);Servos.Arm.goPickCone2();})
 
                 .addTemporalMarker(()->{slide.extendTo(slide.POSITIONS[slide.CONE3]);Servos.Gripper.closeGripper();})
-                .waitSeconds(0.2)
+                .waitSeconds(0.1)
                 .addTemporalMarker(()->Servos.Arm.goInit())
-                .waitSeconds(0.3)
+                .waitSeconds(0.1)
                 .addTemporalMarker(()->{slide.extendTo(slide.POSITIONS[slide.HOME]);Servos.Rotate.rotateDrop();Servos.Arm.goActiveDrop();})
                 .UNSTABLE_addTemporalMarkerOffset(0.6,()->Servos.Arm.goDrop())
                 .UNSTABLE_addTemporalMarkerOffset(0.8,()->Servos.Gripper.openGripper())
@@ -153,18 +153,18 @@ public class RRCH extends LinearOpMode
                 .waitSeconds(0.2)
                 .addTemporalMarker(()->elevator.extendTo(elevator.POSITIONS[elevator.HIGH_POLE]))
                 .waitSeconds(0.7)
-                .addTemporalMarker(()->{Servos.Gripper.Unlock();Servos.Arm.goActivePick3();})
-                .waitSeconds(0.05)
                 .addTemporalMarker(()->elevator.extendTo(elevator.POSITIONS[elevator.HOME]))
+                .waitSeconds(0.05)
+                .addTemporalMarker(()->{Servos.Gripper.Unlock();Servos.Arm.goActivePick3();})
 
                 ////// GO TO PICK CONE 3
                 .lineToLinearHeading(new Pose2d(19,-12, Math.toRadians(180)))
-                .UNSTABLE_addTemporalMarkerOffset(-0.8,()->{slide.extendTo(slide.POSITIONS[slide.CONE3]);Servos.Arm.goPickCone3();})
+                .UNSTABLE_addTemporalMarkerOffset(-0.9,()->{slide.extendTo(slide.POSITIONS[slide.CONE3]);Servos.Arm.goPickCone3();})
 
                 .addTemporalMarker(()->{slide.extendTo(slide.POSITIONS[slide.CONE4]);Servos.Gripper.closeGripper();})
-                .waitSeconds(0.2)
+                .waitSeconds(0.1)
                 .addTemporalMarker(()->Servos.Arm.goInit())
-                .waitSeconds(0.3)
+                .waitSeconds(0.1)
                 .addTemporalMarker(()->{slide.extendTo(slide.POSITIONS[slide.HOME]);Servos.Rotate.rotateDrop();Servos.Arm.goActiveDrop();})
                 .UNSTABLE_addTemporalMarkerOffset(0.6,()->Servos.Arm.goDrop())
                 .UNSTABLE_addTemporalMarkerOffset(0.8,()->Servos.Gripper.openGripper())
@@ -175,18 +175,18 @@ public class RRCH extends LinearOpMode
                 .waitSeconds(0.2)
                 .addTemporalMarker(()->elevator.extendTo(elevator.POSITIONS[elevator.HIGH_POLE]))
                 .waitSeconds(0.7)
-                .addTemporalMarker(()->{Servos.Gripper.Unlock();Servos.Arm.goActivePick4();})
-                .waitSeconds(0.05)
                 .addTemporalMarker(()->elevator.extendTo(elevator.POSITIONS[elevator.HOME]))
+                .waitSeconds(0.05)
+                .addTemporalMarker(()->{Servos.Gripper.Unlock();Servos.Arm.goActivePick4();})
 
                 ////// GO TO PICK CONE 4
                 .lineToLinearHeading(new Pose2d(19,-12, Math.toRadians(180)))
-                .UNSTABLE_addTemporalMarkerOffset(-0.8,()->{slide.extendTo(slide.POSITIONS[slide.CONE4]);Servos.Arm.goPickCone4();})
+                .UNSTABLE_addTemporalMarkerOffset(-0.9,()->{slide.extendTo(slide.POSITIONS[slide.CONE4]);Servos.Arm.goPickCone4();})
 
                 .addTemporalMarker(()->{slide.extendTo(slide.POSITIONS[slide.CONE4]);Servos.Gripper.closeGripper();})
-                .waitSeconds(0.2)
+                .waitSeconds(0.1)
                 .addTemporalMarker(()->Servos.Arm.goInit())
-                .waitSeconds(0.3)
+                .waitSeconds(0.1)
                 .addTemporalMarker(()->{slide.extendTo(slide.POSITIONS[slide.HOME]);Servos.Rotate.rotateDrop();Servos.Arm.goActiveDrop();})
                 .UNSTABLE_addTemporalMarkerOffset(0.6,()->Servos.Arm.goDrop())
                 .UNSTABLE_addTemporalMarkerOffset(0.8,()->Servos.Gripper.openGripper())
@@ -197,19 +197,18 @@ public class RRCH extends LinearOpMode
                 .waitSeconds(0.2)
                 .addTemporalMarker(()->elevator.extendTo(elevator.POSITIONS[elevator.HIGH_POLE]))
                 .waitSeconds(0.7)
-                .addTemporalMarker(()->{Servos.Gripper.Unlock();Servos.Arm.goActivePick();})
-                .waitSeconds(0.05)
                 .addTemporalMarker(()->elevator.extendTo(elevator.POSITIONS[elevator.HOME]))
+                .waitSeconds(0.05)
+                .addTemporalMarker(()->{Servos.Gripper.Unlock();Servos.Arm.goActivePick();})
 
 
                 ////// GO TO PICK CONE 5
                 .lineToLinearHeading(new Pose2d(19,-12, Math.toRadians(180)))
-                .UNSTABLE_addTemporalMarkerOffset(-0.8,()->{slide.extendTo(slide.POSITIONS[slide.CONE5]);Servos.Arm.goPick();})
-                .waitSeconds(0.2)
+                .UNSTABLE_addTemporalMarkerOffset(-0.9,()->{slide.extendTo(slide.POSITIONS[slide.CONE5]);Servos.Arm.goPick();})
                 .addTemporalMarker(()->{Servos.Gripper.closeGripper();})
-                .waitSeconds(0.3)
+                .waitSeconds(0.1)
                 .addTemporalMarker(()->Servos.Arm.goInit())
-                .waitSeconds(0.3)
+                .waitSeconds(0.1)
                 .addTemporalMarker(()->{slide.extendTo(slide.POSITIONS[slide.HOME]);Servos.Rotate.rotateDrop();Servos.Arm.goActiveDrop();})
                 .UNSTABLE_addTemporalMarkerOffset(0.6,()->Servos.Arm.goDrop())
                 .UNSTABLE_addTemporalMarkerOffset(0.8,()->Servos.Gripper.openGripper())

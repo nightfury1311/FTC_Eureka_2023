@@ -12,7 +12,7 @@ import org.firstinspires.ftc.teamcode.drive.TeleopSubsystems.Slide;
 import org.firstinspires.ftc.teamcode.trajectorysequence.TrajectorySequence;
 //@Disabled
 @Autonomous
-public class RedRightFirstHigh extends LinearOpMode {
+public class TheElevens extends LinearOpMode {
 
     Elevator elevator = null;
     Servos servos = null;
@@ -45,28 +45,42 @@ public class RedRightFirstHigh extends LinearOpMode {
                 .lineToLinearHeading(new Pose2d(35,-54, Math.toRadians(180)))  // dropping position
                 .lineToLinearHeading(new Pose2d(37.5, -3,Math.toRadians(165)))
 
+
                 .build();
+        TrajectorySequence traj1 =drive.trajectorySequenceBuilder(pre.end())
+
+                .lineToSplineHeading(new Pose2d(37, -12, Math.toRadians(180)))
+
+                .build();
+        TrajectorySequence traj2 =drive.trajectorySequenceBuilder(traj1.end())
+
+                .lineToConstantHeading(new Vector2d(-35, -12))
+
+                .lineToSplineHeading(new Pose2d(-35, 0, Math.toRadians(15)))
+                        .build();
+
         waitForStart();
 
         drive.followTrajectorySequence(pre);
         elevator.extendTo(elevator.POSITIONS[elevator.HIGH_POLE]);
-        sleep(800);
-        Servos.Gripper.Unlock();
-        sleep(100);
         Servos.Arm.goActivePick1();
         Servos.Arm.goPickCone1();
+        sleep(400);
+        slide.extendTo(slide.POSITIONS[slide.UNSAFE]);
+        sleep(300);
+        Servos.Gripper.Unlock();
         slide.extendTo(slide.POSITIONS[slide.MIN]);
         elevator.extendTo(elevator.POSITIONS[elevator.HOME]);
-        sleep(600);
+        sleep(150);
 
         Servos.Gripper.closeGripper();
-        sleep(300);
+        sleep(200);
         Servos.Arm.goInit();
-        sleep(500);
+        sleep(100);
         Servos.Rotate.rotateDrop();
         Servos.Arm.goActiveDrop();
         slide.extendTo(slide.POSITIONS[slide.HOME]);
-        sleep(600);
+        sleep(400);
         Servos.Arm.goDrop();
         sleep(400);
         Servos.Gripper.openGripper();
@@ -77,21 +91,22 @@ public class RedRightFirstHigh extends LinearOpMode {
         Servos.Rotate.rotatePick();
         Servos.Arm.goActivePick2();
         elevator.extendTo(elevator.POSITIONS[elevator.HIGH_POLE]);
-        sleep(800);
+        sleep(400);
+        slide.extendTo(slide.POSITIONS[slide.UNSAFE]);
+        sleep(300);
         Servos.Gripper.Unlock();
-        sleep(100);
         slide.extendTo(slide.POSITIONS[slide.MIN]);
         elevator.extendTo(elevator.POSITIONS[elevator.HOME]);
-        sleep(600);
+        sleep(150);
 
         Servos.Gripper.closeGripper();
-        sleep(300);
+        sleep(200);
         Servos.Arm.goInit();
-        sleep(500);
+        sleep(100);
         Servos.Rotate.rotateDrop();
         Servos.Arm.goActiveDrop();
         slide.extendTo(slide.POSITIONS[slide.HOME]);
-        sleep(600);
+        sleep(400);
         Servos.Arm.goDrop();
         sleep(400);
         Servos.Gripper.openGripper();
@@ -102,23 +117,24 @@ public class RedRightFirstHigh extends LinearOpMode {
         Servos.Rotate.rotatePick();
         Servos.Arm.goActivePick3();
         elevator.extendTo(elevator.POSITIONS[elevator.HIGH_POLE]);
-        sleep(800);
+        sleep(400);
+        slide.extendTo(slide.POSITIONS[slide.UNSAFE]);
+        sleep(300);
         Servos.Gripper.Unlock();
-        sleep(100);
         slide.extendTo(slide.POSITIONS[slide.MIN]);
         elevator.extendTo(elevator.POSITIONS[elevator.HOME]);
-        sleep(600);
+        sleep(150);
 
         Servos.Gripper.closeGripper();
-        sleep(300);
+        sleep(200);
         Servos.Arm.goInit();
-        sleep(500);
+        sleep(100);
         Servos.Rotate.rotateDrop();
         Servos.Arm.goActiveDrop();
         slide.extendTo(slide.POSITIONS[slide.HOME]);
-        sleep(600);
-        Servos.Arm.goDrop();
         sleep(400);
+        Servos.Arm.goDrop();
+        sleep(250);
         Servos.Gripper.openGripper();
         sleep(100);
         Servos.Gripper.Lock();
@@ -127,23 +143,24 @@ public class RedRightFirstHigh extends LinearOpMode {
         Servos.Rotate.rotatePick();
         Servos.Arm.goActivePick4();
         elevator.extendTo(elevator.POSITIONS[elevator.HIGH_POLE]);
-        sleep(800);
+        sleep(400);
+        slide.extendTo(slide.POSITIONS[slide.UNSAFE]);
+        sleep(300);
         Servos.Gripper.Unlock();
-        sleep(100);
-        slide.extendTo(slide.POSITIONS[slide.MICRO]);
+        slide.extendTo(slide.POSITIONS[slide.MIN]);
         elevator.extendTo(elevator.POSITIONS[elevator.HOME]);
-        sleep(600);
+        sleep(150);
 
         Servos.Gripper.closeGripper();
-        sleep(300);
+        sleep(200);
         Servos.Arm.goInit();
-        sleep(500);
+        sleep(100);
         Servos.Rotate.rotateDrop();
         Servos.Arm.goActiveDrop();
         slide.extendTo(slide.POSITIONS[slide.HOME]);
-        sleep(600);
-        Servos.Arm.goDrop();
         sleep(400);
+        Servos.Arm.goDrop();
+        sleep(250);
         Servos.Gripper.openGripper();
         sleep(100);
         Servos.Gripper.Lock();
@@ -152,21 +169,25 @@ public class RedRightFirstHigh extends LinearOpMode {
         Servos.Rotate.rotatePick();
         Servos.Arm.goActivePick();
         elevator.extendTo(elevator.POSITIONS[elevator.HIGH_POLE]);
-        sleep(800);
+        sleep(400);
+        slide.extendTo(slide.POSITIONS[slide.UNSAFE]);
+        sleep(300);
         Servos.Gripper.Unlock();
-        sleep(100);
-        slide.extendTo(slide.POSITIONS[slide.MICRO]);
+        slide.extendTo(slide.POSITIONS[slide.MIN]);
         elevator.extendTo(elevator.POSITIONS[elevator.HOME]);
-        sleep(600);
+        sleep(150);
+
+        drive.followTrajectorySequence(traj1);
+        drive.followTrajectorySequence(traj2);
 
         Servos.Gripper.closeGripper();
-        sleep(300);
+        sleep(200);
         Servos.Arm.goInit();
-        sleep(500);
+        sleep(100);
         Servos.Rotate.rotateDrop();
         Servos.Arm.goActiveDrop();
         slide.extendTo(slide.POSITIONS[slide.HOME]);
-        sleep(600);
+        sleep(400);
         Servos.Arm.goDrop();
         sleep(400);
         Servos.Gripper.openGripper();
@@ -177,13 +198,14 @@ public class RedRightFirstHigh extends LinearOpMode {
         Servos.Rotate.rotatePick();
         Servos.Arm.goActiveStable();
         elevator.extendTo(elevator.POSITIONS[elevator.HIGH_POLE]);
-        sleep(800);
+        sleep(700);
         Servos.Gripper.Unlock();
-        sleep(100);
         elevator.extendTo(elevator.POSITIONS[elevator.HOME]);
+        sleep(400);
 
-        sleep(5000);
 
+
+        sleep(2000);
 
 
 

@@ -35,7 +35,7 @@ public class RedRightCentreHigh extends LinearOpMode {
         Servos.Gripper.Lock();
         Servos.Gripper.openGripper();
         Servos.Arm.goActiveStable();
-        Servos.Arm.goInit();
+        Servos.Arm.goDrop();
         Servos.Rotate.rotatePick();
 
         TrajectorySequence pre =drive.trajectorySequenceBuilder(startPose)
@@ -51,7 +51,7 @@ public class RedRightCentreHigh extends LinearOpMode {
 
 
                 ////// GO TO PICK CONE 1
-                .lineToLinearHeading(new Pose2d(19,-12, Math.toRadians(180)))                 //picking position
+                .lineToLinearHeading(new Pose2d(20,-12, Math.toRadians(180)))                 //picking position
                 .UNSTABLE_addTemporalMarkerOffset(-0.8,()->{slide.extendTo(slide.POSITIONS[slide.CONE1]);Servos.Arm.goPickCone1();})
 
                 .addTemporalMarker(()->{slide.extendTo(slide.POSITIONS[slide.CONE2]);Servos.Gripper.closeGripper();})

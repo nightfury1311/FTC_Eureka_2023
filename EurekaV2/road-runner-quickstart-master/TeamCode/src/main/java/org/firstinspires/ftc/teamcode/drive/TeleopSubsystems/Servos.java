@@ -101,7 +101,7 @@ public class Servos {
         public static final double ActivePick2 = 0.82;
         public static final double ActivePick1 = 0.76;
         public static final double ActiveStable = 0.5;
-        public static final double ActiveDrop = 0.28;
+        public static final double ActiveDrop = 0.35;
 
         public static void goActivePick() {
             armState = "ActivePick";

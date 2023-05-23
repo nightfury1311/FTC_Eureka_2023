@@ -12,8 +12,10 @@ import org.firstinspires.ftc.robotcore.external.navigation.CurrentUnit;
 public class Slide {
     public DcMotorEx SlideLeft, SlideRight;
 
-    public int HOME = 0, MICRO=1, MIN = 2, CONE1 = 3, CONE2= 4, CONE3=5, CONE4=6, CONE5=7, MAX = 8;
-    public static int[] POSITIONS = {0,570, 590, 1300, 1300, 1280, 1280, 1280, 1320};
+    public int HOME = 0, MICRO=1, MIN = 2, CONE1 = 3, CONE2= 4, CONE3=5, CONE4=6, CONE5=7, MAX = 8 ,UNSAFE=9;
+//    public static int[] POSITIONS = {0,610, 630, 1330, 1330, 1280, 1280, 1280, 1320 ,530};
+public static int[] POSITIONS = {0,335, 348, 732, 732, 707, 707, 707, 729 ,292};
+
     public Slide(HardwareMap hardwareMap, Telemetry telemetry) {
         SlideLeft = hardwareMap.get(DcMotorEx.class, "SlideLeft");
         SlideRight = hardwareMap.get(DcMotorEx.class, "SlideRight");
@@ -68,6 +70,7 @@ public class Slide {
     public void extendToMAX(){
         extendTo(POSITIONS[MAX]);
     }
+    public void extendToUNSAFE(){extendTo(POSITIONS[UNSAFE]);}
 
     public void extendToHomeSlow(){
         extendToSlow(POSITIONS[HOME]);

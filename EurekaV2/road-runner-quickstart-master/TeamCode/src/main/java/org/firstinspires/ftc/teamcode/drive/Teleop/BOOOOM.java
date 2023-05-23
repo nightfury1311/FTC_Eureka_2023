@@ -55,10 +55,11 @@ public class BOOOOM extends LinearOpMode {
 //   //OLD VALUES AT 9:1 slider ratio
 //    public static int MAX = 1800;   //
 //    public static int TEST = 800; //
-    public static int MAX = 1250;   //
-    public static int TEST = 500; //
-
-    public static int GRIP = 540;
+//    public static int MAX = 1250;   //
+    public static int MAX = 690;
+//    public static int TEST = 500; //
+    public static int TEST = 275; //
+    public static int GRIP = 155;
 
     public static double GRIPPER_OPEN = 0.5 ;
     public static double GRIPPER_CLOSE = 0.7;
@@ -154,18 +155,18 @@ public class BOOOOM extends LinearOpMode {
             Pose2d poseEstimate = drive.getPoseEstimate();
             Vector2d input = new Vector2d(Math.pow(-gamepad1.left_stick_y,3), Math.pow(-gamepad1.left_stick_x,3)).rotated(-poseEstimate.getHeading());
 
-            drive.setWeightedDrivePower(new Pose2d(input.getX() * speed, input.getY() * speed, -gamepad1.right_stick_x * turn));
-            drive.update();
-
-
-//            drive.setWeightedDrivePower(
-//                    new Pose2d(
-//                            -gamepad1.left_stick_y * 0.9,
-//                            -gamepad1.left_stick_x * 0.9,
-//                            -gamepad1.right_stick_x * 0.7
-////
-//                    ));
+//            drive.setWeightedDrivePower(new Pose2d(input.getX() * speed, input.getY() * speed, -gamepad1.right_stick_x * turn));
 //            drive.update();
+
+
+            drive.setWeightedDrivePower(
+                    new Pose2d(
+                            -gamepad1.left_stick_y * 1,
+                            -gamepad1.left_stick_x * 1,
+                            -gamepad1.right_stick_x * 0.7
+//
+                    ));
+            drive.update();
 
             if(gamepad1.left_trigger>0.7 )    // slow mode
             {
@@ -281,10 +282,10 @@ public class BOOOOM extends LinearOpMode {
                 servoRF.setPosition(DROP_ARM_RIGHT);
                 servoRB.setPosition(DROP_ARM_RIGHT);
 
-                sleep(200);
+                sleep(150);
 
                 servoGripper.setPosition(GRIPPER_OPEN);
-                sleep(200);
+                sleep(100);
                 servoLock.setPosition(LOCK);
                 servoLF.setPosition(HOME_ARM);
                 servoLB.setPosition(HOME_ARM);
@@ -350,6 +351,32 @@ public class BOOOOM extends LinearOpMode {
 
                 servoActive.setPosition(ACTIVE_STABLE);
             }
+            else if (gamepad1.b) {           // cone transfer
+
+                servoRotate.setPosition(ROTATE_DROP);
+//                sleep(300);
+
+                servoActive.setPosition(ACTIVE_DROP);
+                sleep(200);
+                servoLF.setPosition(DROP_ARM_LEFT);
+                servoLB.setPosition(DROP_ARM_LEFT);
+                servoRF.setPosition(DROP_ARM_RIGHT);
+                servoRB.setPosition(DROP_ARM_RIGHT);
+
+                sleep(300);
+
+                servoGripper.setPosition(GRIPPER_OPEN);
+                sleep(200);
+                servoLock.setPosition(LOCK);
+                servoLF.setPosition(HOME_ARM);
+                servoLB.setPosition(HOME_ARM);
+                servoRF.setPosition(HOME_ARM);
+                servoRB.setPosition(HOME_ARM);
+                servoRotate.setPosition(ROTATE_PICK);
+                sleep(200);
+
+                servoActive.setPosition(ACTIVE_STABLE);
+            }
 
             //////////////////////////////////////////////////////////////////////////////////
             ///////////////////////////////////////////////////////////////////////////////////
@@ -378,31 +405,31 @@ public class BOOOOM extends LinearOpMode {
 
                 ElevateRight.setTargetPosition(MID);
                 ElevateRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                ElevateRight.setPower(0.8);
+                ElevateRight.setPower(1);
 
                 ElevateLeft.setTargetPosition(MID);
                 ElevateLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                ElevateLeft.setPower(0.8);
+                ElevateLeft.setPower(1);
             }
             else if (gamepad1.dpad_up) {
 
                 ElevateRight.setTargetPosition(HIGH);
                 ElevateRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                ElevateRight.setPower(0.9);
+                ElevateRight.setPower(1);
 
                 ElevateLeft.setTargetPosition(HIGH);
                 ElevateLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                ElevateLeft.setPower(0.9);
+                ElevateLeft.setPower(1);
             } else if (gamepad1.dpad_down) {
                 servoLock.setPosition(UNLOCK);
 
                 ElevateRight.setTargetPosition(0);
                 ElevateRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                ElevateRight.setPower(0.7);
+                ElevateRight.setPower(0.9);
 
                 ElevateLeft.setTargetPosition(0);
                 ElevateLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                ElevateLeft.setPower(0.7);
+                ElevateLeft.setPower(0.9);
 
             }
             //small start cycle for fun
@@ -426,19 +453,18 @@ public class BOOOOM extends LinearOpMode {
                 servoLB.setPosition(HOME_ARM);
                 servoRF.setPosition(HOME_ARM);
                 servoRB.setPosition(HOME_ARM);
-                sleep(200);
+                sleep(100);
                 servoLock.setPosition(LOCK);
-                sleep(200);
                 servoRotate.setPosition(ROTATE_PICK);
                 servoActive.setPosition(ACTIVE_STABLE);
                 ElevateRight.setTargetPosition(HIGH);
                 ElevateRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                ElevateRight.setPower(0.9);
+                ElevateRight.setPower(1);
 
                 ElevateLeft.setTargetPosition(HIGH);
                 ElevateLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                ElevateLeft.setPower(0.9);
-                sleep(800);
+                ElevateLeft.setPower(1);
+                sleep(700);
 
                 servoActive.setPosition(ACTIVE_PICK);
                 servoLF.setPosition(PICK_ARM_LEFT);
@@ -446,16 +472,16 @@ public class BOOOOM extends LinearOpMode {
                 servoRF.setPosition(PICK_ARM_RIGHT);
                 servoRB.setPosition(PICK_ARM_RIGHT);
 
-                sleep(200);
+                //sleep(200);
                 servoLock.setPosition(UNLOCK);
 
                 ElevateRight.setTargetPosition(0);
                 ElevateRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                ElevateRight.setPower(0.7);
+                ElevateRight.setPower(0.9);
 
                 ElevateLeft.setTargetPosition(0);
                 ElevateLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                ElevateLeft.setPower(0.7);
+                ElevateLeft.setPower(0.9);
 
 
             }
@@ -522,7 +548,7 @@ public class BOOOOM extends LinearOpMode {
                 ElevateLeft.setTargetPosition(HIGH);
                 ElevateLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                 ElevateLeft.setPower(1);
-                sleep(800);
+                sleep(700);
 
                 SlideRight.setTargetPosition(TEST);
                 SlideRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
@@ -532,16 +558,16 @@ public class BOOOOM extends LinearOpMode {
                 SlideLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                 SlideLeft.setPower(0.7);
 
-                sleep(200);
+                //sleep(200);
                 servoLock.setPosition(UNLOCK);
 
                 ElevateRight.setTargetPosition(0);
                 ElevateRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                ElevateRight.setPower(0.7);
+                ElevateRight.setPower(1);
 
                 ElevateLeft.setTargetPosition(0);
                 ElevateLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                ElevateLeft.setPower(0.7);
+                ElevateLeft.setPower(1);
 
             }
 
