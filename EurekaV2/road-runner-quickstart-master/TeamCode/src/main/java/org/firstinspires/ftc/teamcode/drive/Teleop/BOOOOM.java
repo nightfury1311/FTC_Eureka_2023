@@ -205,7 +205,6 @@ public class BOOOOM extends LinearOpMode {
             //************************ CONE PICKUP AT INIT *******************************
 
             else if (gamepad1.left_bumper) {      // cone pickup
-
                 servoGripper.setPosition(GRIPPER_OPEN);
                 servoActive.setPosition(ACTIVE_PICK);
                 servoRotate.setPosition(ROTATE_PICK);
