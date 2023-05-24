@@ -5,12 +5,12 @@ import com.arcrobotics.ftclib.command.CommandBase;
 import org.firstinspires.ftc.teamcode.drive.TeleopSubsystems.Servos;
 
 
-public class GripperRotatePick extends CommandBase {
+public class ArmDrop extends CommandBase {
 
     public Servos serv;
 
 
-    public GripperRotatePick(Servos serv){
+    public ArmDrop(Servos serv){
         this.serv = serv;
         addRequirements(serv);
     }
@@ -18,7 +18,8 @@ public class GripperRotatePick extends CommandBase {
     @Override
     public void initialize() {
         super.initialize();
-        Servos.Rotate.rotatePick();
+        Servos.Arm.goDrop();
+        Servos.Arm.goActiveDrop();
     }
 
     @Override

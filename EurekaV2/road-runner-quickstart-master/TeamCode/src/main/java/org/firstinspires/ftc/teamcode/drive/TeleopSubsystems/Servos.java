@@ -9,8 +9,8 @@ import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 
-public class Servos {
-//    public class Servos extends SubsystemBase {
+//public class Servos {
+    public class Servos extends SubsystemBase {
     public static Servo servoGripper;
     public static Servo servoLF;
     public static Servo servoLB;

@@ -8,8 +8,8 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.robotcore.external.navigation.CurrentUnit;
 
-public class Elevator{
-//    public class Elevator extends SubsystemBase {
+//public class Elevator{
+    public class Elevator extends SubsystemBase {
         public DcMotorEx ElevateLeft, ElevateRight;
 
         public final int HOME = 0, LOW_POLE = 1, MID_POLE = 2, HIGH_POLE = 3;
