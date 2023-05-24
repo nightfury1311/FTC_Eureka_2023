@@ -20,6 +20,7 @@ public class ArmPick extends CommandBase {
         super.initialize();
         Servos.Arm.goPick();
         Servos.Arm.goActivePick();
+        Servos.Rotate.rotatePick();
     }
 
     @Override

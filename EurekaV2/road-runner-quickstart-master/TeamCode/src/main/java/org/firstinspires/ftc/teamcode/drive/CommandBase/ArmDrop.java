@@ -20,6 +20,7 @@ public class ArmDrop extends CommandBase {
         super.initialize();
         Servos.Arm.goDrop();
         Servos.Arm.goActiveDrop();
+        Servos.Rotate.rotateDrop();
     }
 
     @Override

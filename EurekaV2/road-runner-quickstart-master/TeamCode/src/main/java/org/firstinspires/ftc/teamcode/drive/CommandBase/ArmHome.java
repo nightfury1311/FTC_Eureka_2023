@@ -20,6 +20,7 @@ public class ArmHome extends CommandBase {
         super.initialize();
         Servos.Arm.goInit();
         Servos.Arm.goActiveStable();
+        Servos.Rotate.rotatePick();
     }
 
     @Override

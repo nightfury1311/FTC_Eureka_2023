@@ -114,7 +114,7 @@ public class RRCH extends LinearOpMode
 
                 ////// GO TO PICK CONE 1
                 .lineToLinearHeading(new Pose2d(20,-12, Math.toRadians(180)))                 //picking position
-                .UNSTABLE_addTemporalMarkerOffset(-0.8,()->{slide.extendTo(slide.POSITIONS[slide.CONE1]);Servos.Arm.goPickCone1();})
+                .UNSTABLE_addTemporalMarkerOffset(-0.9,()->{slide.extendTo(slide.POSITIONS[slide.CONE1]);Servos.Arm.goPickCone1();})
 
                 .addTemporalMarker(()->{slide.extendTo(slide.POSITIONS[slide.CONE2]);Servos.Gripper.closeGripper();})
                 .waitSeconds(0.2)
@@ -137,7 +137,7 @@ public class RRCH extends LinearOpMode
 
                 ////// GO TO PICK CONE 2
                 .lineToLinearHeading(new Pose2d(19,-12, Math.toRadians(180)))
-                .UNSTABLE_addTemporalMarkerOffset(-0.8,()->{slide.extendTo(slide.POSITIONS[slide.CONE2]);Servos.Arm.goPickCone2();})
+                .UNSTABLE_addTemporalMarkerOffset(-0.9,()->{slide.extendTo(slide.POSITIONS[slide.CONE2]);Servos.Arm.goPickCone2();})
 
                 .addTemporalMarker(()->{slide.extendTo(slide.POSITIONS[slide.CONE3]);Servos.Gripper.closeGripper();})
                 .waitSeconds(0.2)
@@ -159,7 +159,7 @@ public class RRCH extends LinearOpMode
 
                 ////// GO TO PICK CONE 3
                 .lineToLinearHeading(new Pose2d(19,-12, Math.toRadians(180)))
-                .UNSTABLE_addTemporalMarkerOffset(-0.8,()->{slide.extendTo(slide.POSITIONS[slide.CONE3]);Servos.Arm.goPickCone3();})
+                .UNSTABLE_addTemporalMarkerOffset(-0.9,()->{slide.extendTo(slide.POSITIONS[slide.CONE3]);Servos.Arm.goPickCone3();})
 
                 .addTemporalMarker(()->{slide.extendTo(slide.POSITIONS[slide.CONE4]);Servos.Gripper.closeGripper();})
                 .waitSeconds(0.2)
@@ -181,7 +181,7 @@ public class RRCH extends LinearOpMode
 
                 ////// GO TO PICK CONE 4
                 .lineToLinearHeading(new Pose2d(19,-12, Math.toRadians(180)))
-                .UNSTABLE_addTemporalMarkerOffset(-0.8,()->{slide.extendTo(slide.POSITIONS[slide.CONE4]);Servos.Arm.goPickCone4();})
+                .UNSTABLE_addTemporalMarkerOffset(-0.9,()->{slide.extendTo(slide.POSITIONS[slide.CONE4]);Servos.Arm.goPickCone4();})
 
                 .addTemporalMarker(()->{slide.extendTo(slide.POSITIONS[slide.CONE4]);Servos.Gripper.closeGripper();})
                 .waitSeconds(0.2)
@@ -204,7 +204,7 @@ public class RRCH extends LinearOpMode
 
                 ////// GO TO PICK CONE 5
                 .lineToLinearHeading(new Pose2d(19,-12, Math.toRadians(180)))
-                .UNSTABLE_addTemporalMarkerOffset(-0.8,()->{slide.extendTo(slide.POSITIONS[slide.CONE5]);Servos.Arm.goPick();})
+                .UNSTABLE_addTemporalMarkerOffset(-0.9,()->{slide.extendTo(slide.POSITIONS[slide.CONE5]);Servos.Arm.goPick();})
                 .waitSeconds(0.2)
                 .addTemporalMarker(()->{Servos.Gripper.closeGripper();})
                 .waitSeconds(0.3)

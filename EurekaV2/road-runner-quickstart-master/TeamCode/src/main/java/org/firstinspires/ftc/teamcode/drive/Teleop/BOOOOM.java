@@ -410,6 +410,7 @@ public class BOOOOM extends LinearOpMode {
                 ElevateLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                 ElevateLeft.setPower(1);
             }
+
             else if (gamepad1.dpad_up) {
 
                 ElevateRight.setTargetPosition(HIGH);
@@ -419,7 +420,8 @@ public class BOOOOM extends LinearOpMode {
                 ElevateLeft.setTargetPosition(HIGH);
                 ElevateLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                 ElevateLeft.setPower(1);
-            } else if (gamepad1.dpad_down) {
+            }
+            else if (gamepad1.dpad_down) {
                 servoLock.setPosition(UNLOCK);
 
                 ElevateRight.setTargetPosition(0);
