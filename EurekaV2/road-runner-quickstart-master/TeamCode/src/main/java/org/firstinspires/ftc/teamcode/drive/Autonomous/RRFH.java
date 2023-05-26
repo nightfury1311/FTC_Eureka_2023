@@ -44,14 +44,20 @@ public class RRFH extends LinearOpMode {
 //                .lineToLinearHeading(new Pose2d(37,-5, Math.toRadians(169)))  // dropping position
                 .lineToLinearHeading(new Pose2d(35,-54, Math.toRadians(180)))  // dropping position
                 .lineToLinearHeading(new Pose2d(37.5, -3,Math.toRadians(165)))
-
-
                 .build();
-        TrajectorySequence park =drive.trajectorySequenceBuilder(pre.end())
+        TrajectorySequence lock1 =drive.trajectorySequenceBuilder(pre.end())
+                .lineToLinearHeading(new Pose2d(37.50001, -3.0001, Math.toRadians(165)))
+                .build();
+        TrajectorySequence lock2 =drive.trajectorySequenceBuilder(lock1.end())
+                .lineToLinearHeading(new Pose2d(37.5, -3, Math.toRadians(165)))
+                .build();
+        TrajectorySequence park =drive.trajectorySequenceBuilder(lock1.end())
 
                 .lineToLinearHeading(new Pose2d(37.5, -14,Math.toRadians(90)))
 
                 .build();
+
+
         waitForStart();
 
         drive.followTrajectorySequence(pre);
@@ -84,6 +90,8 @@ public class RRFH extends LinearOpMode {
         sleep(100);
         Servos.Rotate.rotatePick();
         Servos.Arm.goActivePick2();
+
+        drive.followTrajectorySequence(lock1);
         elevator.extendTo(elevator.POSITIONS[elevator.HIGH_POLE]);
         sleep(400);
         slide.extendTo(slide.POSITIONS[slide.UNSAFE]);
@@ -111,6 +119,8 @@ public class RRFH extends LinearOpMode {
         sleep(100);
         Servos.Rotate.rotatePick();
         Servos.Arm.goActivePick3();
+
+        drive.followTrajectorySequence(lock2);
         elevator.extendTo(elevator.POSITIONS[elevator.HIGH_POLE]);
         sleep(400);
         slide.extendTo(slide.POSITIONS[slide.UNSAFE]);
@@ -138,6 +148,7 @@ public class RRFH extends LinearOpMode {
         sleep(100);
         Servos.Rotate.rotatePick();
         Servos.Arm.goActivePick4();
+        drive.followTrajectorySequence(lock1);
         elevator.extendTo(elevator.POSITIONS[elevator.HIGH_POLE]);
         sleep(400);
         slide.extendTo(slide.POSITIONS[slide.UNSAFE]);
@@ -165,6 +176,7 @@ public class RRFH extends LinearOpMode {
         sleep(100);
         Servos.Rotate.rotatePick();
         Servos.Arm.goActivePick();
+        drive.followTrajectorySequence(lock2);
         elevator.extendTo(elevator.POSITIONS[elevator.HIGH_POLE]);
         sleep(400);
         slide.extendTo(slide.POSITIONS[slide.UNSAFE]);
@@ -192,6 +204,7 @@ public class RRFH extends LinearOpMode {
         sleep(100);
         Servos.Rotate.rotatePick();
         Servos.Arm.goActiveStable();
+        drive.followTrajectorySequence(lock1);
         elevator.extendTo(elevator.POSITIONS[elevator.HIGH_POLE]);
         sleep(700);
         Servos.Gripper.Unlock();
