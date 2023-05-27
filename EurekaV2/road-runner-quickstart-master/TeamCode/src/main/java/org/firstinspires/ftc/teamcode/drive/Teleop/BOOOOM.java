@@ -65,7 +65,7 @@ public class BOOOOM extends LinearOpMode {
     public static double GRIPPER_CLOSE = 0.7;
     public static double PICK_ARM_LEFT = 1;
     public static double PICK_ARM_RIGHT = 1-PICK_ARM_LEFT;
-    public static double DROP_ARM_LEFT = 0.25;
+    public static double DROP_ARM_LEFT = 0.27;
     public static double DROP_ARM_RIGHT = 1-DROP_ARM_LEFT;
 
     public static double GROUND_ARM_LEFT = 0.8;
@@ -78,7 +78,7 @@ public class BOOOOM extends LinearOpMode {
     public static double ACTIVE_STABLE = 0.5;   // stable four bar position
     public static double ACTIVE_LOW = 0.69;
 
-    public static double ACTIVE_DROP = 0.3;
+    public static double ACTIVE_DROP = 0.35;
 
     public static double LOCK = 0;
     public static double UNLOCK = 0.3;
@@ -339,7 +339,7 @@ public class BOOOOM extends LinearOpMode {
                 sleep(500);
 
                 servoGripper.setPosition(GRIPPER_OPEN);
-                sleep(200);
+                sleep(100);
                 servoLock.setPosition(LOCK);
                 servoLF.setPosition(HOME_ARM);
                 servoLB.setPosition(HOME_ARM);
