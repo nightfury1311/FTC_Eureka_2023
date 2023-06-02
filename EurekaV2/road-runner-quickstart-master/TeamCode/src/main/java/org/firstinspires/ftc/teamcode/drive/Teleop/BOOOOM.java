@@ -199,12 +199,12 @@ public class BOOOOM extends LinearOpMode {
                 ElevateRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                 ElevateRight.setPower(0.8);
 
-
             }
 
             //************************ CONE PICKUP AT INIT *******************************
 
             else if (gamepad1.left_bumper) {      // cone pickup
+                servoLock.setPosition(UNLOCK);
                 servoGripper.setPosition(GRIPPER_OPEN);
                 servoActive.setPosition(ACTIVE_PICK);
                 servoRotate.setPosition(ROTATE_PICK);
@@ -224,6 +224,7 @@ public class BOOOOM extends LinearOpMode {
             }
             else if (gamepad2.left_bumper) {      // cone pickup
 
+                servoLock.setPosition(UNLOCK);
                 servoGripper.setPosition(GRIPPER_OPEN);
                 servoActive.setPosition(ACTIVE_PICK);
                 servoRotate.setPosition(ROTATE_PICK);

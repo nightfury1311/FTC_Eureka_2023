@@ -76,7 +76,7 @@ public class RRFH extends LinearOpMode {
         Servos.Gripper.closeGripper();
         sleep(200);
         Servos.Arm.goInit();
-        sleep(100);
+        sleep(300);
         Servos.Rotate.rotateDrop();
         Servos.Arm.goActiveDrop();
         slide.extendTo(slide.POSITIONS[slide.HOME]);
@@ -105,7 +105,7 @@ public class RRFH extends LinearOpMode {
         Servos.Gripper.closeGripper();
         sleep(200);
         Servos.Arm.goInit();
-        sleep(100);
+        sleep(300);
         Servos.Rotate.rotateDrop();
         Servos.Arm.goActiveDrop();
         slide.extendTo(slide.POSITIONS[slide.HOME]);
@@ -134,7 +134,7 @@ public class RRFH extends LinearOpMode {
         Servos.Gripper.closeGripper();
         sleep(200);
         Servos.Arm.goInit();
-        sleep(100);
+        sleep(300);
         Servos.Rotate.rotateDrop();
         Servos.Arm.goActiveDrop();
         slide.extendTo(slide.POSITIONS[slide.HOME]);
@@ -162,7 +162,7 @@ public class RRFH extends LinearOpMode {
         Servos.Gripper.closeGripper();
         sleep(200);
         Servos.Arm.goInit();
-        sleep(100);
+        sleep(300);
         Servos.Rotate.rotateDrop();
         Servos.Arm.goActiveDrop();
         slide.extendTo(slide.POSITIONS[slide.HOME]);
