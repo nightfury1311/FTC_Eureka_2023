@@ -155,18 +155,18 @@ public class BOOOOM extends LinearOpMode {
             Pose2d poseEstimate = drive.getPoseEstimate();
             Vector2d input = new Vector2d(Math.pow(-gamepad1.left_stick_y,3), Math.pow(-gamepad1.left_stick_x,3)).rotated(-poseEstimate.getHeading());
 
-//            drive.setWeightedDrivePower(new Pose2d(input.getX() * speed, input.getY() * speed, -gamepad1.right_stick_x * turn));
-//            drive.update();
-
-
-            drive.setWeightedDrivePower(
-                    new Pose2d(
-                            -gamepad1.left_stick_y * 1,
-                            -gamepad1.left_stick_x * 1,
-                            -gamepad1.right_stick_x * 0.7
-//
-                    ));
+            drive.setWeightedDrivePower(new Pose2d(input.getX() * speed, input.getY() * speed, -gamepad1.right_stick_x * turn));
             drive.update();
+
+
+//            drive.setWeightedDrivePower(
+//                    new Pose2d(
+//                            -gamepad1.left_stick_y * 1,
+//                            -gamepad1.left_stick_x * 1,
+//                            -gamepad1.right_stick_x * 0.7
+////
+//                    ));
+//            drive.update();
 
             if(gamepad1.left_trigger>0.7 )    // slow mode
             {
