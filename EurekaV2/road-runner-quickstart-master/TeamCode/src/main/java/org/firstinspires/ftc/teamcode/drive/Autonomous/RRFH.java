@@ -66,11 +66,12 @@ public class RRFH extends LinearOpMode {
         Servos.Arm.goPickCone1();
         sleep(400);
         slide.extendTo(slide.POSITIONS[slide.UNSAFE]);
-        sleep(300);
-        Servos.Gripper.Unlock();
-        sleep(100);
+        sleep(400);
+
         slide.extendTo(slide.POSITIONS[slide.MIN]);
         elevator.extendTo(elevator.POSITIONS[elevator.HOME]);
+        sleep(50);
+        Servos.Gripper.Unlock();
         sleep(150);
 
         Servos.Gripper.closeGripper();
@@ -96,10 +97,12 @@ public class RRFH extends LinearOpMode {
         sleep(400);
         slide.extendTo(slide.POSITIONS[slide.UNSAFE]);
         sleep(300);
-        Servos.Gripper.Unlock();
-        sleep(100);
+//        Servos.Gripper.Unlock();
+//        sleep(100);
         slide.extendTo(slide.POSITIONS[slide.MIN]);
         elevator.extendTo(elevator.POSITIONS[elevator.HOME]);
+        sleep(50);
+        Servos.Gripper.Unlock();
         sleep(150);
 
         Servos.Gripper.closeGripper();
@@ -125,10 +128,12 @@ public class RRFH extends LinearOpMode {
         sleep(400);
         slide.extendTo(slide.POSITIONS[slide.UNSAFE]);
         sleep(300);
-        Servos.Gripper.Unlock();
-        sleep(100);
+//        Servos.Gripper.Unlock();
+//        sleep(100);
         slide.extendTo(slide.POSITIONS[slide.MIN]);
         elevator.extendTo(elevator.POSITIONS[elevator.HOME]);
+        sleep(50);
+        Servos.Gripper.Unlock();
         sleep(150);
 
         Servos.Gripper.closeGripper();
@@ -153,10 +158,12 @@ public class RRFH extends LinearOpMode {
         sleep(400);
         slide.extendTo(slide.POSITIONS[slide.UNSAFE]);
         sleep(300);
-        Servos.Gripper.Unlock();
-        sleep(100);
+//        Servos.Gripper.Unlock();
+//        sleep(100);
         slide.extendTo(slide.POSITIONS[slide.MIN]);
         elevator.extendTo(elevator.POSITIONS[elevator.HOME]);
+        sleep(50);
+        Servos.Gripper.Unlock();
         sleep(150);
 
         Servos.Gripper.closeGripper();
@@ -181,10 +188,12 @@ public class RRFH extends LinearOpMode {
         sleep(400);
         slide.extendTo(slide.POSITIONS[slide.UNSAFE]);
         sleep(300);
-        Servos.Gripper.Unlock();
-        sleep(100);
+//        Servos.Gripper.Unlock();
+//        sleep(100);
         slide.extendTo(slide.POSITIONS[slide.MIN]);
         elevator.extendTo(elevator.POSITIONS[elevator.HOME]);
+        sleep(50);
+        Servos.Gripper.Unlock();
         sleep(150);
 
         Servos.Gripper.closeGripper();
@@ -207,9 +216,11 @@ public class RRFH extends LinearOpMode {
         drive.followTrajectorySequence(lock1);
         elevator.extendTo(elevator.POSITIONS[elevator.HIGH_POLE]);
         sleep(700);
-        Servos.Gripper.Unlock();
-        sleep(100);
+//        Servos.Gripper.Unlock();
+//        sleep(100);
         elevator.extendTo(elevator.POSITIONS[elevator.HOME]);
+        sleep(50);
+        Servos.Gripper.Unlock();
         sleep(400);
 
         drive.followTrajectorySequence(park);
