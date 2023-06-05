@@ -93,7 +93,7 @@ public class RRCH2 extends LinearOpMode
         Servos.Arm.goInit();
         Servos.Rotate.rotatePick();
 
-        SampleMecanumDrive drive = new SampleMecanumDrive(hardwareMap);
+        SampleMecanumDrive drive = new SampleMecanumDrive(hardwareMap, telemetry);
         Pose2d startPose = new Pose2d(31, -62, Math.toRadians(90));    //63 y value for tis
         drive.setPoseEstimate(startPose);
 

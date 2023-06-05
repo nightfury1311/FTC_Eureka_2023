@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.drive.MotionProfile;
+package org.firstinspires.ftc.teamcode.drive.geometry;
 
 public class Constraints {
     public double accel;

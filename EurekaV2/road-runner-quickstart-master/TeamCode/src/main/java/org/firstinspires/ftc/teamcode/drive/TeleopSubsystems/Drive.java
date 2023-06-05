@@ -43,7 +43,7 @@ public class Drive extends SubsystemBase {
     };
 
     public Drive(HardwareMap hardwareMap, Telemetry telemetry, OpMode opMode){
-        this.drive = new SampleMecanumDrive(hardwareMap);
+        this.drive = new SampleMecanumDrive(hardwareMap, telemetry);
         this.opMode = opMode;
         this.telemetry = telemetry;
         gamepad = opMode.gamepad1;

@@ -90,7 +90,7 @@ public class BOOOOM extends LinearOpMode {
     @Override
     public void runOpMode() throws InterruptedException {
 
-        SampleMecanumDrive drive = new SampleMecanumDrive(hardwareMap);
+        SampleMecanumDrive drive = new SampleMecanumDrive(hardwareMap, telemetry);
 
         servoGripper = hardwareMap.get(Servo.class, "servoGripper");
         servoLock =  hardwareMap.get(Servo.class, "servoLock");
@@ -106,15 +106,19 @@ public class BOOOOM extends LinearOpMode {
         SlideRight = hardwareMap.get(DcMotorEx.class, "SlideRight");
 
 
-        ElevateLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        ElevateRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        ElevateLeft.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
+        ElevateRight.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
         SlideLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         SlideRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        ElevateLeft.setDirection(DcMotorSimple.Direction.REVERSE);
+        ElevateLeft.setDirection(DcMotorEx.Direction.REVERSE);
 
         SlideRight.setDirection(DcMotorSimple.Direction.REVERSE);
-        SlideRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        SlideLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        ElevateLeft.setTargetPositionTolerance(5);
+        ElevateRight.setTargetPositionTolerance(5);
+        ElevateRight.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
+        ElevateLeft.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
+        SlideRight.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
+        SlideLeft.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
 //        SlideLeft.setDirection(DcMotorSimple.Direction.REVERSE);
 
 //        ElevateLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -421,6 +425,7 @@ public class BOOOOM extends LinearOpMode {
                 ElevateLeft.setTargetPosition(HIGH);
                 ElevateLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                 ElevateLeft.setPower(1);
+
             }
             else if (gamepad1.dpad_down) {
                 servoLock.setPosition(UNLOCK);
@@ -432,6 +437,7 @@ public class BOOOOM extends LinearOpMode {
                 ElevateLeft.setTargetPosition(0);
                 ElevateLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                 ElevateLeft.setPower(0.9);
+
 
             }
             //small start cycle for fun
@@ -731,6 +737,8 @@ public class BOOOOM extends LinearOpMode {
             telemetry.addData("SlideLeft", SlideLeft.getCurrentPosition());
             telemetry.addData("Current SlideRight", SlideRight.getCurrent(CurrentUnit.AMPS));
             telemetry.addData("SlideRight", SlideRight.getCurrentPosition());
+            telemetry.addData("PowerLeft", ElevateLeft.getPower());
+            telemetry.addData("PowerRight", ElevateRight.getPower());
             telemetry.update();
 
         }

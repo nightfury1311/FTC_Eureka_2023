@@ -46,7 +46,6 @@ public class ElevatorTest extends LinearOpMode {
 //    public static int MID = 700;   //740           // counts value
 //    public static int HIGH = 1110; //1160
 
-    //NEW VALUES AT 3:1 elevator ratio
     public static int LOW = 183;   // 320
     public static int MID = 387;   //740           //counts value
     public static int HIGH = 610; //1160
@@ -90,7 +89,7 @@ public class ElevatorTest extends LinearOpMode {
     @Override
     public void runOpMode() throws InterruptedException {
 
-        SampleMecanumDrive drive = new SampleMecanumDrive(hardwareMap);
+        SampleMecanumDrive drive = new SampleMecanumDrive(hardwareMap, telemetry);
 
         servoGripper = hardwareMap.get(Servo.class, "servoGripper");
         servoLock =  hardwareMap.get(Servo.class, "servoLock");
@@ -102,25 +101,16 @@ public class ElevatorTest extends LinearOpMode {
         servoRotate = hardwareMap.get(Servo.class, "servoRotate");
         ElevateLeft = hardwareMap.get(DcMotorEx.class, "ElevateLeft");
         ElevateRight = hardwareMap.get(DcMotorEx.class, "ElevateRight");
-        SlideLeft = hardwareMap.get(DcMotorEx.class, "SlideLeft");
-        SlideRight = hardwareMap.get(DcMotorEx.class, "SlideRight");
+
 
 
         ElevateLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        ElevateRight.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 //        ElevateRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        SlideLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        SlideRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
         ElevateLeft.setDirection(DcMotorSimple.Direction.REVERSE);
 
-        SlideRight.setDirection(DcMotorSimple.Direction.REVERSE);
-        SlideRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        SlideLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-//        SlideLeft.setDirection(DcMotorSimple.Direction.REVERSE);
 
-//        ElevateLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-//        ElevateRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-//        SlideLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-//        SlideRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
 
         drive.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
@@ -164,68 +154,10 @@ public class ElevatorTest extends LinearOpMode {
             }
 
 
-            if (gamepad1.b) {           // cone transfer
-
-                servoRotate.setPosition(ROTATE_DROP);
-//                sleep(300);
-
-                servoActive.setPosition(ACTIVE_DROP);
-                sleep(200);
-                servoLF.setPosition(DROP_ARM_LEFT);
-                servoLB.setPosition(DROP_ARM_LEFT);
-                servoRF.setPosition(DROP_ARM_RIGHT);
-                servoRB.setPosition(DROP_ARM_RIGHT);
-
-                sleep(300);
-
-                servoGripper.setPosition(GRIPPER_OPEN);
-                sleep(200);
-                servoLock.setPosition(LOCK);
-                servoLF.setPosition(HOME_ARM);
-                servoLB.setPosition(HOME_ARM);
-                servoRF.setPosition(HOME_ARM);
-                servoRB.setPosition(HOME_ARM);
-                servoRotate.setPosition(ROTATE_PICK);
-                sleep(200);
-
-                servoActive.setPosition(ACTIVE_STABLE);
-            }
-
-            //////////////////////////////////////////////////////////////////////////////////
-            ///////////////////////////////////////////////////////////////////////////////////
-            //////////////////////////////////////////////////////////////////////////////////
-
-
-            ////////////////////////////////////////////////////////////////////////////////////
-            ////////////////////////////////////////////////////////////////////////////////////
-            ////////////////////////////////////////////////////////////////////////////////////
-
-
-
             //************************ UP DOWN BUTTONS *******************************
-//
-//            else if (gamepad1.a) {
-//
-//                ElevateRight.setTargetPosition(LOW);
-//                ElevateRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-//                ElevateRight.setPower(0.6);
-//
-//                ElevateLeft.setTargetPosition(LOW);
-//                ElevateLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-//                ElevateLeft.setPower(0.6);
-//            }
-//            else if (gamepad1.y) {
-//
-//                ElevateRight.setTargetPosition(MID);
-//                ElevateRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-//                ElevateRight.setPower(1);
-//
-//                ElevateLeft.setTargetPosition(MID);
-//                ElevateLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-//                ElevateLeft.setPower(1);
-//            }
 
-            else if (gamepad1.dpad_up) {
+
+           if (gamepad1.dpad_up) {
 
                 ElevateLeft.setTargetPosition(HIGH);
                 ElevateLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
@@ -236,9 +168,20 @@ public class ElevatorTest extends LinearOpMode {
                 ElevateRight.setPower(ElevateLeft.getPower());
 
             }
-            else if (gamepad1.dpad_down) {
-                servoLock.setPosition(UNLOCK);
-                ElevateLeft.setTargetPosition(0);
+            if (gamepad1.y) {
+
+                ElevateLeft.setTargetPosition(MID);
+                ElevateLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                ElevateLeft.setPower(1);
+
+//                ElevateRight.setTargetPosition(HIGH);
+//                ElevateRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                ElevateRight.setPower(ElevateLeft.getPower());
+
+            }
+            if (gamepad1.a) {
+
+                ElevateLeft.setTargetPosition(LOW);
                 ElevateLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                 ElevateLeft.setPower(1);
 
@@ -246,37 +189,22 @@ public class ElevatorTest extends LinearOpMode {
 //                ElevateRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                 ElevateRight.setPower(ElevateLeft.getPower());
             }
+            else if (gamepad1.dpad_down) {
+               ElevateLeft.setTargetPosition(0);
+               ElevateLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+               ElevateLeft.setPower(1);
 
-            else if(gamepad1.dpad_left){
-                servoRotate.setPosition(ROTATE_PICK);
-                servoGripper.setPosition(GRIPPER_OPEN);
-                servoActive.setPosition(ACTIVE_PICK);
-                sleep(300);
-                servoLF.setPosition(PICK_ARM_LEFT);
-                servoLB.setPosition(PICK_ARM_LEFT);
-                servoRF.setPosition(PICK_ARM_RIGHT);
-                servoRB.setPosition(PICK_ARM_RIGHT);
+//                ElevateRight.setTargetPosition(HIGH);
+//                ElevateRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+               ElevateRight.setPower(ElevateLeft.getPower());
             }
-            else if(gamepad1.x){
-                servoRotate.setPosition(ROTATE_PICK);
-                servoActive.setPosition(ACTIVE_PICK);
-                sleep(300);
-                servoLF.setPosition(PICK_ARM_LEFT);
-                servoLB.setPosition(PICK_ARM_LEFT);
-                servoRF.setPosition(PICK_ARM_RIGHT);
-                servoRB.setPosition(PICK_ARM_RIGHT);
-            }
-
-
-
-
-
-
 
             telemetry.addData("Current ElevateLeft", ElevateLeft.getCurrent(CurrentUnit.AMPS));
             telemetry.addData("ElevateLeft", ElevateLeft.getCurrentPosition());
             telemetry.addData("Current ElevateRight", ElevateRight.getCurrent(CurrentUnit.AMPS));
             telemetry.addData("ElevateRight", ElevateRight.getCurrentPosition());
+            telemetry.addData("Power ElevateLeft", ElevateLeft.getPower());
+            telemetry.addData("Power ElevateRight", ElevateRight.getPower());
 
             telemetry.update();
 

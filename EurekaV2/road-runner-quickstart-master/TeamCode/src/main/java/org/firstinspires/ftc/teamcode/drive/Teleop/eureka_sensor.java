@@ -55,7 +55,7 @@ public class eureka_sensor extends LinearOpMode {
 
     @Override
     public void runOpMode() throws InterruptedException {
-        SampleMecanumDrive drive = new SampleMecanumDrive(hardwareMap);
+        SampleMecanumDrive drive = new SampleMecanumDrive(hardwareMap, telemetry);
 
         servoGripper = hardwareMap.get(Servo.class, "servoGripper");
         servoLeft = hardwareMap.get(Servo.class, "servoLeft");

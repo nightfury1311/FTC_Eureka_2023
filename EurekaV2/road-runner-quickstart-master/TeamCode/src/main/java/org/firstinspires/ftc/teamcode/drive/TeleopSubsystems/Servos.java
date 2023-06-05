@@ -45,7 +45,7 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
         }
 
         public static void closeGripper() {
-            gripperState = "CLOSED";
+            gripperState = "CLOSE";
             servoGripper.setPosition(gripperClosePosition);
         }
 
@@ -54,7 +54,7 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
             servoLock.setPosition(Lock);
         }
         public static void Unlock() {
-            gripperState = "LOCK";
+            gripperState = "UNLOCK";
             servoLock.setPosition(Unlock);
         }
     }
@@ -116,7 +116,7 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
             servoActive.setPosition(ActiveDrop);
         }
         public static void goActivePick1() {
-            armState = "ActivePick";
+            armState = "ActivePick1";
             servoActive.setPosition(ActivePick1);
         }
         public static void goActivePick2() {
@@ -128,7 +128,7 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
             servoActive.setPosition(ActivePick3);
         }
         public static void goActivePick4() {
-            armState = "ActivePick";
+            armState = "ActivePick4";
             servoActive.setPosition(ActivePick4);
         }
 
