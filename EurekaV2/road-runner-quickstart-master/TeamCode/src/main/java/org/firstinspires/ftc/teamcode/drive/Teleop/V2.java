@@ -34,6 +34,7 @@ public class V2 extends LinearOpMode {
 
     public static double speed = 0.9;
     public static double turn = 0.6;
+    boolean GRIPFlag=false;
 
 
     @Override
@@ -270,10 +271,23 @@ public class V2 extends LinearOpMode {
                 sleep(200);
                 Servos.Arm.goPick();
             }
-            if(RTG1>0.7)
-            {
-               Servos.Gripper.openGripper();
+//            if(RTG1>0.7)
+//            {
+//               Servos.Gripper.openGripper();
+//            }
+
+            if (RTG1>0.7 && !GRIPFlag) {
+                GRIPFlag = true;
+                if (Servos.Gripper.gripperState == "OPEN") {
+                    Servos.Gripper.openGripper();
+                } else if (Servos.Gripper.gripperState == "CLOSE") {
+                    Servos.Gripper.closeGripper();
+                }
             }
+            if (!A1) {
+                GRIPFlag = false;
+            }
+            
             else if(gamepad2.right_trigger>0.7)
             {
                 Servos.Gripper.openGripper();
