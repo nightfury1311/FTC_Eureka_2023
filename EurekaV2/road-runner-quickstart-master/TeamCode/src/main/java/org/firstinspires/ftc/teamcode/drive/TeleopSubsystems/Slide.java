@@ -16,7 +16,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.CurrentUnit;
 
     public int HOME = 0, MICRO=1, MIN = 2, CONE1 = 3, CONE2= 4, CONE3=5, CONE4=6, CONE5=7, MAX = 8 ,UNSAFE=9;
 //    public static int[] POSITIONS = {0,610, 630, 1330, 1330, 1280, 1280, 1280, 1320 ,530};
-public static int[] POSITIONS = {0,335, 348, 670, 670, 670, 670, 670, 670 ,292};
+public static int[] POSITIONS = {0,355, 348, 670, 670, 670, 670, 670, 670 ,292};
 
     public Slide(HardwareMap hardwareMap, Telemetry telemetry) {
         SlideLeft = hardwareMap.get(DcMotorEx.class, "SlideLeft");

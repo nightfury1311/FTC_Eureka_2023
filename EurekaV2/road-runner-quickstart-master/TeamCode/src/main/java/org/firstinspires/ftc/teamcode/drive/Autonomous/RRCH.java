@@ -233,13 +233,13 @@ public class RRCH extends LinearOpMode
                 .build();
 
         TrajectorySequence goToP2 = drive.trajectorySequenceBuilder((pre.end()))
-                .lineToLinearHeading(new Pose2d(19,-12, Math.toRadians(180)))
+                .lineToLinearHeading(new Pose2d(12,-12, Math.toRadians(90)))
                 .waitSeconds(0.001)
                 .lineToConstantHeading(new Vector2d(36,-12))
                 .build();
 
         TrajectorySequence goToP3 = drive.trajectorySequenceBuilder((pre.end()))
-                .lineToLinearHeading(new Pose2d(19,-12, Math.toRadians(180)))
+                .lineToLinearHeading(new Pose2d(12,-12, Math.toRadians(90)))
                 .waitSeconds(0.001)
                 .lineToConstantHeading(new Vector2d(60,-12))
                 .build();

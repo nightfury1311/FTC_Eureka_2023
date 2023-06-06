@@ -58,7 +58,7 @@ public class RRFH_Cam extends LinearOpMode
     {
         Pose2d PARKING1 = new Pose2d(13, -36, Math.toRadians(90));
         Pose2d PARKING2 = new Pose2d(37.5, -27, Math.toRadians(90));
-        Pose2d PARKING3 = new Pose2d(60, -36, Math.toRadians(90));
+        Pose2d PARKING3 = new Pose2d(60, -24, Math.toRadians(90));
 
         int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
         camera = OpenCvCameraFactory.getInstance().createWebcam(hardwareMap.get(WebcamName.class, "Camera"), cameraMonitorViewId);
@@ -92,25 +92,27 @@ public class RRFH_Cam extends LinearOpMode
         Servos.Arm.goActiveStable();
         Servos.Arm.goDrop();
         Servos.Rotate.rotatePick();
+        slide.extendTo(slide.POSITIONS[slide.HOME]);
+
 
         SampleMecanumDrive drive = new SampleMecanumDrive(hardwareMap, telemetry);
-        Pose2d startPose = new Pose2d(31, -62, Math.toRadians(90));
+        Pose2d startPose = new Pose2d(30, -62, Math.toRadians(90));
         drive.setPoseEstimate(startPose);
 
         TrajectorySequence pre =drive.trajectorySequenceBuilder(startPose)
 
                 .lineToLinearHeading(new Pose2d(35,-54, Math.toRadians(180)))  // dropping position
-                .lineToLinearHeading(new Pose2d(37.5, -3,Math.toRadians(165)))
+                .lineToLinearHeading(new Pose2d(35, -3,Math.toRadians(165)))
                 .build();
         TrajectorySequence lock1 =drive.trajectorySequenceBuilder(pre.end())
-                .lineToLinearHeading(new Pose2d(37.50001, -3.0001, Math.toRadians(165)))
+                .lineToLinearHeading(new Pose2d(35.00001, -3.0001, Math.toRadians(165)))
                 .build();
         TrajectorySequence lock2 =drive.trajectorySequenceBuilder(lock1.end())
-                .lineToLinearHeading(new Pose2d(37.5, -3, Math.toRadians(165)))
+                .lineToLinearHeading(new Pose2d(35.001, -3, Math.toRadians(165)))
                 .build();
         TrajectorySequence park =drive.trajectorySequenceBuilder(lock1.end())
 
-                .lineToLinearHeading(new Pose2d(37.5, -14,Math.toRadians(90)))
+                .lineToLinearHeading(new Pose2d(37.5, -12,Math.toRadians(90)))
 
                 .build();
 
@@ -126,7 +128,7 @@ public class RRFH_Cam extends LinearOpMode
                 .build();
 
         TrajectorySequence goToP3 = drive.trajectorySequenceBuilder((park.end()))
-                .lineToConstantHeading(new Vector2d(36,-36))
+                .lineToConstantHeading(new Vector2d(60,-12))
                 .waitSeconds(0.001)
                 .lineToConstantHeading(new Vector2d(PARKING3.getX(), PARKING3.getY()))
                 .build();
@@ -189,7 +191,7 @@ public class RRFH_Cam extends LinearOpMode
         slide.extendTo(slide.POSITIONS[slide.UNSAFE]);
         sleep(400);
 
-        slide.extendTo(slide.POSITIONS[slide.MIN]);
+        slide.extendTo(slide.POSITIONS[slide.MICRO]);
         elevator.extendTo(elevator.POSITIONS[elevator.HOME]);
         sleep(50);
         Servos.Gripper.Unlock();
