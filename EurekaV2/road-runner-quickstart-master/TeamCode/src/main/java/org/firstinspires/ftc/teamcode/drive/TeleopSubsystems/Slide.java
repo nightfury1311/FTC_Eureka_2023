@@ -14,9 +14,9 @@ import org.firstinspires.ftc.robotcore.external.navigation.CurrentUnit;
     public class Slide extends SubsystemBase {
     public DcMotorEx SlideLeft, SlideRight;
 
-    public int HOME = 0, MICRO=1, MIN = 2, CONE1 = 3, CONE2= 4, CONE3=5, CONE4=6, CONE5=7, MAX = 8 ,UNSAFE=9;
+    public int HOME = 0, MICRO=1, MIN = 2, CONE1 = 3, CONE2= 4, CONE3=5, CONE4=6, CONE5=7, MAX = 8 ,UNSAFE=9, TELETEST=10, TELEMAX=11;
 //    public static int[] POSITIONS = {0,610, 630, 1330, 1330, 1280, 1280, 1280, 1320 ,530};
-public static int[] POSITIONS = {0,355, 348, 670, 670, 670, 670, 670, 670 ,292};
+public static int[] POSITIONS = {0,355, 348, 670, 670, 670, 670, 670, 670 ,292, 275, 690};
 
     public Slide(HardwareMap hardwareMap, Telemetry telemetry) {
         SlideLeft = hardwareMap.get(DcMotorEx.class, "SlideLeft");
@@ -38,11 +38,11 @@ public static int[] POSITIONS = {0,355, 348, 670, 670, 670, 670, 670, 670 ,292};
 
         SlideLeft.setTargetPosition(position);
         SlideLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        SlideLeft.setPower(0.6);
+        SlideLeft.setPower(0.7);
 
         SlideRight.setTargetPosition(position);
         SlideRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        SlideRight.setPower(0.6);
+        SlideRight.setPower(0.7);
     }
     public double[] getPosition(){
         return new double[]{SlideLeft.getCurrentPosition(), SlideRight.getCurrentPosition()};
@@ -73,6 +73,9 @@ public static int[] POSITIONS = {0,355, 348, 670, 670, 670, 670, 670, 670 ,292};
         extendTo(POSITIONS[MAX]);
     }
     public void extendToUNSAFE(){extendTo(POSITIONS[UNSAFE]);}
+    public void extendToTELETEST(){extendTo(POSITIONS[TELETEST]);}
+    public void extendToTELEMAX(){extendTo(POSITIONS[TELEMAX]);}
+
 
     public void extendToHomeSlow(){
         extendToSlow(POSITIONS[HOME]);
@@ -88,6 +91,9 @@ public static int[] POSITIONS = {0,355, 348, 670, 670, 670, 670, 670, 670 ,292};
     public void extendToMAXSlow(){
         extendToSlow(POSITIONS[MAX]);
     }
+    public void extendToUNSAFESlow(){extendTo(POSITIONS[UNSAFE]);}
+    public void extendToTELETESTSlow(){extendTo(POSITIONS[TELETEST]);}
+    public void extendToTELEMAXSlow(){extendTo(POSITIONS[TELEMAX]);}
 
 }
 

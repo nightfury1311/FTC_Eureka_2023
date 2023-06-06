@@ -103,6 +103,12 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
         public static final double ActiveStable = 0.5;
         public static final double ActiveDrop = 0.35;
 
+        public static final double ActiveLow = 0.69;
+        public static void goActiveLow() {
+            armState = "ActiveLow";
+            servoActive.setPosition(ActiveLow);
+        }
+
         public static void goActivePick() {
             armState = "ActivePick";
             servoActive.setPosition(ActivePick);

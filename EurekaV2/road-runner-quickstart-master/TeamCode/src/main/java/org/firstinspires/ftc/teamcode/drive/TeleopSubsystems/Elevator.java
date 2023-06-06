@@ -32,6 +32,16 @@ import org.firstinspires.ftc.robotcore.external.navigation.CurrentUnit;
             ElevateRight.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
             ElevateRight.setPower(1);
         }
+
+    public void extendToSlow(int position){
+        ElevateLeft.setTargetPosition(position);
+        ElevateLeft.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
+        ElevateLeft.setPower(0.5);
+
+        ElevateRight.setTargetPosition(position);
+        ElevateRight.setMode(DcMotorEx.RunMode.RUN_TO_POSITION);
+        ElevateRight.setPower(0.5);
+    }
     public double[] getPosition(){
         return new double[]{ElevateLeft.getCurrentPosition(), ElevateRight.getCurrentPosition()};
     }
@@ -55,5 +65,18 @@ import org.firstinspires.ftc.robotcore.external.navigation.CurrentUnit;
         public void extendToHome(){
             extendTo(POSITIONS[HOME]);
         }
+
+    public void extendToHP(){
+        extendToSlow(POSITIONS[HIGH_POLE]);
+    }
+    public void extendToMP(){
+        extendToSlow(POSITIONS[MID_POLE]);
+    }
+    public void extendToLP(){
+        extendToSlow(POSITIONS[LOW_POLE]);
+    }
+    public void extendToH(){
+        extendToSlow(POSITIONS[HOME]);
+    }
 
 }

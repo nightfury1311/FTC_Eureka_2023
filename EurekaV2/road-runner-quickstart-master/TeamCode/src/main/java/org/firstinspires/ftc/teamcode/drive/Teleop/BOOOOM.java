@@ -128,6 +128,9 @@ public class BOOOOM extends LinearOpMode {
 
 
         drive.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+
+        Pose2d startPose = new Pose2d(0, 0, Math.toRadians(0));
+        drive.setPoseEstimate(startPose);
         while (opModeInInit()) {
             servoLock.setPosition(UNLOCK);
             servoRotate.setPosition(ROTATE_PICK);
@@ -156,6 +159,7 @@ public class BOOOOM extends LinearOpMode {
 //        waitForStart();
         while (opModeIsActive()) {
             telemetry.addData("Status", "Running");
+
             Pose2d poseEstimate = drive.getPoseEstimate();
             Vector2d input = new Vector2d(Math.pow(-gamepad1.left_stick_y,3), Math.pow(-gamepad1.left_stick_x,3)).rotated(-poseEstimate.getHeading());
 
@@ -179,6 +183,10 @@ public class BOOOOM extends LinearOpMode {
             } else{
                 speed = 0.9;
                 turn = 0.6;
+            }
+
+            if(gamepad1.left_stick_button || gamepad1.right_stick_button){
+                drive.setPoseEstimate(startPose);
             }
 
             if (gamepad1.back) {                    // elevate at start position
