@@ -219,7 +219,7 @@ public class RRFH_Cam extends LinearOpMode
         elevator.extendTo(elevator.POSITIONS[elevator.HIGH_POLE]);
         sleep(400);
         slide.extendTo(slide.POSITIONS[slide.UNSAFE]);
-        sleep(300);
+        sleep(400);
 //        Servos.Gripper.Unlock();
 //        sleep(100);
         slide.extendTo(slide.POSITIONS[slide.MIN]);
@@ -250,7 +250,7 @@ public class RRFH_Cam extends LinearOpMode
         elevator.extendTo(elevator.POSITIONS[elevator.HIGH_POLE]);
         sleep(400);
         slide.extendTo(slide.POSITIONS[slide.UNSAFE]);
-        sleep(300);
+        sleep(400);
 //        Servos.Gripper.Unlock();
 //        sleep(100);
         slide.extendTo(slide.POSITIONS[slide.MIN]);
@@ -280,7 +280,7 @@ public class RRFH_Cam extends LinearOpMode
         elevator.extendTo(elevator.POSITIONS[elevator.HIGH_POLE]);
         sleep(400);
         slide.extendTo(slide.POSITIONS[slide.UNSAFE]);
-        sleep(300);
+        sleep(400);
 //        Servos.Gripper.Unlock();
 //        sleep(100);
         slide.extendTo(slide.POSITIONS[slide.MIN]);
@@ -310,7 +310,7 @@ public class RRFH_Cam extends LinearOpMode
         elevator.extendTo(elevator.POSITIONS[elevator.HIGH_POLE]);
         sleep(400);
         slide.extendTo(slide.POSITIONS[slide.UNSAFE]);
-        sleep(300);
+        sleep(400);
 //        Servos.Gripper.Unlock();
 //        sleep(100);
         slide.extendTo(slide.POSITIONS[slide.MIN]);
@@ -338,7 +338,7 @@ public class RRFH_Cam extends LinearOpMode
         Servos.Arm.goActiveStable();
         drive.followTrajectorySequence(lock1);
         elevator.extendTo(elevator.POSITIONS[elevator.HIGH_POLE]);
-        sleep(700);
+        sleep(800);
 //        Servos.Gripper.Unlock();
 //        sleep(100);
         elevator.extendTo(elevator.POSITIONS[elevator.HOME]);

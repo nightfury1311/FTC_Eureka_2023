@@ -92,6 +92,9 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
         public static final double PickLeft = 0.98;
         public static final double PickRight = 1-PickLeft;
 
+        public static final double PickLeftTele = 1;
+        public static final double PickRightTele = 1-PickLeft;
+
         public static final double LegalLeft = 0.4;
         public static final double LegalRight = 1-LegalLeft;
 
@@ -147,7 +150,13 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
             servoRF.setPosition(LegalRight);
             servoRB.setPosition(LegalRight);
         }
-
+        public static void goPickTele() {
+            armState = "PICKTELE";
+            servoLF.setPosition(PickLeftTele);
+            servoLB.setPosition(PickLeftTele);
+            servoRF.setPosition(PickRightTele);
+            servoRB.setPosition(PickRightTele);
+        }
         public static void goPick() {
             armState = "PICK";
             servoLF.setPosition(PickLeft);

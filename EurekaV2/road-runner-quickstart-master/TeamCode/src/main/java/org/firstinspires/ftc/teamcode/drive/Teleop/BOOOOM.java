@@ -46,10 +46,15 @@ public class BOOOOM extends LinearOpMode {
 //    public static int MID = 700;   //740           // counts value
 //    public static int HIGH = 1110; //1160
 
-    //NEW VALUES AT 3:1 elevator ratio
-    public static int LOW = 183;   // 320
-    public static int MID = 387;   //740           //counts value
-    public static int HIGH = 610; //1160
+    //NEW VALUES AT 4:1 elevator ratio
+    public static int LOW = 228;   // 320
+    public static int MID = 484;   //740           //counts value
+    public static int HIGH = 755; //1160
+
+//    //NEW VALUES AT 3:1 elevator ratio
+//    public static int LOW = 183;   // 320
+//    public static int MID = 387;   //740           //counts value
+//    public static int HIGH = 610; //1160
 
 
 //   //OLD VALUES AT 9:1 slider ratio
@@ -83,8 +88,8 @@ public class BOOOOM extends LinearOpMode {
     public static double LOCK = 0;
     public static double UNLOCK = 0.3;
 
-    public static double speed = 0.9;
-    public static double turn = 0.6;
+    public static double speed = 1;
+    public static double turn = 0.8;
 
 
     @Override

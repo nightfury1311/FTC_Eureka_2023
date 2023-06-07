@@ -4,21 +4,9 @@ package org.firstinspires.ftc.teamcode.drive.Teleop;
 import  com.acmerobotics.dashboard.config.Config;
 import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.acmerobotics.roadrunner.geometry.Vector2d;
-import com.qualcomm.hardware.motors.RevRoboticsUltraPlanetaryHdHexMotor;
-import com.qualcomm.hardware.rev.Rev2mDistanceSensor;
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DcMotorEx;
-import com.qualcomm.robotcore.hardware.DcMotorSimple;
-import com.qualcomm.robotcore.hardware.Servo;
-import com.qualcomm.robotcore.hardware.TouchSensor;
-
-
-import org.firstinspires.ftc.robotcore.external.navigation.CurrentUnit;
-import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
-
 import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
 import org.firstinspires.ftc.teamcode.drive.TeleopSubsystems.Elevator;
 import org.firstinspires.ftc.teamcode.drive.TeleopSubsystems.Servos;
@@ -40,6 +28,10 @@ public class V2 extends LinearOpMode {
     @Override
     public void runOpMode() throws InterruptedException {
 
+        elevator = new Elevator(hardwareMap, telemetry);
+        servos = new Servos(hardwareMap, telemetry);
+        slide = new Slide(hardwareMap, telemetry);
+
         SampleMecanumDrive drive = new SampleMecanumDrive(hardwareMap, telemetry);
         drive.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
@@ -47,26 +39,8 @@ public class V2 extends LinearOpMode {
         drive.setPoseEstimate(startPose);
 
 
-        // GAMEPAD FUNCTIONALITY
-            boolean A1 = gamepad1.a;
-            boolean B1 = gamepad1.b;
-            boolean X1 = gamepad1.x;
-            boolean Y1 = gamepad1.y;
-            boolean UP1 = gamepad1.dpad_up;
-            boolean RIGHT1 = gamepad1.dpad_right;
-            boolean DOWN1 = gamepad1.dpad_down;
-            boolean LEFT1 = gamepad1.dpad_left;
-            boolean RB1 = gamepad1.right_bumper;
-            boolean LB1 = gamepad1.left_bumper;
-            boolean START1 = gamepad1.start;
-            boolean BACK1 = gamepad1.back;
-            boolean LStick =gamepad1.left_stick_button;
-            boolean RStick =gamepad1.right_stick_button;
-            double RTG1 = gamepad1.right_trigger;
-            double LTG1 = gamepad1.left_trigger;
 
-
-        while (opModeInInit()) {
+        while ((opModeInInit()))   {
 
             Servos.Gripper.Unlock();
             Servos.Gripper.openGripper();
@@ -96,6 +70,23 @@ public class V2 extends LinearOpMode {
 //                    ));
 //            drive.update();
 
+            // GAMEPAD FUNCTIONALITY
+            boolean A1 = gamepad1.a;
+            boolean B1 = gamepad1.b;
+            boolean X1 = gamepad1.x;
+            boolean Y1 = gamepad1.y;
+            boolean UP1 = gamepad1.dpad_up;
+            boolean RIGHT1 = gamepad1.dpad_right;
+            boolean DOWN1 = gamepad1.dpad_down;
+            boolean LEFT1 = gamepad1.dpad_left;
+            boolean RB1 = gamepad1.right_bumper;
+            boolean LB1 = gamepad1.left_bumper;
+            boolean START1 = gamepad1.start;
+            boolean BACK1 = gamepad1.back;
+            boolean LStick =gamepad1.left_stick_button;
+            boolean RStick =gamepad1.right_stick_button;
+            double RTG1 = gamepad1.right_trigger;
+            double LTG1 = gamepad1.left_trigger;
             if(LTG1>0.7 )    // slow mode
             {
                 speed = 0.4;
@@ -252,10 +243,9 @@ public class V2 extends LinearOpMode {
 
             else if(RIGHT1){
                 Servos.Gripper.closeGripper();
-                Servos.Arm.goActiveLow();
-                Servos.Rotate.rotatePick();
-                sleep(300);
+                sleep(200);
                 Servos.Arm.goInit();
+                Servos.Arm.goActiveLow();
                 slide.extendTo(slide.POSITIONS[slide.HOME]);
             }
             else if(LEFT1){
@@ -278,16 +268,16 @@ public class V2 extends LinearOpMode {
 
             if (RTG1>0.7 && !GRIPFlag) {
                 GRIPFlag = true;
-                if (Servos.Gripper.gripperState == "OPEN") {
+                if (Servos.Gripper.gripperState == "CLOSE") {
                     Servos.Gripper.openGripper();
-                } else if (Servos.Gripper.gripperState == "CLOSE") {
+                } else if (Servos.Gripper.gripperState == "OPEN") {
                     Servos.Gripper.closeGripper();
                 }
             }
             if (!A1) {
                 GRIPFlag = false;
             }
-            
+
             else if(gamepad2.right_trigger>0.7)
             {
                 Servos.Gripper.openGripper();

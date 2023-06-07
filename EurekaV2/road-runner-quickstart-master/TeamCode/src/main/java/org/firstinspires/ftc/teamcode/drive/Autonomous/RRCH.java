@@ -106,7 +106,7 @@ public class RRCH extends LinearOpMode
                 .lineToLinearHeading(new Pose2d(12, -58, Math.toRadians(180)))
                 .lineToLinearHeading(new Pose2d(12,-20, Math.toRadians(196)))
                 .addTemporalMarker(()->elevator.extendTo(elevator.POSITIONS[elevator.HIGH_POLE]))
-                .waitSeconds(0.5)
+                .waitSeconds(0.7)
                 .addTemporalMarker(()->{Servos.Gripper.Unlock();Servos.Arm.goActivePick1();})
                 .waitSeconds(0.05)
                 .addTemporalMarker(()->elevator.extendTo(elevator.POSITIONS[elevator.HOME]))
@@ -130,7 +130,7 @@ public class RRCH extends LinearOpMode
                 ///// DROP CONE 1
                 .waitSeconds(0.2)
                 .addTemporalMarker(()->elevator.extendTo(elevator.POSITIONS[elevator.HIGH_POLE]))
-                .waitSeconds(0.7)
+                .waitSeconds(0.9)
                 .addTemporalMarker(()->{Servos.Gripper.Unlock();Servos.Arm.goActivePick2();})
                 .waitSeconds(0.05)
                 .addTemporalMarker(()->elevator.extendTo(elevator.POSITIONS[elevator.HOME]))
@@ -152,7 +152,7 @@ public class RRCH extends LinearOpMode
                 ///// DROP CONE 2
                 .waitSeconds(0.2)
                 .addTemporalMarker(()->elevator.extendTo(elevator.POSITIONS[elevator.HIGH_POLE]))
-                .waitSeconds(0.7)
+                .waitSeconds(0.9)
                 .addTemporalMarker(()->{Servos.Gripper.Unlock();Servos.Arm.goActivePick3();})
                 .waitSeconds(0.05)
                 .addTemporalMarker(()->elevator.extendTo(elevator.POSITIONS[elevator.HOME]))
@@ -174,7 +174,7 @@ public class RRCH extends LinearOpMode
                 ///// DROP CONE 3
                 .waitSeconds(0.2)
                 .addTemporalMarker(()->elevator.extendTo(elevator.POSITIONS[elevator.HIGH_POLE]))
-                .waitSeconds(0.7)
+                .waitSeconds(0.9)
                 .addTemporalMarker(()->{Servos.Gripper.Unlock();Servos.Arm.goActivePick4();})
                 .waitSeconds(0.05)
                 .addTemporalMarker(()->elevator.extendTo(elevator.POSITIONS[elevator.HOME]))
@@ -196,7 +196,7 @@ public class RRCH extends LinearOpMode
                 ///// DROP CONE 4
                 .waitSeconds(0.2)
                 .addTemporalMarker(()->elevator.extendTo(elevator.POSITIONS[elevator.HIGH_POLE]))
-                .waitSeconds(0.7)
+                .waitSeconds(0.9)
                 .addTemporalMarker(()->{Servos.Gripper.Unlock();Servos.Arm.goActivePick();})
                 .waitSeconds(0.05)
                 .addTemporalMarker(()->elevator.extendTo(elevator.POSITIONS[elevator.HOME]))
@@ -219,7 +219,7 @@ public class RRCH extends LinearOpMode
                 ///// DROP CONE 5
                 .waitSeconds(0.2)
                 .addTemporalMarker(()->elevator.extendTo(elevator.POSITIONS[elevator.HIGH_POLE]))
-                .waitSeconds(0.7)
+                .waitSeconds(0.9)
                 .addTemporalMarker(()->{Servos.Gripper.Unlock();Servos.Arm.goActiveStable();})
                 .waitSeconds(0.05)
                 .addTemporalMarker(()->elevator.extendTo(elevator.POSITIONS[elevator.HOME]))
