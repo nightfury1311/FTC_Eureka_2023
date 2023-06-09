@@ -14,8 +14,8 @@ import org.firstinspires.ftc.teamcode.drive.TeleopSubsystems.Servos;
 import org.firstinspires.ftc.teamcode.drive.TeleopSubsystems.Slide;
 
 @Config
-@TeleOp(name = "V2")
-public class V2 extends LinearOpMode {
+@TeleOp(name = "V2Test")
+public class V2Test extends LinearOpMode {
 
     Elevator elevator = null;
     Servos servos = null;
@@ -91,19 +91,22 @@ public class V2 extends LinearOpMode {
             boolean RStick = gamepad1.right_stick_button;
             double RTG1 = gamepad1.right_trigger;
             double LTG1 = gamepad1.left_trigger;
-            if (LTG1 > 0.7)    // slow mode
-            {
-                speed = 0.4;
-                turn = 0.2;
-            } else {
-                speed = 0.9;
-                turn = 0.5;
+            if (!RB1) {
+                RB1Flag = false;
+            }
+            if (!LEFT1) {
+                LEFT1Flag = false;
+            }
+            if (!(RTG1 > 0.7)) {
+                GRIPFlag = false;
             }
 
-            if (LStick || RStick) {
-                drive.setPoseEstimate(startPose);
+            if (!RIGHT1) {
+                RIGHT1Flag = false;
             }
-
+            if (!X1) {
+                X1Flag = false;
+            }
             if (BACK1) {                    // home position
 
                 Servos.Arm.goActiveStable();
@@ -112,6 +115,18 @@ public class V2 extends LinearOpMode {
                 elevator.extendToSlow(elevator.POSITIONS[elevator.HOME]);
                 slide.extendToSlow(slide.POSITIONS[slide.HOME]);
 
+            }
+//            else if (LTG1 > 0.7)    // slow mode
+//            {
+//                speed = 0.4;
+//                turn = 0.2;
+//            } else {
+//                speed = 0.9;
+//                turn = 0.5;
+//            }
+
+            else if (LStick || RStick) {
+                drive.setPoseEstimate(startPose);
             }
 
             // CONE TRANSFER
@@ -126,7 +141,7 @@ public class V2 extends LinearOpMode {
                 sleep(300);
                 slide.extendToSlow(slide.POSITIONS[slide.TELETEST]);
             }
-            if (RB1 && !RB1Flag) {
+            else if (RB1 && !RB1Flag) {
                 RB1Flag = true;
                 if (slide.getPosition() > 300) {     // picking with long extension
                     slide.extendTo(slide.POSITIONS[slide.TELETEST] + 100);
@@ -164,9 +179,6 @@ public class V2 extends LinearOpMode {
                     Servos.Rotate.rotatePick();
                     Servos.Arm.goActiveStable();
                 }
-            }
-            if (!RB1) {
-                RB1Flag = false;
             }
 //            else if (RB1) {           // cone transfer
 //
@@ -251,7 +263,7 @@ public class V2 extends LinearOpMode {
                 elevator.extendTo(elevator.POSITIONS[elevator.HOME]);
             }
 
-            if (LEFT1 && !LEFT1Flag) {
+            else if (LEFT1 && !LEFT1Flag) {
                 LEFT1Flag = true;
                 if (Servos.Arm.armState == "INIT") {
                     Servos.Gripper.openGripper();
@@ -267,9 +279,6 @@ public class V2 extends LinearOpMode {
                     slide.extendTo(slide.POSITIONS[slide.HOME]);
                 }
             }
-            if (!LEFT1) {
-                LEFT1Flag = false;
-            }
 
 //            else if (RIGHT1) {
 //                Servos.Gripper.closeGripper();
@@ -284,7 +293,7 @@ public class V2 extends LinearOpMode {
 //                sleep(200);
 //                Servos.Arm.goPickTele();
 //            }
-            if (X1 && !X1Flag) {
+            else if (X1 && !X1Flag) {
                 X1Flag = true;
                 if (Servos.Gripper.gripperState == "CLOSE") {
                     Servos.Arm.goActivePick();
@@ -297,9 +306,6 @@ public class V2 extends LinearOpMode {
                     Servos.Rotate.rotatePick();
                 }
             }
-            if (!X1) {
-                X1Flag = false;
-            }
 //            else if (X1) {
 //                Servos.Arm.goActivePick();
 //                Servos.Rotate.rotatePick();
@@ -311,7 +317,7 @@ public class V2 extends LinearOpMode {
 //               Servos.Gripper.openGripper();
 //            }
 
-            if (RTG1 > 0.7 && !GRIPFlag) {
+            else if (RTG1 > 0.7 && !GRIPFlag) {
                 GRIPFlag = true;
                 if (Servos.Gripper.gripperState == "CLOSE") {
                     Servos.Gripper.openGripper();
@@ -319,20 +325,13 @@ public class V2 extends LinearOpMode {
                     Servos.Gripper.closeGripper();
                 }
             }
-            if (!(RTG1 > 0.7)) {
-                GRIPFlag = false;
-            }
-
-            if (RIGHT1 && !RIGHT1Flag) {
+            else if (RIGHT1 && !RIGHT1Flag) {
                 RIGHT1Flag = true;
                 if (Servos.Gripper.gripperState == "UNLOCK") {
                     Servos.Gripper.Lock();
                 } else if (Servos.Gripper.gripperState == "LOCK") {
                     Servos.Gripper.Unlock();
                 }
-            }
-            if (!RIGHT1) {
-                RIGHT1Flag = false;
             }
 
         }

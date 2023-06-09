@@ -370,28 +370,27 @@ public class BOOOOM extends LinearOpMode {
             }
             else if (gamepad1.b) {           // cone transfer
 
-                servoRotate.setPosition(ROTATE_DROP);
-//                sleep(300);
-
-                servoActive.setPosition(ACTIVE_DROP);
+                servoGripper.setPosition(GRIPPER_CLOSE);
                 sleep(200);
+                servoRotate.setPosition(ROTATE_DROP);
+                servoActive.setPosition(ACTIVE_DROP);
+
                 servoLF.setPosition(DROP_ARM_LEFT);
                 servoLB.setPosition(DROP_ARM_LEFT);
                 servoRF.setPosition(DROP_ARM_RIGHT);
                 servoRB.setPosition(DROP_ARM_RIGHT);
 
-                sleep(300);
+                sleep(800);
 
                 servoGripper.setPosition(GRIPPER_OPEN);
                 sleep(200);
-                servoLock.setPosition(LOCK);
                 servoLF.setPosition(HOME_ARM);
                 servoLB.setPosition(HOME_ARM);
                 servoRF.setPosition(HOME_ARM);
                 servoRB.setPosition(HOME_ARM);
+                sleep(100);
+                servoLock.setPosition(LOCK);
                 servoRotate.setPosition(ROTATE_PICK);
-                sleep(200);
-
                 servoActive.setPosition(ACTIVE_STABLE);
             }
 

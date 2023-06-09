@@ -93,8 +93,7 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
         public static final double PickRight = 1-PickLeft;
 
         public static final double PickLeftTele = 1;
-        public static final double PickRightTele = 1-PickLeft;
-
+        public static final double PickRightTele = 1-PickLeftTele;
         public static final double LegalLeft = 0.4;
         public static final double LegalRight = 1-LegalLeft;
 
