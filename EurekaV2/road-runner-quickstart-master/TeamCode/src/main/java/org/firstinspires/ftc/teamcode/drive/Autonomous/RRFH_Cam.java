@@ -56,8 +56,8 @@ public class RRFH_Cam extends LinearOpMode
     @Override
     public void runOpMode() throws InterruptedException
     {
-        Pose2d PARKING1 = new Pose2d(13, -36, Math.toRadians(90));
-        Pose2d PARKING2 = new Pose2d(37.5, -27, Math.toRadians(90));
+        Pose2d PARKING1 = new Pose2d(12, -36, Math.toRadians(90));
+        Pose2d PARKING2 = new Pose2d(36, -27, Math.toRadians(90));
         Pose2d PARKING3 = new Pose2d(60, -24, Math.toRadians(90));
 
         int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
@@ -112,7 +112,7 @@ public class RRFH_Cam extends LinearOpMode
                 .build();
         TrajectorySequence park =drive.trajectorySequenceBuilder(lock1.end())
 
-                .lineToLinearHeading(new Pose2d(37.5, -12,Math.toRadians(90)))
+                .lineToLinearHeading(new Pose2d(36, -12,Math.toRadians(90)))
 
                 .build();
 
