@@ -125,13 +125,13 @@ public class V2Test extends LinearOpMode {
 //                turn = 0.5;
 //            }
 
-            else if (LStick || RStick) {
+            if (LStick || RStick) {
                 drive.setPoseEstimate(startPose);
             }
 
             // CONE TRANSFER
 
-            else if (LB1) {      // cone pickup
+            if (LB1) {      // cone pickup
                 Servos.Gripper.Unlock();
                 Servos.Arm.goActivePick();
                 Servos.Rotate.rotatePick();
@@ -141,7 +141,7 @@ public class V2Test extends LinearOpMode {
                 sleep(300);
                 slide.extendToSlow(slide.POSITIONS[slide.TELETEST]);
             }
-            else if (RB1 && !RB1Flag) {
+            if (RB1 && !RB1Flag) {
                 RB1Flag = true;
                 if (slide.getPosition() > 300) {     // picking with long extension
                     slide.extendTo(slide.POSITIONS[slide.TELETEST] + 100);
@@ -205,7 +205,7 @@ public class V2Test extends LinearOpMode {
 //            }
 
 
-            else if (B1) {           // cone transfer from low pole position
+            if (B1) {           // cone transfer from low pole position
 
                 Servos.Rotate.rotateDrop();
                 Servos.Arm.goActiveDrop();
@@ -222,20 +222,20 @@ public class V2Test extends LinearOpMode {
 
             //************************ UP DOWN BUTTONS *******************************
 
-            else if (A1) {
+            if (A1) {
                 elevator.extendTo(elevator.POSITIONS[elevator.LOW_POLE]);
-            } else if (Y1) {
+            } if (Y1) {
                 elevator.extendTo(elevator.POSITIONS[elevator.MID_POLE]);
-            } else if (UP1) {
+            } if (UP1) {
                 elevator.extendTo(elevator.POSITIONS[elevator.HIGH_POLE]);
-            } else if (DOWN1) {
+            } if (DOWN1) {
                 elevator.extendTo(elevator.POSITIONS[elevator.HOME]);
                 Servos.Gripper.Unlock();
             }
 
             ///////////////////REAL CYCLEE////////////////////////
 
-            else if (START1) {
+            if (START1) {
                 slide.extendTo(slide.POSITIONS[slide.TELETEST] + 100);
                 sleep(100);
                 Servos.Gripper.closeGripper();
@@ -263,7 +263,7 @@ public class V2Test extends LinearOpMode {
                 elevator.extendTo(elevator.POSITIONS[elevator.HOME]);
             }
 
-            else if (LEFT1 && !LEFT1Flag) {
+            if (LEFT1 && !LEFT1Flag) {
                 LEFT1Flag = true;
                 if (Servos.Arm.armState == "INIT") {
                     Servos.Gripper.openGripper();
@@ -293,7 +293,7 @@ public class V2Test extends LinearOpMode {
 //                sleep(200);
 //                Servos.Arm.goPickTele();
 //            }
-            else if (X1 && !X1Flag) {
+            if (X1 && !X1Flag) {
                 X1Flag = true;
                 if (Servos.Gripper.gripperState == "CLOSE") {
                     Servos.Arm.goActivePick();
@@ -317,7 +317,7 @@ public class V2Test extends LinearOpMode {
 //               Servos.Gripper.openGripper();
 //            }
 
-            else if (RTG1 > 0.7 && !GRIPFlag) {
+            if (RTG1 > 0.7 && !GRIPFlag) {
                 GRIPFlag = true;
                 if (Servos.Gripper.gripperState == "CLOSE") {
                     Servos.Gripper.openGripper();
@@ -325,7 +325,7 @@ public class V2Test extends LinearOpMode {
                     Servos.Gripper.closeGripper();
                 }
             }
-            else if (RIGHT1 && !RIGHT1Flag) {
+            if (RIGHT1 && !RIGHT1Flag) {
                 RIGHT1Flag = true;
                 if (Servos.Gripper.gripperState == "UNLOCK") {
                     Servos.Gripper.Lock();

@@ -116,6 +116,7 @@ public class BOOOOM extends LinearOpMode {
         SlideLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         SlideRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         ElevateLeft.setDirection(DcMotorEx.Direction.REVERSE);
+        ElevateRight.setDirection(DcMotorEx.Direction.REVERSE);
 
         SlideRight.setDirection(DcMotorSimple.Direction.REVERSE);
         ElevateLeft.setTargetPositionTolerance(5);

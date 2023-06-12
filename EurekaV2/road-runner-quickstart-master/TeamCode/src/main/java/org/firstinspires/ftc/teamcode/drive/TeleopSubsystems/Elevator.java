@@ -23,6 +23,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.CurrentUnit;
         ElevateRight = hardwareMap.get(DcMotorEx.class, "ElevateRight");
 
       ElevateLeft.setDirection(DcMotorEx.Direction.REVERSE);
+        ElevateRight.setDirection(DcMotorEx.Direction.REVERSE);
     }
         public void extendTo(int position){
             ElevateLeft.setTargetPosition(position);
