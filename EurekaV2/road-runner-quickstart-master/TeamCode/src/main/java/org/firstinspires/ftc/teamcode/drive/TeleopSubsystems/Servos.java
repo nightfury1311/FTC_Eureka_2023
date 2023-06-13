@@ -33,6 +33,7 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 
     public static class Gripper {
         public static String gripperState = "OPEN";
+        public static String lockState = "UNLOCK";
         public static final double gripperOpenPosition = 0.5;
         public static final double gripperClosePosition = 0.7;
 
@@ -50,11 +51,11 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
         }
 
         public static void Lock() {
-            gripperState = "LOCK";
+            lockState = "LOCK";
             servoLock.setPosition(Lock);
         }
         public static void Unlock() {
-            gripperState = "UNLOCK";
+            lockState = "UNLOCK";
             servoLock.setPosition(Unlock);
         }
     }
