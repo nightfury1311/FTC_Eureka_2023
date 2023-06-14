@@ -737,10 +737,10 @@ public class BOOOOM extends LinearOpMode {
 //                SlideLeft.setPower(0.8);
 //            }
 
-            telemetry.addData("Servo Gripper Position", servoGripper.getPosition());
-            telemetry.addData("Servo Left Position", servoLF.getPosition());
-            telemetry.addData("Servo Right Position", servoRF.getPosition());
-            telemetry.addData("Servo Rotation Positon", servoRotate.getPosition());
+//            telemetry.addData("Servo Gripper Position", servoGripper.getPosition());
+//            telemetry.addData("Servo Left Position", servoLF.getPosition());
+//            telemetry.addData("Servo Right Position", servoRF.getPosition());
+//            telemetry.addData("Servo Rotation Positon", servoRotate.getPosition());
             telemetry.addData("Current ElevateLeft", ElevateLeft.getCurrent(CurrentUnit.AMPS));
 
             telemetry.addData("ElevateLeft", ElevateLeft.getCurrentPosition());
@@ -750,8 +750,8 @@ public class BOOOOM extends LinearOpMode {
             telemetry.addData("SlideLeft", SlideLeft.getCurrentPosition());
             telemetry.addData("Current SlideRight", SlideRight.getCurrent(CurrentUnit.AMPS));
             telemetry.addData("SlideRight", SlideRight.getCurrentPosition());
-            telemetry.addData("PowerLeft", ElevateLeft.getPower());
-            telemetry.addData("PowerRight", ElevateRight.getPower());
+//            telemetry.addData("PowerLeft", ElevateLeft.getPower());
+//            telemetry.addData("PowerRight", ElevateRight.getPower());
             telemetry.update();
 
         }

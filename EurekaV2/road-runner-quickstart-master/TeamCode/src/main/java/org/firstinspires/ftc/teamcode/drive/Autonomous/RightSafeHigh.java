@@ -3,7 +3,6 @@ package org.firstinspires.ftc.teamcode.drive.Autonomous;
 import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.acmerobotics.roadrunner.geometry.Vector2d;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
@@ -21,7 +20,7 @@ import org.openftc.easyopencv.OpenCvCameraRotation;
 import java.util.ArrayList;
 
 @Autonomous
-public class RRCH extends LinearOpMode
+public class RightSafeHigh extends LinearOpMode
 {
     Elevator elevator = null;
     Servos servos = null;
@@ -90,7 +89,7 @@ public class RRCH extends LinearOpMode
         Servos.Gripper.Lock();
         Servos.Gripper.openGripper();
         Servos.Arm.goActiveStable();
-        Servos.Arm.goInit();
+        Servos.Arm.goDrop();
         Servos.Rotate.rotatePick();
 
         SampleMecanumDrive drive = new SampleMecanumDrive(hardwareMap, telemetry);
@@ -104,6 +103,7 @@ public class RRCH extends LinearOpMode
 //                .lineToLinearHeading(new Pose2d(12,-20, Math.toRadians(196)))  // dropping position
 
                 .lineToLinearHeading(new Pose2d(12, -58, Math.toRadians(180)))
+                .addTemporalMarker(()->Servos.Arm.goInit())
                 .lineToLinearHeading(new Pose2d(12,-20, Math.toRadians(196)))
                 .addTemporalMarker(()->elevator.extendTo(elevator.POSITIONS[elevator.HIGH_POLE]))
                 .waitSeconds(0.7)
@@ -223,7 +223,8 @@ public class RRCH extends LinearOpMode
                 .addTemporalMarker(()->{Servos.Gripper.Unlock();Servos.Arm.goActiveStable();})
                 .waitSeconds(0.05)
                 .addTemporalMarker(()->elevator.extendTo(elevator.POSITIONS[elevator.HOME]))
-
+                .waitSeconds(0.2)
+                .lineToLinearHeading(new Pose2d(12,-12.001, Math.toRadians(90)))
                 .build();
 
 

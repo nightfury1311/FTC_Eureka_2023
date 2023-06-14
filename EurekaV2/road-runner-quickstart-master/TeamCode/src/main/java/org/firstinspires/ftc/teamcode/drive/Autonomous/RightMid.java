@@ -217,7 +217,7 @@ RightMid extends LinearOpMode
         Servos.Arm.goActivePick2();
 
 //        drive.followTrajectorySequence(lock1);
-        elevator.extendToSlow(elevator.POSITIONS[elevator.MID_POLE]);
+        elevator.extendTo(elevator.POSITIONS[elevator.MID_POLE]);
         sleep(400);
         slide.extendToSlow(slide.POSITIONS[slide.MIDMICRO]);
         sleep(400);

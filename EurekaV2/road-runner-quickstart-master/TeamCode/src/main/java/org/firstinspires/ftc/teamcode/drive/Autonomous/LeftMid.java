@@ -101,7 +101,7 @@ public class LeftMid extends LinearOpMode
         TrajectorySequence pre =drive.trajectorySequenceBuilder(startPose)
                 .lineToLinearHeading(new Pose2d(-34,-54, Math.toRadians(0)))  // dropping position
                 .waitSeconds(0.5)
-                .lineToLinearHeading(new Pose2d(-34, -19.25,Math.toRadians(-15)))
+                .lineToLinearHeading(new Pose2d(-34, -18.5,Math.toRadians(-13)))
                 .build();
 
         TrajectorySequence lock1 =drive.trajectorySequenceBuilder(pre.end())
@@ -217,7 +217,7 @@ public class LeftMid extends LinearOpMode
         Servos.Arm.goActivePick2();
 
 //        drive.followTrajectorySequence(lock1);
-        elevator.extendToSlow(elevator.POSITIONS[elevator.MID_POLE]);
+        elevator.extendTo(elevator.POSITIONS[elevator.MID_POLE]);
         sleep(400);
         slide.extendToSlow(slide.POSITIONS[slide.MIDMICRO]);
         sleep(400);
