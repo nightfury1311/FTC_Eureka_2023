@@ -3,7 +3,6 @@ package org.firstinspires.ftc.teamcode.drive.Autonomous;
 import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.acmerobotics.roadrunner.geometry.Vector2d;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
@@ -21,7 +20,7 @@ import org.openftc.easyopencv.OpenCvCameraRotation;
 import java.util.ArrayList;
 
 @Autonomous
-public class RLFM_Cam extends LinearOpMode
+public class RightContestedHigh extends LinearOpMode
 {
     Elevator elevator = null;
     Servos servos = null;
@@ -56,8 +55,8 @@ public class RLFM_Cam extends LinearOpMode
     @Override
     public void runOpMode() throws InterruptedException
     {
-        Pose2d PARKING1 = new Pose2d(13, -36, Math.toRadians(90));
-        Pose2d PARKING2 = new Pose2d(37.5, -27, Math.toRadians(90));
+        Pose2d PARKING1 = new Pose2d(12, -36, Math.toRadians(90));
+        Pose2d PARKING2 = new Pose2d(36, -27, Math.toRadians(90));
         Pose2d PARKING3 = new Pose2d(60, -24, Math.toRadians(90));
 
         int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
@@ -96,40 +95,41 @@ public class RLFM_Cam extends LinearOpMode
 
 
         SampleMecanumDrive drive = new SampleMecanumDrive(hardwareMap, telemetry);
-        Pose2d startPose = new Pose2d(-30, -62, Math.toRadians(90));
+        Pose2d startPose = new Pose2d(30, -62, Math.toRadians(90));
         drive.setPoseEstimate(startPose);
 
         TrajectorySequence pre =drive.trajectorySequenceBuilder(startPose)
-                .lineToLinearHeading(new Pose2d(-35,-54, Math.toRadians(0)))  // dropping position
-                .waitSeconds(0.5)
-                .lineToLinearHeading(new Pose2d(-35, -19,Math.toRadians(-15)))
+
+                .lineToLinearHeading(new Pose2d(35,-54, Math.toRadians(180)))  // dropping position
+                .lineToLinearHeading(new Pose2d(37, -4,Math.toRadians(165)))
                 .build();
         TrajectorySequence lock1 =drive.trajectorySequenceBuilder(pre.end())
-                .lineToLinearHeading(new Pose2d(-35.00001, -19.0001, Math.toRadians(-15)))
+                .lineToLinearHeading(new Pose2d(37.00001, -4.0001, Math.toRadians(165)))
                 .build();
         TrajectorySequence lock2 =drive.trajectorySequenceBuilder(lock1.end())
-                .lineToLinearHeading(new Pose2d(-35.001, -19, Math.toRadians(-15)))
+                .lineToLinearHeading(new Pose2d(37.001, -4, Math.toRadians(165)))
                 .build();
-        TrajectorySequence park =drive.trajectorySequenceBuilder(pre.end())
+        TrajectorySequence park =drive.trajectorySequenceBuilder(lock1.end())
 
-                .lineToLinearHeading(new Pose2d(-35, -34, Math.toRadians(90)))
+                .lineToLinearHeading(new Pose2d(36, -12,Math.toRadians(90)))
 
                 .build();
 
         TrajectorySequence goToP1 = drive.trajectorySequenceBuilder((park.end()))
-                .lineToConstantHeading(new Vector2d(-60,-12))
+                .lineToConstantHeading(new Vector2d(36,-36))
                 .waitSeconds(0.001)
-                .lineToConstantHeading(new Vector2d(-60,-24))
+                .lineToConstantHeading(new Vector2d(12,-36))
+                .lineToConstantHeading(new Vector2d(12, -24))
                 .build();
 
         TrajectorySequence goToP2 = drive.trajectorySequenceBuilder((park.end()))
-                .lineToConstantHeading(new Vector2d(-36,-24))
+                .lineToConstantHeading(new Vector2d(36,-24))
                 .build();
 
         TrajectorySequence goToP3 = drive.trajectorySequenceBuilder((park.end()))
-                .lineToConstantHeading(new Vector2d(-12,-12))
+                .lineToConstantHeading(new Vector2d(60,-12))
                 .waitSeconds(0.001)
-                .lineToConstantHeading(new Vector2d(-12,-24))
+                .lineToConstantHeading(new Vector2d(60,-24))
                 .build();
 
         while (!isStarted() && !isStopRequested())
@@ -183,16 +183,14 @@ public class RLFM_Cam extends LinearOpMode
             sleep(20);
         }
         drive.followTrajectorySequence(pre);
-
-        //preload
-        elevator.extendTo(elevator.POSITIONS[elevator.MID_POLE]);
+        elevator.extendTo(elevator.POSITIONS[elevator.HIGH_POLE]);
         Servos.Arm.goActivePick1();
         Servos.Arm.goPickCone1();
         sleep(400);
-        slide.extendToSlow(slide.POSITIONS[slide.MIDMICRO]);
+        slide.extendTo(slide.POSITIONS[slide.UNSAFE]);
         sleep(400);
 
-        slide.extendToSlow(slide.POSITIONS[slide.MID]);
+        slide.extendTo(slide.POSITIONS[slide.MICRO]);
         elevator.extendTo(elevator.POSITIONS[elevator.HOME]);
         sleep(50);
         Servos.Gripper.Unlock();
@@ -216,14 +214,14 @@ public class RLFM_Cam extends LinearOpMode
         Servos.Rotate.rotatePick();
         Servos.Arm.goActivePick2();
 
-//        drive.followTrajectorySequence(lock1);
-        elevator.extendToSlow(elevator.POSITIONS[elevator.MID_POLE]);
+        drive.followTrajectorySequence(lock1);
+        elevator.extendTo(elevator.POSITIONS[elevator.HIGH_POLE]);
         sleep(400);
-        slide.extendToSlow(slide.POSITIONS[slide.MIDMICRO]);
+        slide.extendTo(slide.POSITIONS[slide.UNSAFE]);
         sleep(400);
 //        Servos.Gripper.Unlock();
 //        sleep(100);
-        slide.extendToSlow(slide.POSITIONS[slide.MID]);
+        slide.extendTo(slide.POSITIONS[slide.MIN]);
         elevator.extendTo(elevator.POSITIONS[elevator.HOME]);
         sleep(50);
         Servos.Gripper.Unlock();
@@ -247,14 +245,14 @@ public class RLFM_Cam extends LinearOpMode
         Servos.Rotate.rotatePick();
         Servos.Arm.goActivePick3();
 
-//        drive.followTrajectorySequence(lock2);
-        elevator.extendTo(elevator.POSITIONS[elevator.MID_POLE]);
+        drive.followTrajectorySequence(lock2);
+        elevator.extendTo(elevator.POSITIONS[elevator.HIGH_POLE]);
         sleep(400);
-        slide.extendToSlow(slide.POSITIONS[slide.MIDMICRO]);
+        slide.extendTo(slide.POSITIONS[slide.UNSAFE]);
         sleep(400);
 //        Servos.Gripper.Unlock();
 //        sleep(100);
-        slide.extendToSlow(slide.POSITIONS[slide.MID]);
+        slide.extendTo(slide.POSITIONS[slide.MIN]);
         elevator.extendTo(elevator.POSITIONS[elevator.HOME]);
         sleep(50);
         Servos.Gripper.Unlock();
@@ -267,9 +265,9 @@ public class RLFM_Cam extends LinearOpMode
         Servos.Rotate.rotateDrop();
         Servos.Arm.goActiveDrop();
         slide.extendTo(slide.POSITIONS[slide.HOME]);
-        sleep(400);
+        sleep(600);
         Servos.Arm.goDrop();
-        sleep(250);
+        sleep(300);
         Servos.Gripper.openGripper();
         sleep(100);
         Servos.Gripper.Lock();
@@ -277,14 +275,14 @@ public class RLFM_Cam extends LinearOpMode
         sleep(100);
         Servos.Rotate.rotatePick();
         Servos.Arm.goActivePick4();
-//        drive.followTrajectorySequence(lock1);
-        elevator.extendTo(elevator.POSITIONS[elevator.MID_POLE]);
+        drive.followTrajectorySequence(lock1);
+        elevator.extendTo(elevator.POSITIONS[elevator.HIGH_POLE]);
         sleep(400);
-        slide.extendToSlow(slide.POSITIONS[slide.MIDMICRO]);
+        slide.extendTo(slide.POSITIONS[slide.UNSAFE]);
         sleep(400);
 //        Servos.Gripper.Unlock();
 //        sleep(100);
-        slide.extendToSlow(slide.POSITIONS[slide.MID]);
+        slide.extendTo(slide.POSITIONS[slide.MIN]);
         elevator.extendTo(elevator.POSITIONS[elevator.HOME]);
         sleep(50);
         Servos.Gripper.Unlock();
@@ -307,14 +305,14 @@ public class RLFM_Cam extends LinearOpMode
         sleep(100);
         Servos.Rotate.rotatePick();
         Servos.Arm.goActivePick();
-//        drive.followTrajectorySequence(lock2);
-        elevator.extendTo(elevator.POSITIONS[elevator.MID_POLE]);
+        drive.followTrajectorySequence(lock2);
+        elevator.extendTo(elevator.POSITIONS[elevator.HIGH_POLE]);
         sleep(400);
-        slide.extendToSlow(slide.POSITIONS[slide.MIDMICRO]);
+        slide.extendTo(slide.POSITIONS[slide.UNSAFE]);
         sleep(400);
 //        Servos.Gripper.Unlock();
 //        sleep(100);
-        slide.extendToSlow(slide.POSITIONS[slide.MID]);
+        slide.extendTo(slide.POSITIONS[slide.MIN]);
         elevator.extendTo(elevator.POSITIONS[elevator.HOME]);
         sleep(50);
         Servos.Gripper.Unlock();
@@ -337,9 +335,9 @@ public class RLFM_Cam extends LinearOpMode
         sleep(100);
         Servos.Rotate.rotatePick();
         Servos.Arm.goActiveStable();
-//        drive.followTrajectorySequence(lock1);
-        elevator.extendTo(elevator.POSITIONS[elevator.MID_POLE]);
-        sleep(600);
+        drive.followTrajectorySequence(lock1);
+        elevator.extendTo(elevator.POSITIONS[elevator.HIGH_POLE]);
+        sleep(800);
 //        Servos.Gripper.Unlock();
 //        sleep(100);
         elevator.extendTo(elevator.POSITIONS[elevator.HOME]);

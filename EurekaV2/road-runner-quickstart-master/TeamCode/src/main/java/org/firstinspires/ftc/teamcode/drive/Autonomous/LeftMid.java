@@ -3,7 +3,6 @@ package org.firstinspires.ftc.teamcode.drive.Autonomous;
 import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.acmerobotics.roadrunner.geometry.Vector2d;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
@@ -21,7 +20,7 @@ import org.openftc.easyopencv.OpenCvCameraRotation;
 import java.util.ArrayList;
 
 @Autonomous
-public class RLFH_Cam2 extends LinearOpMode
+public class LeftMid extends LinearOpMode
 {
     Elevator elevator = null;
     Servos servos = null;
@@ -56,9 +55,9 @@ public class RLFH_Cam2 extends LinearOpMode
     @Override
     public void runOpMode() throws InterruptedException
     {
-        Pose2d PARKING1 = new Pose2d(-60, -24, Math.toRadians(90));
-        Pose2d PARKING2 = new Pose2d(-36, -27, Math.toRadians(90));
-        Pose2d PARKING3 = new Pose2d(-13, -36, Math.toRadians(90));
+        Pose2d PARKING1 = new Pose2d(13, -36, Math.toRadians(90));
+        Pose2d PARKING2 = new Pose2d(37.5, -27, Math.toRadians(90));
+        Pose2d PARKING3 = new Pose2d(60, -24, Math.toRadians(90));
 
         int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
         camera = OpenCvCameraFactory.getInstance().createWebcam(hardwareMap.get(WebcamName.class, "Camera"), cameraMonitorViewId);
@@ -100,23 +99,25 @@ public class RLFH_Cam2 extends LinearOpMode
         drive.setPoseEstimate(startPose);
 
         TrajectorySequence pre =drive.trajectorySequenceBuilder(startPose)
-
-                .lineToLinearHeading(new Pose2d(-35,-54, Math.toRadians(0)))  // dropping position
-                .lineToLinearHeading(new Pose2d(-37, -4,Math.toRadians(15)))
+                .lineToLinearHeading(new Pose2d(-34,-54, Math.toRadians(0)))  // dropping position
+                .waitSeconds(0.5)
+                .lineToLinearHeading(new Pose2d(-34, -19.25,Math.toRadians(-15)))
                 .build();
+
         TrajectorySequence lock1 =drive.trajectorySequenceBuilder(pre.end())
-                .lineToLinearHeading(new Pose2d(-37.00001, -4.0001, Math.toRadians(15)))
+                .lineToLinearHeading(new Pose2d(-34.00001, -19.5001, Math.toRadians(-15)))
                 .build();
         TrajectorySequence lock2 =drive.trajectorySequenceBuilder(lock1.end())
-                .lineToLinearHeading(new Pose2d(-37.001, -4, Math.toRadians(15)))
+                .lineToLinearHeading(new Pose2d(-34.001, -19.5, Math.toRadians(-15)))
                 .build();
-        TrajectorySequence park =drive.trajectorySequenceBuilder(lock1.end())
+        TrajectorySequence park =drive.trajectorySequenceBuilder(pre.end())
 
-                .lineToLinearHeading(new Pose2d(-36, -12,Math.toRadians(90)))
+                .lineToLinearHeading(new Pose2d(-36, -36, Math.toRadians(90)))
+
                 .build();
 
         TrajectorySequence goToP1 = drive.trajectorySequenceBuilder((park.end()))
-                .lineToConstantHeading(new Vector2d(-60,-12))
+                .lineToConstantHeading(new Vector2d(-60,-36))
                 .waitSeconds(0.001)
                 .lineToConstantHeading(new Vector2d(-60,-24))
                 .build();
@@ -126,7 +127,7 @@ public class RLFH_Cam2 extends LinearOpMode
                 .build();
 
         TrajectorySequence goToP3 = drive.trajectorySequenceBuilder((park.end()))
-                .lineToConstantHeading(new Vector2d(-12,-12))
+                .lineToConstantHeading(new Vector2d(-12,-36))
                 .waitSeconds(0.001)
                 .lineToConstantHeading(new Vector2d(-12,-24))
                 .build();
@@ -182,14 +183,16 @@ public class RLFH_Cam2 extends LinearOpMode
             sleep(20);
         }
         drive.followTrajectorySequence(pre);
-        elevator.extendTo(elevator.POSITIONS[elevator.HIGH_POLE]);
+
+        //preload
+        elevator.extendTo(elevator.POSITIONS[elevator.MID_POLE]);
         Servos.Arm.goActivePick1();
         Servos.Arm.goPickCone1();
         sleep(400);
-        slide.extendTo(slide.POSITIONS[slide.UNSAFE]);
+        slide.extendToSlow(slide.POSITIONS[slide.MIDMICRO]);
         sleep(400);
 
-        slide.extendTo(slide.POSITIONS[slide.MICRO]);
+        slide.extendToSlow(slide.POSITIONS[slide.MID]);
         elevator.extendTo(elevator.POSITIONS[elevator.HOME]);
         sleep(50);
         Servos.Gripper.Unlock();
@@ -213,14 +216,14 @@ public class RLFH_Cam2 extends LinearOpMode
         Servos.Rotate.rotatePick();
         Servos.Arm.goActivePick2();
 
-        drive.followTrajectorySequence(lock1);
-        elevator.extendTo(elevator.POSITIONS[elevator.HIGH_POLE]);
+//        drive.followTrajectorySequence(lock1);
+        elevator.extendToSlow(elevator.POSITIONS[elevator.MID_POLE]);
         sleep(400);
-        slide.extendTo(slide.POSITIONS[slide.UNSAFE]);
+        slide.extendToSlow(slide.POSITIONS[slide.MIDMICRO]);
         sleep(400);
 //        Servos.Gripper.Unlock();
 //        sleep(100);
-        slide.extendTo(slide.POSITIONS[slide.MIN]);
+        slide.extendToSlow(slide.POSITIONS[slide.MID]);
         elevator.extendTo(elevator.POSITIONS[elevator.HOME]);
         sleep(50);
         Servos.Gripper.Unlock();
@@ -244,14 +247,14 @@ public class RLFH_Cam2 extends LinearOpMode
         Servos.Rotate.rotatePick();
         Servos.Arm.goActivePick3();
 
-        drive.followTrajectorySequence(lock2);
-        elevator.extendTo(elevator.POSITIONS[elevator.HIGH_POLE]);
+//        drive.followTrajectorySequence(lock2);
+        elevator.extendTo(elevator.POSITIONS[elevator.MID_POLE]);
         sleep(400);
-        slide.extendTo(slide.POSITIONS[slide.UNSAFE]);
+        slide.extendToSlow(slide.POSITIONS[slide.MIDMICRO]);
         sleep(400);
 //        Servos.Gripper.Unlock();
 //        sleep(100);
-        slide.extendTo(slide.POSITIONS[slide.MIN]);
+        slide.extendToSlow(slide.POSITIONS[slide.MID]);
         elevator.extendTo(elevator.POSITIONS[elevator.HOME]);
         sleep(50);
         Servos.Gripper.Unlock();
@@ -264,9 +267,9 @@ public class RLFH_Cam2 extends LinearOpMode
         Servos.Rotate.rotateDrop();
         Servos.Arm.goActiveDrop();
         slide.extendTo(slide.POSITIONS[slide.HOME]);
-        sleep(600);
+        sleep(400);
         Servos.Arm.goDrop();
-        sleep(300);
+        sleep(250);
         Servos.Gripper.openGripper();
         sleep(100);
         Servos.Gripper.Lock();
@@ -274,14 +277,14 @@ public class RLFH_Cam2 extends LinearOpMode
         sleep(100);
         Servos.Rotate.rotatePick();
         Servos.Arm.goActivePick4();
-        drive.followTrajectorySequence(lock1);
-        elevator.extendTo(elevator.POSITIONS[elevator.HIGH_POLE]);
+//        drive.followTrajectorySequence(lock1);
+        elevator.extendTo(elevator.POSITIONS[elevator.MID_POLE]);
         sleep(400);
-        slide.extendTo(slide.POSITIONS[slide.UNSAFE]);
+        slide.extendToSlow(slide.POSITIONS[slide.MIDMICRO]);
         sleep(400);
 //        Servos.Gripper.Unlock();
 //        sleep(100);
-        slide.extendTo(slide.POSITIONS[slide.MIN]);
+        slide.extendToSlow(slide.POSITIONS[slide.MID]);
         elevator.extendTo(elevator.POSITIONS[elevator.HOME]);
         sleep(50);
         Servos.Gripper.Unlock();
@@ -304,14 +307,14 @@ public class RLFH_Cam2 extends LinearOpMode
         sleep(100);
         Servos.Rotate.rotatePick();
         Servos.Arm.goActivePick();
-        drive.followTrajectorySequence(lock2);
-        elevator.extendTo(elevator.POSITIONS[elevator.HIGH_POLE]);
+//        drive.followTrajectorySequence(lock2);
+        elevator.extendTo(elevator.POSITIONS[elevator.MID_POLE]);
         sleep(400);
-        slide.extendTo(slide.POSITIONS[slide.UNSAFE]);
+        slide.extendToSlow(slide.POSITIONS[slide.MIDMICRO]);
         sleep(400);
 //        Servos.Gripper.Unlock();
 //        sleep(100);
-        slide.extendTo(slide.POSITIONS[slide.MIN]);
+        slide.extendToSlow(slide.POSITIONS[slide.MID]);
         elevator.extendTo(elevator.POSITIONS[elevator.HOME]);
         sleep(50);
         Servos.Gripper.Unlock();
@@ -334,9 +337,9 @@ public class RLFH_Cam2 extends LinearOpMode
         sleep(100);
         Servos.Rotate.rotatePick();
         Servos.Arm.goActiveStable();
-        drive.followTrajectorySequence(lock1);
-        elevator.extendTo(elevator.POSITIONS[elevator.HIGH_POLE]);
-        sleep(800);
+//        drive.followTrajectorySequence(lock1);
+        elevator.extendTo(elevator.POSITIONS[elevator.MID_POLE]);
+        sleep(600);
 //        Servos.Gripper.Unlock();
 //        sleep(100);
         elevator.extendTo(elevator.POSITIONS[elevator.HOME]);
