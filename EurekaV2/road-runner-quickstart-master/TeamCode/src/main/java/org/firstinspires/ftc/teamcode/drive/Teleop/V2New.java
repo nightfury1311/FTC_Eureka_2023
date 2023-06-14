@@ -181,7 +181,7 @@ public class V2New extends LinearOpMode {
                     sleep(200);
                     Servos.Arm.goDrop();
                     sleep(300);
-                    Servos.Gripper.openGripper();
+                    Servos.Gripper.openGripper();           
                     sleep(200);
                     Servos.Gripper.Lock();
                     Servos.Arm.goInit();
@@ -192,9 +192,9 @@ public class V2New extends LinearOpMode {
 
             if (B1 && !B1Flag) {
                 B1Flag = true;
-                if (Servos.Gripper.gripperState == "UNLOCK") {
+                if (Servos.Gripper.lockState == "UNLOCK") {
                     Servos.Gripper.Lock();
-                } else if (Servos.Gripper.gripperState == "LOCK") {
+                } else if (Servos.Gripper.lockState == "LOCK") {
                     Servos.Gripper.Unlock();
                 }
             }
@@ -293,6 +293,8 @@ public class V2New extends LinearOpMode {
             if (!RB1) {
                 RB1Flag = 0;
             }
+
+            telemetry.update();
         }
 
     }
