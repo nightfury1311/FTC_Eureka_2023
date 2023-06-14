@@ -181,7 +181,7 @@ public class V2New extends LinearOpMode {
                     sleep(200);
                     Servos.Arm.goDrop();
                     sleep(300);
-                    Servos.Gripper.openGripper();           
+                    Servos.Gripper.openGripper();
                     sleep(200);
                     Servos.Gripper.Lock();
                     Servos.Arm.goInit();
