@@ -232,7 +232,7 @@ public class LeftSafeHigh extends LinearOpMode
         TrajectorySequence goToP1 = drive.trajectorySequenceBuilder((pre.end()))
                 .lineToLinearHeading(new Pose2d(-12,-12, Math.toRadians(90)))
                 .waitSeconds(0.001)
-                .lineToConstantHeading(new Vector2d(-60,-10))
+                .lineToConstantHeading(new Vector2d(-60,-14))
                 .build();
 
         TrajectorySequence goToP2 = drive.trajectorySequenceBuilder((pre.end()))

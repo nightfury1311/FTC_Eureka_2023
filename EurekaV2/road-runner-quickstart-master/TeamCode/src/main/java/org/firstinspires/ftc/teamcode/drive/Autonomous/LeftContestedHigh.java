@@ -101,13 +101,13 @@ public class LeftContestedHigh extends LinearOpMode
         TrajectorySequence pre =drive.trajectorySequenceBuilder(startPose)
 
                 .lineToLinearHeading(new Pose2d(-35,-54, Math.toRadians(0)))  // dropping position
-                .lineToLinearHeading(new Pose2d(-37, -4,Math.toRadians(15)))
+                .lineToLinearHeading(new Pose2d(-36.5, -4,Math.toRadians(15)))
                 .build();
         TrajectorySequence lock1 =drive.trajectorySequenceBuilder(pre.end())
-                .lineToLinearHeading(new Pose2d(-37.00001, -4.0001, Math.toRadians(15)))
+                .lineToLinearHeading(new Pose2d(-36.50001, -4.0001, Math.toRadians(15)))
                 .build();
         TrajectorySequence lock2 =drive.trajectorySequenceBuilder(lock1.end())
-                .lineToLinearHeading(new Pose2d(-37.001, -4, Math.toRadians(15)))
+                .lineToLinearHeading(new Pose2d(-36.5001, -4, Math.toRadians(15)))
                 .build();
         TrajectorySequence park =drive.trajectorySequenceBuilder(lock1.end())
 

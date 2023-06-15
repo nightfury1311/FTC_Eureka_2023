@@ -69,10 +69,10 @@ public class EXPID extends OpMode {
             target=0;
         }
         else if (gamepad1.y) {
-            target=500;
+            target=484;
         }
         else if (gamepad1.a) {
-            target=300;
+            target=228;
         }
 
 //        telemetry.addData("Left", ElevateLeftPos);
