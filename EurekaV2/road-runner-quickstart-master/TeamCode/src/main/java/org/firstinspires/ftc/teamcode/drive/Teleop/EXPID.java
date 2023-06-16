@@ -48,9 +48,8 @@ public class EXPID extends OpMode {
     @Override
     public void loop(){
         controller.setPID(p, i, d);
-//        int ElevateLeftPos = ElevateLeft.getCurrentPosition();
-        int ElevateRightPos = ElevateRight.getCurrentPosition();
-        int ElevateFinalPos = (ElevateRightPos);
+
+        int ElevateFinalPos = ElevateRight.getCurrentPosition();
         double pid = controller.calculate(ElevateFinalPos, target);
 //        double ff = Math.cos(Math.toRadians(target/ticks_in_degree)) * f;
 
