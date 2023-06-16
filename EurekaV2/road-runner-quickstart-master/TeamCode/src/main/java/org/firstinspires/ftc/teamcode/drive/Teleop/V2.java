@@ -15,6 +15,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.util.Range;
 
+import org.firstinspires.ftc.robotcore.external.navigation.CurrentUnit;
 import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
 import org.firstinspires.ftc.teamcode.drive.TeleopSubsystems.Servos;
 import org.firstinspires.ftc.teamcode.drive.TeleopSubsystems.Slide;
@@ -91,7 +92,7 @@ public class V2 extends LinearOpMode {
             controller.setPID(p, i, d);
 
             int ElevateFinalPos = ElevateRight.getCurrentPosition();
-            double power = Range.clip(((controller.calculate(ElevateFinalPos, target)+ ff)) , -0.9, 0.9);
+            double power = Range.clip(((controller.calculate(ElevateFinalPos, target)+ ff)) , -0.7, 0.8);
             ElevateLeft.setPower(power);
             ElevateRight.setPower(power);
 
@@ -171,7 +172,7 @@ public class V2 extends LinearOpMode {
             }
 
             if (RB1 && RB1Flag == 0) {
-                if (slide.getPosition() > 300) {     // Picking with extension
+                if (slide.getPosition() > 200) {     // Picking with extension
                     RB1Flag = 1;
                     slide.extendTo(slide.POSITIONS[slide.TELETEST] + 100);
                     sleep(100);
@@ -252,16 +253,16 @@ public class V2 extends LinearOpMode {
 
             if (A1) {
 
-                target=228;
+                target=190;
             }
 
             if (Y1) {
 
-                target=484;
+                target=450;
             }
 
             if (UP1) {
-                target=770;
+                target=750;
             }
 
             if (DOWN1) {
@@ -287,35 +288,33 @@ public class V2 extends LinearOpMode {
 
             // High junction cycle
 
-//            if (START1) {
-//                slide.extendTo(slide.POSITIONS[slide.TELETEST] + 100);
-//                sleep(100);
-//                Servos.Gripper.closeGripper();
-//                sleep(200);
-//                Servos.Arm.goInit();
-//                Servos.Arm.goActiveStable();
-//                slide.extendTo(slide.POSITIONS[slide.HOME]);
-//                sleep(200);
-//                Servos.Rotate.rotateDrop();
-//                Servos.Arm.goActiveDrop();
-//                sleep(400);
-//                Servos.Arm.goDrop();
-//                sleep(500);
-//                Servos.Gripper.openGripper();
-//                sleep(100);
-//                Servos.Gripper.Lock();
-//                Servos.Arm.goPickTele();
-//                Servos.Rotate.rotatePick();
-//                Servos.Arm.goActiveStable();
-//                sleep(200);
-////                elevator.extendTo(elevator.TARGETS[elevator.HIGH_POLE]);
-//                target=750;
-//                sleep(700);
-//                slide.extendToSlow(slide.POSITIONS[slide.TELETEST]);
-//                Servos.Gripper.Unlock();
-////                elevator.extendTo(elevator.TARGETS[elevator.HOME]);
-//                target=0;
-//            }
+            if (START1) {
+                slide.extendTo(slide.POSITIONS[slide.TELETEST] + 100);
+                sleep(100);
+                Servos.Gripper.closeGripper();
+                sleep(200);
+                Servos.Arm.goInit();
+                Servos.Arm.goActiveStable();
+                slide.extendTo(slide.POSITIONS[slide.HOME]);
+                sleep(200);
+                Servos.Rotate.rotateDrop();
+                Servos.Arm.goActiveDrop();
+                sleep(400);
+                Servos.Arm.goDrop();
+                sleep(500);
+                Servos.Gripper.openGripper();
+                sleep(100);
+                Servos.Gripper.Lock();
+                Servos.Arm.goPickTele();
+                Servos.Rotate.rotatePick();
+                Servos.Arm.goActiveStable();
+                sleep(200);
+                target=750;
+                sleep(700);
+                slide.extendToSlow(slide.POSITIONS[slide.TELETEST]);
+                Servos.Gripper.Unlock();
+                target=0;
+            }
             // Flags
             if (!B1) {
                 B1Flag = false;
@@ -332,8 +331,12 @@ public class V2 extends LinearOpMode {
             if (!RB1) {
                 RB1Flag = 0;
             }
-
+            telemetry.addData("FinalPos", ElevateFinalPos);
+            telemetry.addData("target", target);
+            telemetry.addData("Current ElevateRight", ElevateRight.getCurrent(CurrentUnit.AMPS));
+            telemetry.addData("Current ElevateLeft", ElevateLeft.getCurrent(CurrentUnit.AMPS));
             telemetry.update();
+
         }
 
     }
