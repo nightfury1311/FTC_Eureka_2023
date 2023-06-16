@@ -1,287 +1,347 @@
-//package org.firstinspires.ftc.teamcode.drive.Teleop;
-//
-//
-//import com.acmerobotics.dashboard.FtcDashboard;
-//import com.acmerobotics.dashboard.config.Config;
-//import com.acmerobotics.dashboard.telemetry.MultipleTelemetry;
-//import com.acmerobotics.roadrunner.geometry.Pose2d;
-//import com.acmerobotics.roadrunner.geometry.Vector2d;
-//import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-//import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-//import com.qualcomm.robotcore.util.ElapsedTime;
-//import com.qualcomm.robotcore.util.Range;
-//
-//
-//import org.firstinspires.ftc.teamcode.drive.Robot;
-//import org.firstinspires.ftc.teamcode.drive.TeleopSubsystems.Elevator;
-//import org.firstinspires.ftc.teamcode.drive.TeleopSubsystems.Servos;
-//import org.firstinspires.ftc.teamcode.drive.TeleopSubsystems.SlidersEx;
-//import org.firstinspires.ftc.teamcode.trajectorysequence.TrajectorySequence;
-//
-//@Config
-//@TeleOp
-//public class APOC extends LinearOpMode {
-//
-//
-//    public static long a = 500;
-//
-//    boolean RB1Flag = false;
-//    boolean LB1Flag = false;
-//    boolean B1Flag = false;
-//    boolean AFlag1=false;
-//    boolean XFlag1=false;
-//    boolean  STARTFLAG1=false;
-//
-//
-//    boolean XFlag2 = false;
-//    boolean AFlag2 = false;
-//    boolean RB2Flag = false;
-//    boolean BACKFlag2 = false;
-//
-//    boolean flagForSliderHome = false;
-//
-//    public boolean isDelayComplete = false;
-//    public double temp ;
-//    public double THROTTLE;
-//    public double TURN;
-//    public double HEADING;
-//    public static double MAXVEL = 2000;
-//    public static double MAXACC = 2000;
-//
-//
-//    Elevator elevator = null;
-//    Servos servos = null;
-//    SlidersEx slide = null;
-//
-//    Robot drive = null;
-////    Timers timer = null;
-//    ElapsedTime t = null;
-//
-//    public static int elevatorPos = 0;
-//    public static int sliderPos = 0;
-//
-//
-//    @Override
-//    public void runOpMode() throws InterruptedException {
-//
-//        elevator = new Elevator(hardwareMap, telemetry);
-//        slide = new SlidersEx(hardwareMap, telemetry);
-//        servos = new Servos(hardwareMap, telemetry);
-//        drive = new Robot(hardwareMap, telemetry, slide);
-//
-//        t = new ElapsedTime();
-//
-//
-//
-//        Pose2d startPose = new Pose2d(0, 0, Math.toRadians(180));
-//        drive.setPoseEstimate(startPose);
-//
-//        telemetry = new MultipleTelemetry(FtcDashboard.getInstance().getTelemetry(), telemetry);
-//
-//
-//        while (opModeInInit()) {
-//
-//            isDelayComplete = false;
-//
-//            elevator.reset();
-//            slide.reset();
-//            Servos.Gripper.Lock();
-//            Servos.Gripper.openGripper();
-//            Servos.Arm.goActiveStable();
-//            Servos.Arm.goInit();
-//            Servos.Rotate.rotatePick();
-//
-//        }
-//
-//
-//        elevatorPos = 0;
-//        sliderPos = 0;
-//
-//
-//        waitForStart();
-//
-//        while (opModeIsActive()) {
-//
-//
-//            // driver
-//            boolean A1 = gamepad1.a;
-//            boolean B1 = gamepad1.b;
-//            boolean X1 = gamepad1.x;
-//            boolean Y1 = gamepad1.y;
-//            boolean UP1 = gamepad1.dpad_up;
-//            boolean RIGHT1 = gamepad1.dpad_right;
-//            boolean DOWN1 = gamepad1.dpad_down;
-//            boolean LEFT1 = gamepad1.dpad_left;
-//            boolean RB1 = gamepad1.right_bumper;
-//            boolean LB1 = gamepad1.left_bumper;
-//            boolean START1 = gamepad1.start;
-//            boolean BACK1 = gamepad1.back;
-//            double RTG1 = gamepad1.right_trigger;
-//            double LTG1 = gamepad1.left_trigger;
-//
-//
-//            Pose2d poseEstimate = drive.getPoseEstimate();
-//            Vector2d input = new Vector2d(Math.pow(Range.clip(gamepad1.left_stick_y, -1, 1), 3), Math.pow(Range.clip(gamepad1.left_stick_x, -1, 1), 3)).rotated(-poseEstimate.getHeading());
-//            drive.setWeightedDrivePower(new Pose2d(input.getX() * THROTTLE, input.getY() * TURN, -gamepad1.right_stick_x * HEADING));
-//            drive.update();
-//
-//
-//            // TODO : SLOW MODE - DRIVE
-//            if (LTG1 > 0.7) {    // slow mode
-//                THROTTLE = 0.4;
-//                TURN = 0.4;
-//                HEADING = 0.2;
-//            } else {
-//                THROTTLE = 0.9;
-//                TURN = 0.9;
-//                HEADING = 0.6;
-//            }
-//
-//
-//            // TODO : Everything to Init pos
-//            if(BACK1){
-//
-//            }
-//
-//            // TODO : gripper open-CLOSE
-//            if (A1 && !AFlag1) {
-//                AFlag1 = true;
-//                telemetry.addLine("GRIPPPPERRR");
-//                if (Servos.Gripper.gripperState == "OPEN") {
-//                    Servos.Gripper.openGripper();
-//                    telemetry.addLine("GRIPPER CLOSE");
-//                } else if (Servos.Gripper.gripperState == "CLOSE") {
-//                    Servos.Gripper.closeGripper();
-//                    telemetry.addLine("GRIPPER OPEN");
-//                }
-//            }
-//            if (!A1) {
-//                AFlag1 = false;
-//            }
-//
-//            if(B1){
-//
-//            }
-//
-//
-//            // TODO : Elevator home position
-//            if(DOWN1){
-//                elevator.extendToHomePos();
-//               Servos.Gripper.Unlock();
-//            }
-//
-//            // TODO : ELEVATOR HIGH
-//            if(RIGHT1){
-//                elevator.extendToHighPole();
-//            }
-//
-//            // TODO : ELEVATOR MEDIUM
-//            if (UP1){
-//                elevator.extendToMidPole();
-//            }
-//
-//            // TODO : ELEVATOR LOW
-//            if (UP1){
-//                elevator.extendToLowPole();
-//            }
-//
-//            // TODO : ARM AND END EFFECTOR TO LOW POLE
-//            if(LEFT1){
-//
-//            }
-//
-//            // TODO : STACKING ON HIGH
-//
-//            if (Y1){
-//
-//            }
-//
-//            //TODO  ARM POSITION - INIT AND GRIPPING
-//
-//            if(X1 && !XFlag1){
-//                XFlag1 = true;
-//                if((Arm.armState == "INIT" || Arm.armState == "LOWPOLE") && (EndEffector.yawState == "INIT" || EndEffector.yawState == "LOWPOLE") && (EndEffector.wristState == "INIT" || EndEffector.wristState == "LOWPOLE")){
-//                    Arm.GrippingPos();
-//                    EndEffector.Wrist.GrippingPos();
-//                    EndEffector.Yaw.GrippingPos();
-//
-//                    telemetry.addLine("Arm in gripping position");
-//                    telemetry.update();
-//                }
-//                else if ((Arm.armState == "GRIP" || Arm.armState == "PLACE") && (EndEffector.yawState == "GRIP" || EndEffector.yawState == "PLACE")&& (EndEffector.wristState == "GRIP" || EndEffector.wristState == "PLACE")) {
-//                    Arm.InitPos();
-//                    EndEffector.Wrist.InitPos();
-//                    EndEffector.Yaw.InitPos();
-//
-//                    telemetry.addLine("Arm in init position");
-//                    telemetry.update();
-//                }
-//            }
-//            if(!X1){
-//                XFlag1 = false;
-//            }
-//
-//            if(RB1 && !RB1Flag){
-//                RB1Flag = true;
-//                if (coneLocking.lockState == "LOCK"){
-//                    ConeLocking.coneUnlock();
-//                    telemetry.addLine("Cone Lock open");
-//                    telemetry.update();
-//                }
-//                else if (coneLocking.lockState == "UNLOCK"){
-//                    ConeLocking.coneLock();
-//                    telemetry.addLine("Cone Lock shut");
-//                    telemetry.update();
-//                }
-//            }
-//
-//            if (!RB1){
-//                RB1Flag = false;
-//            }
-//
-//
-//
-//            // TODO : TOGGLE - SLIDER OPEN ---> GRIPPING POS ----> GRIP ---> ARM TO PLACING POS ----> LOCK ----> ARM TO INIT POS
-//
-//            if(LB1 && !LB1Flag){
-//                LB1Flag = true;
-//
-//                if(Slider.sliderState == "CLOSE"){
-//                    slider.goTo(800);
-//                    EndEffector.Gripper.gripperOpen();
-//                    EndEffector.Yaw.GrippingPos();
-//                    Arm.GrippingPos();
-//                    ConeLocking.coneUnlock();
-//                    EndEffector.Wrist.GrippingPos();
-//
-//                }
-//
-//                else if(Slider.sliderState == "OPEN" ){
-//
-//                    drive.followTrajectorySequenceAsync(traj1);
-//                    drive.update();
-//
-//                }
-//            }
-//
-//            if (!LB1){
-//                LB1Flag = false;
-//            }
-//
-//            drive.update();
-//            telemetry.update();
-//
-//
-//
-//            // TODO on left click reset heading
-//
-//            if(gamepad1.left_stick_button){
-//                drive.setPoseEstimate(startPose);
-//            }
-//
-//        }
-//
-//    }
-//
-//}
-//
+package org.firstinspires.ftc.teamcode.drive.Teleop;
+
+import com.acmerobotics.dashboard.FtcDashboard;
+import com.acmerobotics.dashboard.config.Config;
+import com.acmerobotics.dashboard.telemetry.MultipleTelemetry;
+import com.acmerobotics.roadrunner.geometry.Pose2d;
+import com.acmerobotics.roadrunner.geometry.Vector2d;
+import com.arcrobotics.ftclib.controller.PIDController;
+import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorEx;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
+import com.qualcomm.robotcore.util.Range;
+
+import org.firstinspires.ftc.robotcore.external.navigation.CurrentUnit;
+import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
+import org.firstinspires.ftc.teamcode.drive.TeleopSubsystems.Servos;
+import org.firstinspires.ftc.teamcode.drive.TeleopSubsystems.Slide;
+
+@Config
+@TeleOp(name = "APOC")
+public class APOC extends LinearOpMode {
+
+    Servos servos = null;
+
+    private PIDController controller;
+    private PIDController slidercontroller;
+    public static double p = 0.008, i = 0, d = 0, ff = 0.14;
+    public static int target = 0;
+    public static int slidertarget = 0;
+    private DcMotorEx ElevateLeft, ElevateRight;
+    private DcMotorEx SlideLeft, SlideRight;
+
+    public static double speed = 0.9;
+    public static double turn = 0.6;
+
+    // Flags for toggle commands
+
+    int RB1Flag = 0;
+
+    boolean RTG1Flag = false; // Gripping
+
+    boolean X1Flag = false; // Ground junction placement + retraction
+
+    boolean B1Flag = false; // Locking
+
+    @Override
+    public void runOpMode() throws InterruptedException {
+
+        servos = new Servos(hardwareMap, telemetry);
+        slidercontroller = new PIDController(p,i,d);
+        controller= new PIDController(p,i,d);
+
+        telemetry= new MultipleTelemetry(telemetry, FtcDashboard.getInstance().getTelemetry());
+
+        ElevateLeft = hardwareMap.get(DcMotorEx.class, "ElevateLeft");
+        ElevateRight = hardwareMap.get(DcMotorEx.class, "ElevateRight");
+        SlideLeft = hardwareMap.get(DcMotorEx.class, "SlideLeft");
+        SlideRight = hardwareMap.get(DcMotorEx.class, "SlideRight");
+        ElevateLeft.setDirection(DcMotorEx.Direction.REVERSE);
+        ElevateRight.setDirection(DcMotorEx.Direction.REVERSE);
+        SlideRight.setDirection(DcMotorSimple.Direction.REVERSE);
+
+
+        SampleMecanumDrive drive = new SampleMecanumDrive(hardwareMap, telemetry);
+        drive.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+
+        Pose2d startPose = new Pose2d(0, 0, Math.toRadians(0));
+        drive.setPoseEstimate(startPose);
+
+        telemetry= new MultipleTelemetry(telemetry, FtcDashboard.getInstance().getTelemetry());
+
+
+        while ((opModeInInit())) {
+            // Initialization - resetting all motors and servos
+            Servos.Gripper.Unlock();
+            Servos.Gripper.openGripper();
+            Servos.Arm.goActiveStable();
+            Servos.Arm.goInit();
+            Servos.Rotate.rotatePick();
+        }
+
+        while (opModeIsActive()) {
+            controller.setPID(p, i, d);
+            slidercontroller.setPID(p, i, d);
+
+            int ElevateFinalPos = ElevateRight.getCurrentPosition();
+            int SlideFinalPos = SlideRight.getCurrentPosition();
+            double power = Range.clip(((controller.calculate(ElevateFinalPos, target)+ ff)) , -0.7, 0.8);
+            double sliderpower =  Range.clip(((slidercontroller.calculate(SlideFinalPos, slidertarget)+ ff)) , -0.9, 0.9);
+            ElevateLeft.setPower(power);
+            ElevateRight.setPower(power);
+            SlideLeft.setPower(sliderpower);
+            SlideRight.setPower(sliderpower);
+
+            telemetry.addData("Status", "Running");
+
+            //Field centric drive
+            Pose2d poseEstimate = drive.getPoseEstimate();
+            Vector2d input = new Vector2d(Math.pow(-gamepad1.left_stick_y, 3), Math.pow(-gamepad1.left_stick_x, 3)).rotated(-poseEstimate.getHeading());
+
+            drive.setWeightedDrivePower(new Pose2d(input.getX() * speed, input.getY() * speed, -gamepad1.right_stick_x * turn));
+            drive.update();
+
+            // GAMEPAD FUNCTIONALITY
+            boolean A1 = gamepad1.a;                        // Elevator - Low junction
+            boolean B1 = gamepad1.b;                        // Toggling lock state - NOT WORKING
+            boolean X1 = gamepad1.x;                        // Ground junctions - NOT WORKING
+            boolean Y1 = gamepad1.y;                        // Elevator - Mid junction
+            boolean UP1 = gamepad1.dpad_up;                 // Elevator - High junction
+            boolean RIGHT1 = gamepad1.dpad_right;           // Cone pickup - Low junction
+            boolean DOWN1 = gamepad1.dpad_down;             // Elevator -  Home position
+            boolean LEFT1 = gamepad1.dpad_left;             // Cone pickup - Without extension
+            boolean RB1 = gamepad1.right_bumper;            // Cone transfer - NOT FULLY WORKING
+            boolean LB1 = gamepad1.left_bumper;             // Cone pickup - With extension
+            boolean START1 = gamepad1.start;                // High junction cycle
+            boolean BACK1 = gamepad1.back;                  // Resetting all motors and servos / Home position
+            boolean LStick = gamepad1.left_stick_button;    // Resetting heading
+            boolean RStick = gamepad1.right_stick_button;   // Resetting heading
+            double RTG1 = gamepad1.right_trigger;           // Toggling gripper state - NOT WORKING
+            double LTG1 = gamepad1.left_trigger;            // Slowmode
+
+            // Flags for toggle commands
+
+
+            // Defining commands/keybinds
+
+            if (LStick || RStick) {         // Resetting heading (for field centric)
+                drive.setPoseEstimate(startPose);
+            }
+
+            if (BACK1) {                    // Home position
+
+                Servos.Arm.goActiveStable();
+                Servos.Arm.goInit();
+                Servos.Rotate.rotatePick();
+                target=0;
+                slidertarget=0;
+
+            }
+
+            if (LTG1 > 0.7)    // Slow mode
+            {
+                speed = 0.4;
+                turn = 0.2;
+            } else {
+                speed = 0.9;
+                turn = 0.5;
+            }
+
+            if (RTG1 > 0.7 && !RTG1Flag) {       // Toggling gripper state
+                RTG1Flag = true;
+                if (Servos.Gripper.gripperState == "CLOSE") {   // If closed, then open
+                    Servos.Gripper.openGripper();
+                } else if (Servos.Gripper.gripperState == "OPEN") {     // If open, then close
+                    Servos.Gripper.closeGripper();
+                }
+            }
+
+            if (LB1) {      // Extending sliders for pickup
+                Servos.Gripper.Unlock();
+                Servos.Arm.goActivePick();
+                Servos.Rotate.rotatePick();
+                Servos.Gripper.openGripper();
+                sleep(300);
+                Servos.Arm.goPickTele();
+                sleep(300);
+                slidertarget=275;
+            }
+
+            if (RB1 && RB1Flag == 0) {
+                if (SlideFinalPos > 200) {     // Picking with extension
+                    RB1Flag = 1;
+                    slidertarget=275 + 100;
+                    sleep(100);
+                    Servos.Gripper.closeGripper();
+                    sleep(200);
+                    Servos.Arm.goInit();
+                    Servos.Arm.goActiveStable();
+                    slidertarget=0;
+                    sleep(200);
+                    Servos.Rotate.rotateDrop();
+                    Servos.Arm.goActiveDrop();
+                    sleep(400);
+                    Servos.Arm.goDrop();
+                    sleep(500);
+                    Servos.Gripper.openGripper();
+                    sleep(100);
+                    Servos.Gripper.Lock();
+                    Servos.Arm.goInit();
+                    Servos.Rotate.rotatePick();
+                    sleep(200);
+                    Servos.Arm.goActiveStable();
+                }
+                else if (SlideFinalPos < 100 && Servos.Arm.armState  == "PICKTELE") {   // Picking without extension
+                    RB1Flag = 2;
+                    Servos.Gripper.closeGripper();
+                    sleep(200);
+                    Servos.Rotate.rotateDrop();
+                    Servos.Arm.goActiveDrop();
+                    Servos.Arm.goDrop();
+                    sleep(800);
+                    Servos.Gripper.openGripper();
+                    sleep(200);
+                    Servos.Arm.goInit();
+                    Servos.Gripper.Lock();
+                    Servos.Rotate.rotatePick();
+                    Servos.Arm.goActiveStable();
+                }
+                else if (Servos.Arm.armState == "ActiveLow" || Servos.Arm.armState == "INIT") {   // Dropping from arm home position
+                    RB1Flag = 3;
+                    Servos.Rotate.rotateDrop();
+                    Servos.Arm.goActiveDrop();
+                    sleep(200);
+                    Servos.Arm.goDrop();
+                    sleep(300);
+                    Servos.Gripper.openGripper();
+                    sleep(200);
+                    Servos.Gripper.Lock();
+                    Servos.Arm.goInit();
+                    Servos.Rotate.rotatePick();
+                    Servos.Arm.goActiveStable();
+                }
+            }
+
+            if (B1 && !B1Flag) {
+                B1Flag = true;
+                if (Servos.Gripper.lockState == "UNLOCK") {
+                    Servos.Gripper.Lock();
+                } else if (Servos.Gripper.lockState == "LOCK") {
+                    Servos.Gripper.Unlock();
+                }
+            }
+
+            if (X1 && !X1Flag) {
+                X1Flag = true;
+                if (Servos.Arm.armState == "ActiveLow" || Servos.Arm.armState == "INIT") {
+                    Servos.Arm.goActivePick();
+                    Servos.Rotate.rotatePick();
+                    sleep(200);
+                    Servos.Arm.goPickTele();
+                } else if (Servos.Arm.armState == "PICKTELE") {
+                    Servos.Arm.goActiveStable();
+                    Servos.Arm.goInit();
+                    Servos.Rotate.rotatePick();
+                }
+            }
+
+            // Elevator extensions
+
+            if (A1) {
+
+                target=190;
+            }
+
+            if (Y1) {
+
+                target=450;
+            }
+
+            if (UP1) {
+                target=750;
+            }
+
+            if (DOWN1) {
+                target=0;
+                Servos.Gripper.Unlock();
+            }
+
+            if (LEFT1) {
+                Servos.Gripper.openGripper();
+                Servos.Arm.goActivePick();
+                Servos.Rotate.rotatePick();
+                sleep(200);
+                Servos.Arm.goPickTele();
+            }
+
+            if (RIGHT1) {
+                Servos.Gripper.closeGripper();
+                sleep(200);
+                Servos.Arm.goInit();
+                Servos.Arm.goActiveLow();
+                slidertarget=0;
+            }
+
+            // High junction cycle
+
+            if (START1) {
+                slidertarget=275 + 100;
+                sleep(100);
+                Servos.Gripper.closeGripper();
+                sleep(200);
+                Servos.Arm.goInit();
+                Servos.Arm.goActiveStable();
+                slidertarget=0;
+                sleep(200);
+                Servos.Rotate.rotateDrop();
+                Servos.Arm.goActiveDrop();
+                sleep(400);
+                Servos.Arm.goDrop();
+                sleep(500);
+                Servos.Gripper.openGripper();
+                sleep(100);
+                Servos.Gripper.Lock();
+                Servos.Arm.goPickTele();
+                Servos.Rotate.rotatePick();
+                Servos.Arm.goActiveStable();
+                sleep(200);
+                target=750;
+                sleep(700);
+                slidertarget=275;
+                Servos.Gripper.Unlock();
+                target=0;
+            }
+            // Flags
+            if (!B1) {
+                B1Flag = false;
+            }
+
+            if (!X1) {
+                X1Flag = false;
+            }
+
+            if (RTG1 <= 0.7) {
+                RTG1Flag = false;
+            }
+
+            if (!RB1) {
+                RB1Flag = 0;
+            }
+            telemetry.addData("ElevateFinalPos", ElevateFinalPos);
+            telemetry.addData("Elevatetarget", target);
+            telemetry.addData("SliderFinalPos", SlideFinalPos);
+            telemetry.addData("Slidetarget", slidertarget);
+            telemetry.addData("Current ElevateRight", ElevateRight.getCurrent(CurrentUnit.AMPS));
+            telemetry.addData("Current ElevateLeft", ElevateLeft.getCurrent(CurrentUnit.AMPS));
+            telemetry.addData("Current SlideRight", SlideRight.getCurrent(CurrentUnit.AMPS));
+            telemetry.addData("Current SlideLeft", SlideLeft.getCurrent(CurrentUnit.AMPS));
+            telemetry.update();
+
+        }
+
+    }
+
+}
+
