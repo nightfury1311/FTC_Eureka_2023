@@ -17,6 +17,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.CurrentUnit;
 import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
 import org.firstinspires.ftc.teamcode.drive.TeleopSubsystems.Servos;
 import org.firstinspires.ftc.teamcode.drive.TeleopSubsystems.Slide;
+import org.firstinspires.ftc.teamcode.trajectorysequence.TrajectorySequence;
 
 @Config
 @TeleOp(name = "APOC")
@@ -28,7 +29,13 @@ public class APOC extends LinearOpMode {
     private PIDController slidercontroller;
     public static double p = 0.008, i = 0, d = 0, ff = 0.14;
     public static int target = 0;
+    public static int HIGH = 750;   // HIGH POLE
+    public static int MID = 450;   // MID POLE
+    public static int LOW = 190;   // LOW POLE
     public static int slidertarget = 0;
+    public static int TEST = 275;   // slider extension
+    public static int HOME = 0;     // slider + elevator home
+
     private DcMotorEx ElevateLeft, ElevateRight;
     private DcMotorEx SlideLeft, SlideRight;
 
@@ -80,6 +87,51 @@ public class APOC extends LinearOpMode {
             Servos.Arm.goInit();
             Servos.Rotate.rotatePick();
         }
+
+        TrajectorySequence transfer = drive.trajectorySequenceBuilder(new Pose2d())
+                .addTemporalMarker(()->{slidertarget=TEST+100;})
+                .waitSeconds(0.05)
+                .addTemporalMarker(()->{Servos.Gripper.closeGripper();})
+                .waitSeconds(0.1)
+                .addTemporalMarker(()->{Servos.Arm.goInit();Servos.Arm.goActiveStable();slidertarget=HOME;})
+                .waitSeconds(0.2)
+                .addTemporalMarker(()->{Servos.Arm.goActiveDrop();Servos.Rotate.rotateDrop();})
+                .waitSeconds(0.4)
+                .addTemporalMarker(()->{Servos.Arm.goDrop();})
+                .waitSeconds(0.5)
+                .addTemporalMarker(()->{Servos.Gripper.openGripper();})
+                .waitSeconds(0.1)
+                .addTemporalMarker(()->{Servos.Gripper.Lock();Servos.Arm.goInit();})
+                .waitSeconds(0.1)
+                .addTemporalMarker(()->{Servos.Rotate.rotatePick();Servos.Arm.goActiveStable();})
+                .build();
+
+
+        TrajectorySequence cycle = drive.trajectorySequenceBuilder(new Pose2d())
+                .addTemporalMarker(()->{slidertarget=TEST+100;})
+                .waitSeconds(0.05)
+                .addTemporalMarker(()->{Servos.Gripper.closeGripper();})
+                .waitSeconds(0.1)
+                .addTemporalMarker(()->{Servos.Arm.goInit();Servos.Arm.goActiveStable();slidertarget=HOME;})
+                .waitSeconds(0.2)
+                .addTemporalMarker(()->{Servos.Arm.goActiveDrop();Servos.Rotate.rotateDrop();})
+                .waitSeconds(0.4)
+                .addTemporalMarker(()->{Servos.Arm.goDrop();})
+                .waitSeconds(0.5)
+                .addTemporalMarker(()->{Servos.Gripper.openGripper();})
+                .waitSeconds(0.1)
+                .addTemporalMarker(()->{Servos.Gripper.Lock();Servos.Arm.goPickTele();})
+                .waitSeconds(0.1)
+                .addTemporalMarker(()->{Servos.Rotate.rotatePick();Servos.Arm.goActivePick();})
+                .waitSeconds(0.2)
+                .addTemporalMarker(()->{target=HIGH;})
+                .waitSeconds(0.7)
+                .addTemporalMarker(()->{slidertarget=TEST-200;})
+                .addTemporalMarker(()->{target=HOME;Servos.Gripper.Unlock();})
+                .waitSeconds(0.2)
+                .addTemporalMarker(()->{slidertarget=TEST;})
+                .build();
+
 
         while (opModeIsActive()) {
             controller.setPID(p, i, d);
@@ -135,8 +187,8 @@ public class APOC extends LinearOpMode {
                 Servos.Arm.goActiveStable();
                 Servos.Arm.goInit();
                 Servos.Rotate.rotatePick();
-                target=0;
-                slidertarget=0;
+                target=HOME;
+                slidertarget=HOME;
 
             }
 
@@ -166,32 +218,13 @@ public class APOC extends LinearOpMode {
                 sleep(300);
                 Servos.Arm.goPickTele();
                 sleep(300);
-                slidertarget=275;
+                slidertarget=TEST;
             }
 
             if (RB1 && RB1Flag == 0) {
                 if (SlideFinalPos > 200) {     // Picking with extension
                     RB1Flag = 1;
-                    slidertarget=275 + 100;
-                    sleep(100);
-                    Servos.Gripper.closeGripper();
-                    sleep(200);
-                    Servos.Arm.goInit();
-                    Servos.Arm.goActiveStable();
-                    slidertarget=0;
-                    sleep(200);
-                    Servos.Rotate.rotateDrop();
-                    Servos.Arm.goActiveDrop();
-                    sleep(400);
-                    Servos.Arm.goDrop();
-                    sleep(500);
-                    Servos.Gripper.openGripper();
-                    sleep(100);
-                    Servos.Gripper.Lock();
-                    Servos.Arm.goInit();
-                    Servos.Rotate.rotatePick();
-                    sleep(200);
-                    Servos.Arm.goActiveStable();
+                    drive.followTrajectorySequenceAsync(transfer);
                 }
                 else if (SlideFinalPos < 100 && Servos.Arm.armState  == "PICKTELE") {   // Picking without extension
                     RB1Flag = 2;
@@ -202,13 +235,14 @@ public class APOC extends LinearOpMode {
                     Servos.Arm.goDrop();
                     sleep(800);
                     Servos.Gripper.openGripper();
-                    sleep(200);
+                    sleep(100);
                     Servos.Arm.goInit();
                     Servos.Gripper.Lock();
+                    sleep(100);
                     Servos.Rotate.rotatePick();
                     Servos.Arm.goActiveStable();
                 }
-                else if (Servos.Arm.armState == "ActiveLow" || Servos.Arm.armState == "INIT") {   // Dropping from arm home position
+                else if (Servos.Arm.armState == "ActiveLow" || Servos.Arm.armState == "ActiveStable") {   // Dropping from arm home position
                     RB1Flag = 3;
                     Servos.Rotate.rotateDrop();
                     Servos.Arm.goActiveDrop();
@@ -216,9 +250,10 @@ public class APOC extends LinearOpMode {
                     Servos.Arm.goDrop();
                     sleep(300);
                     Servos.Gripper.openGripper();
-                    sleep(200);
+                    sleep(100);
                     Servos.Gripper.Lock();
                     Servos.Arm.goInit();
+                    sleep(100);
                     Servos.Rotate.rotatePick();
                     Servos.Arm.goActiveStable();
                 }
@@ -251,20 +286,20 @@ public class APOC extends LinearOpMode {
 
             if (A1) {
 
-                target=190;
+                target=LOW;
             }
 
             if (Y1) {
 
-                target=450;
+                target=MID;
             }
 
             if (UP1) {
-                target=750;
+                target=HIGH;
             }
 
             if (DOWN1) {
-                target=0;
+                target=HOME;
                 Servos.Gripper.Unlock();
             }
 
@@ -281,37 +316,13 @@ public class APOC extends LinearOpMode {
                 sleep(200);
                 Servos.Arm.goInit();
                 Servos.Arm.goActiveLow();
-                slidertarget=0;
+                slidertarget=HOME;
             }
 
             // High junction cycle
 
             if (START1) {
-                slidertarget=275 + 100;
-                sleep(100);
-                Servos.Gripper.closeGripper();
-                sleep(200);
-                Servos.Arm.goInit();
-                Servos.Arm.goActiveStable();
-                slidertarget=0;
-                sleep(200);
-                Servos.Rotate.rotateDrop();
-                Servos.Arm.goActiveDrop();
-                sleep(400);
-                Servos.Arm.goDrop();
-                sleep(500);
-                Servos.Gripper.openGripper();
-                sleep(100);
-                Servos.Gripper.Lock();
-                Servos.Arm.goPickTele();
-                Servos.Rotate.rotatePick();
-                Servos.Arm.goActiveStable();
-                sleep(200);
-                target=750;
-                sleep(700);
-                slidertarget=275;
-                Servos.Gripper.Unlock();
-                target=0;
+                drive.followTrajectorySequenceAsync(cycle);
             }
             // Flags
             if (!B1) {

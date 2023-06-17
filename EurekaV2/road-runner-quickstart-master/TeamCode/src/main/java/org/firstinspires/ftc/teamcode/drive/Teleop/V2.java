@@ -19,6 +19,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.CurrentUnit;
 import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
 import org.firstinspires.ftc.teamcode.drive.TeleopSubsystems.Servos;
 import org.firstinspires.ftc.teamcode.drive.TeleopSubsystems.Slide;
+import org.firstinspires.ftc.teamcode.trajectorysequence.TrajectorySequence;
 
 @Config
 @TeleOp(name = "V2")
@@ -307,7 +308,7 @@ public class V2 extends LinearOpMode {
                 Servos.Gripper.Lock();
                 Servos.Arm.goPickTele();
                 Servos.Rotate.rotatePick();
-                Servos.Arm.goActiveStable();
+                Servos.Arm.goActivePick();
                 sleep(200);
                 target=750;
                 sleep(700);
