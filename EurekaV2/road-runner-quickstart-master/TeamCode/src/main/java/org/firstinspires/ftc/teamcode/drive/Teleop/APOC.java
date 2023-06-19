@@ -29,7 +29,7 @@ public class APOC extends LinearOpMode {
     private PIDController slidercontroller;
     public static double p = 0.008, i = 0, d = 0, ff = 0.14;
     public static int target = 0;
-    public static int HIGH = 740;   // HIGH POLE
+    public static int HIGH = 730;   // HIGH POLE
     public static int MID = 450;   // MID POLE
     public static int LOW = 190;   // LOW POLE
     public static int slidertarget = 0;
@@ -139,7 +139,7 @@ public class APOC extends LinearOpMode {
 
             int ElevateFinalPos = ElevateRight.getCurrentPosition();
             int SlideFinalPos = SlideRight.getCurrentPosition();
-            double power = Range.clip(((controller.calculate(ElevateFinalPos, target)+ ff)) , -0.7, 0.8);
+            double power = Range.clip(((controller.calculate(ElevateFinalPos, target)+ ff)) , -1, 0.9);
             double sliderpower =  Range.clip(((slidercontroller.calculate(SlideFinalPos, slidertarget)+ ff)) , -0.9, 0.9);
             ElevateLeft.setPower(power);
             ElevateRight.setPower(power);
