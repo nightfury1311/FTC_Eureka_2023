@@ -29,7 +29,7 @@ public class APOC extends LinearOpMode {
     private PIDController slidercontroller;
     public static double p = 0.008, i = 0, d = 0, ff = 0.14;
     public static int target = 0;
-    public static int HIGH = 750;   // HIGH POLE
+    public static int HIGH = 740;   // HIGH POLE
     public static int MID = 450;   // MID POLE
     public static int LOW = 190;   // LOW POLE
     public static int slidertarget = 0;
