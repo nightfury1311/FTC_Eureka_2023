@@ -23,7 +23,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.CurrentUnit;
 public class EXPID extends OpMode {
     private PIDController controller;
 
-    public static double p = 0.008, i = 0, d = 0;
+    public static double p = 0.004, i = 0, d = 0.04;
     public static double f = 0, ff = 0.14;
 //    public static double ff = 0.12;
 
@@ -55,24 +55,24 @@ public class EXPID extends OpMode {
 
 //        double power = pid;
 
-        double power = Range.clip(((controller.calculate(ElevateFinalPos, target)+ ff)) , -0.9, 0.9);
+        double power = Range.clip(((controller.calculate(ElevateFinalPos, target)+ ff)) , -1, 0.9);
         ElevateLeft.setPower(power);
         ElevateRight.setPower(power);
         double error = target-ElevateFinalPos;
 
 
-        if(gamepad1.dpad_up)
-        {
-            target=770;
-        } else if (gamepad1.dpad_down) {
-            target=0;
-        }
-        else if (gamepad1.y) {
-            target=484;
-        }
-        else if (gamepad1.a) {
-            target=228;
-        }
+//        if(gamepad1.dpad_up)
+//        {
+//            target=770;
+//        } else if (gamepad1.dpad_down) {
+//            target=0;
+//        }
+//        else if (gamepad1.y) {
+//            target=484;
+//        }
+//        else if (gamepad1.a) {
+//            target=228;
+//        }
 
 //        telemetry.addData("Left", ElevateLeftPos);
 //        telemetry.addData("Right", ElevateRightPos);

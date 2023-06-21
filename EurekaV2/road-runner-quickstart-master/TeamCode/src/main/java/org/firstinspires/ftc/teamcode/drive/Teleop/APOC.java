@@ -27,10 +27,12 @@ public class APOC extends LinearOpMode {
 
     private PIDController controller;
     private PIDController slidercontroller;
-    public static double p = 0.008, i = 0, d = 0, ff = 0.14;
+    public static double elevatorp = 0.004, elevatori = 0, elevatord = 0, elevatorff = 0.14;
+    public static double sliderp = 0.008, slideri = 0, sliderd = 0, sliderff = 0.14;
+
     public static int target = 0;
-    public static int HIGH = 730;   // HIGH POLE
-    public static int MID = 450;   // MID POLE
+    public static int HIGH = 750;   // HIGH POLE
+    public static int MID = 440;   // MID POLE
     public static int LOW = 190;   // LOW POLE
     public static int slidertarget = 0;
     public static int TEST = 275;   // slider extension
@@ -56,8 +58,8 @@ public class APOC extends LinearOpMode {
     public void runOpMode() throws InterruptedException {
 
         servos = new Servos(hardwareMap, telemetry);
-        slidercontroller = new PIDController(p,i,d);
-        controller= new PIDController(p,i,d);
+        slidercontroller = new PIDController(elevatorp,elevatori,elevatord);
+        controller= new PIDController(sliderp,slideri,sliderd);
 
         telemetry= new MultipleTelemetry(telemetry, FtcDashboard.getInstance().getTelemetry());
 
@@ -89,7 +91,7 @@ public class APOC extends LinearOpMode {
         }
 
         TrajectorySequence transfer = drive.trajectorySequenceBuilder(new Pose2d())
-                .addTemporalMarker(()->{slidertarget=TEST+100;})
+                .addTemporalMarker(()->{slidertarget=TEST+50;})
                 .waitSeconds(0.05)
                 .addTemporalMarker(()->{Servos.Gripper.closeGripper();})
                 .waitSeconds(0.1)
@@ -134,13 +136,13 @@ public class APOC extends LinearOpMode {
 
 
         while (opModeIsActive()) {
-            controller.setPID(p, i, d);
-            slidercontroller.setPID(p, i, d);
+            controller.setPID(elevatorp, elevatori, elevatord);
+            slidercontroller.setPID(sliderp, slideri, sliderd);
 
             int ElevateFinalPos = ElevateRight.getCurrentPosition();
             int SlideFinalPos = SlideRight.getCurrentPosition();
-            double power = Range.clip(((controller.calculate(ElevateFinalPos, target)+ ff)) , -1, 0.9);
-            double sliderpower =  Range.clip(((slidercontroller.calculate(SlideFinalPos, slidertarget)+ ff)) , -0.9, 0.9);
+            double power = Range.clip(((controller.calculate(ElevateFinalPos, target)+ elevatorff)) , -1, 0.9);
+            double sliderpower =  Range.clip(((slidercontroller.calculate(SlideFinalPos, slidertarget)+ sliderff)) , -0.9, 0.9);
             ElevateLeft.setPower(power);
             ElevateRight.setPower(power);
             SlideLeft.setPower(sliderpower);
