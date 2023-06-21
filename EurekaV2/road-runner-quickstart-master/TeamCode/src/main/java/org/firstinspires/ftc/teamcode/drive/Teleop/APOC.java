@@ -31,9 +31,9 @@ public class APOC extends LinearOpMode {
     public static double sliderp = 0.008, slideri = 0, sliderd = 0, sliderff = 0.14;
 
     public static int target = 0;
-    public static int HIGH = 750;   // HIGH POLE
-    public static int MID = 440;   // MID POLE
-    public static int LOW = 190;   // LOW POLE
+    public static int HIGH = 600;   // HIGH POLE
+    public static int MID = 387;   // MID POLE
+    public static int LOW = 183;   // LOW POLE
     public static int slidertarget = 0;
     public static int TEST = 275;   // slider extension
     public static int HOME = 0;     // slider + elevator home
