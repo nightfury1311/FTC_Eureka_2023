@@ -16,7 +16,6 @@ import com.qualcomm.robotcore.util.Range;
 import org.firstinspires.ftc.robotcore.external.navigation.CurrentUnit;
 import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
 import org.firstinspires.ftc.teamcode.drive.TeleopSubsystems.Servos;
-import org.firstinspires.ftc.teamcode.drive.TeleopSubsystems.Slide;
 import org.firstinspires.ftc.teamcode.trajectorysequence.TrajectorySequence;
 
 @Config
@@ -175,16 +174,14 @@ public class APOC extends LinearOpMode {
             double RTG1 = gamepad1.right_trigger;           // Toggling gripper state - NOT WORKING
             double LTG1 = gamepad1.left_trigger;            // Slowmode
 
-            // Flags for toggle commands
-
 
             // Defining commands/keybinds
 
-            if (LStick || RStick) {         // Resetting heading (for field centric)
+            if (LStick || RStick) {         // RESETTING HEADING (FOR FIELD CENTRIC)
                 drive.setPoseEstimate(startPose);
             }
 
-            if (BACK1) {                    // Home position
+            if (BACK1) {                    // EVERYTHING IN HOME POSITION
 
                 Servos.Arm.goActiveStable();
                 Servos.Arm.goInit();
@@ -194,7 +191,7 @@ public class APOC extends LinearOpMode {
 
             }
 
-            if (LTG1 > 0.7)    // Slow mode
+            if (LTG1 > 0.7 || (Servos.Arm.armState  == "PICKTELE" && Servos.Gripper.gripperState == "CLOSE") )    // SLOW MODE
             {
                 speed = 0.4;
                 turn = 0.2;
@@ -203,7 +200,8 @@ public class APOC extends LinearOpMode {
                 turn = 0.5;
             }
 
-            if (RTG1 > 0.7 && !RTG1Flag) {       // Toggling gripper state
+
+            if (RTG1 > 0.7 && !RTG1Flag) {       // GRIPPER OPEN CLOSE
                 RTG1Flag = true;
                 if (Servos.Gripper.gripperState == "CLOSE") {   // If closed, then open
                     Servos.Gripper.openGripper();
@@ -212,7 +210,7 @@ public class APOC extends LinearOpMode {
                 }
             }
 
-            if (LB1) {      // Extending sliders for pickup
+            if (LB1) {      // GOTO PICK CONES WITH SLIDERS
                 Servos.Gripper.Unlock();
                 Servos.Arm.goActivePick();
                 Servos.Rotate.rotatePick();
@@ -224,7 +222,7 @@ public class APOC extends LinearOpMode {
             }
 
             if (RB1 && RB1Flag == 0) {
-                if (SlideFinalPos > 200) {     // Picking with extension
+                if (SlideFinalPos > 200) {     // CONE TRANSFERS
                     RB1Flag = 1;
                     drive.followTrajectorySequenceAsync(transfer);
                 }
@@ -261,7 +259,7 @@ public class APOC extends LinearOpMode {
                 }
             }
 
-            if (B1 && !B1Flag) {
+            if (B1 && !B1Flag) {     //CONE LOCK TOGGLE
                 B1Flag = true;
                 if (Servos.Gripper.lockState == "UNLOCK") {
                     Servos.Gripper.Lock();
@@ -270,7 +268,7 @@ public class APOC extends LinearOpMode {
                 }
             }
 
-            if (X1 && !X1Flag) {
+            if (X1 && !X1Flag) {    //GROUND JUNCTION TOGGLE
                 X1Flag = true;
                 if (Servos.Arm.armState == "ActiveLow" || Servos.Arm.armState == "INIT") {
                     Servos.Arm.goActivePick();
@@ -286,26 +284,26 @@ public class APOC extends LinearOpMode {
 
             // Elevator extensions
 
-            if (A1) {
+            if (A1) {                 //ELEVATOR LOW
 
                 target=LOW;
             }
 
-            if (Y1) {
+            if (Y1) {                 //ELEVATOR MID
 
                 target=MID;
             }
 
-            if (UP1) {
+            if (UP1) {                //ELEVATOR HIGH
                 target=HIGH;
             }
 
-            if (DOWN1) {
+            if (DOWN1) {              //ELEVATOR HOME
                 target=HOME;
                 Servos.Gripper.Unlock();
             }
 
-            if (LEFT1) {
+            if (LEFT1) {              //CONE GRIPPING POSITION WITHOUT SLIDERS
                 Servos.Gripper.openGripper();
                 Servos.Arm.goActivePick();
                 Servos.Rotate.rotatePick();
@@ -313,7 +311,7 @@ public class APOC extends LinearOpMode {
                 Servos.Arm.goPickTele();
             }
 
-            if (RIGHT1) {
+            if (RIGHT1) {             //GOTO LOW POLE
                 Servos.Gripper.closeGripper();
                 sleep(200);
                 Servos.Arm.goInit();
@@ -321,27 +319,29 @@ public class APOC extends LinearOpMode {
                 slidertarget=HOME;
             }
 
+            // FLAGS FOR TOGGLE COMMANDS
             // High junction cycle
 
-            if (START1) {
+            if (START1) {             // TRANSFER CYCLE
                 drive.followTrajectorySequenceAsync(cycle);
             }
             // Flags
-            if (!B1) {
+            if (!B1) {                //CONE TOGGLE FLAG
                 B1Flag = false;
             }
 
-            if (!X1) {
+            if (!X1) {                //GROUND JUNCTION TOGGLE FLAG
                 X1Flag = false;
             }
 
-            if (RTG1 <= 0.7) {
+            if (RTG1 <= 0.7) {        //GRIPPER TOGGLE FLAG
                 RTG1Flag = false;
             }
 
-            if (!RB1) {
+            if (!RB1) {               //CONE TRANSFER FLAG
                 RB1Flag = 0;
             }
+
             telemetry.addData("ElevateFinalPos", ElevateFinalPos);
             telemetry.addData("Elevatetarget", target);
             telemetry.addData("SliderFinalPos", SlideFinalPos);
@@ -355,6 +355,4 @@ public class APOC extends LinearOpMode {
         }
 
     }
-
 }
-
