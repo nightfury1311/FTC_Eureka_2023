@@ -158,20 +158,20 @@ public class APOC extends LinearOpMode {
 
             // GAMEPAD FUNCTIONALITY
             boolean A1 = gamepad1.a;                        // Elevator - Low junction
-            boolean B1 = gamepad1.b;                        // Toggling lock state - NOT WORKING
-            boolean X1 = gamepad1.x;                        // Ground junctions - NOT WORKING
+            boolean B1 = gamepad1.b;                        // Toggling lock state
+            boolean X1 = gamepad1.x;                        // Ground junction
             boolean Y1 = gamepad1.y;                        // Elevator - Mid junction
             boolean UP1 = gamepad1.dpad_up;                 // Elevator - High junction
             boolean RIGHT1 = gamepad1.dpad_right;           // Cone pickup - Low junction
             boolean DOWN1 = gamepad1.dpad_down;             // Elevator -  Home position
             boolean LEFT1 = gamepad1.dpad_left;             // Cone pickup - Without extension
-            boolean RB1 = gamepad1.right_bumper;            // Cone transfer - NOT FULLY WORKING
+            boolean RB1 = gamepad1.right_bumper;            // Cone transfer 
             boolean LB1 = gamepad1.left_bumper;             // Cone pickup - With extension
             boolean START1 = gamepad1.start;                // High junction cycle
             boolean BACK1 = gamepad1.back;                  // Resetting all motors and servos / Home position
             boolean LStick = gamepad1.left_stick_button;    // Resetting heading
             boolean RStick = gamepad1.right_stick_button;   // Resetting heading
-            double RTG1 = gamepad1.right_trigger;           // Toggling gripper state - NOT WORKING
+            double RTG1 = gamepad1.right_trigger;           // Toggling gripper state
             double LTG1 = gamepad1.left_trigger;            // Slowmode
 
 
