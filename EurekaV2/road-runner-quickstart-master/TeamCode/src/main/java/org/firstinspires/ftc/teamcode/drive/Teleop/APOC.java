@@ -30,17 +30,19 @@ public class APOC extends LinearOpMode {
     public static double sliderp = 0.008, slideri = 0, sliderd = 0, sliderff = 0.14;
 
     public static int target = 0;
-    public static int HIGH = 610;   // HIGH POLE
-    public static int MID = 397;   // MID POLE
+    public static int HIGH = 630;   // HIGH POLE
+    public static int MID = 410;   // MID POLE
     public static int LOW = 183;   // LOW POLE
     public static int slidertarget = 0;
-    public static int TEST = 275;   // slider extension
+
+    public static int MAX = 690; //Slider long extension
+    public static int TEST = 275;   // slider small extension
     public static int HOME = 0;     // slider + elevator home
 
     private DcMotorEx ElevateLeft, ElevateRight;
     private DcMotorEx SlideLeft, SlideRight;
 
-    public static double speed = 0.9;
+    public static double speed = 1;
     public static double turn = 0.6;
 
     // Flags for toggle commands
@@ -90,8 +92,8 @@ public class APOC extends LinearOpMode {
         }
 
         TrajectorySequence transfer = drive.trajectorySequenceBuilder(new Pose2d())
-                .addTemporalMarker(()->{slidertarget=TEST+50;})
-                .waitSeconds(0.05)
+                .addTemporalMarker(()->{slidertarget=MAX+50;})
+                .waitSeconds(0.1)
                 .addTemporalMarker(()->{Servos.Gripper.closeGripper();})
                 .waitSeconds(0.1)
                 .addTemporalMarker(()->{Servos.Arm.goInit();Servos.Arm.goActiveStable();slidertarget=HOME;})
@@ -218,7 +220,7 @@ public class APOC extends LinearOpMode {
                 sleep(300);
                 Servos.Arm.goPickTele();
                 sleep(300);
-                slidertarget=TEST;
+                slidertarget=MAX;
             }
 
             if (RB1 && RB1Flag == 0) {
