@@ -43,7 +43,7 @@ public class APOC extends LinearOpMode {
     private DcMotorEx SlideLeft, SlideRight;
 
     public static double speed = 1;
-    public static double turn = 0.6;
+    public static double turn = 0.8;
 
     // Flags for toggle commands
 
@@ -142,7 +142,7 @@ public class APOC extends LinearOpMode {
 
             int ElevateFinalPos = ElevateRight.getCurrentPosition();
             int SlideFinalPos = SlideRight.getCurrentPosition();
-            double power = Range.clip(((controller.calculate(ElevateFinalPos, target)+ elevatorff)) , -1, 0.9);
+            double power = Range.clip(((controller.calculate(ElevateFinalPos, target)+ elevatorff)) , -0.8, 1);
             double sliderpower =  Range.clip(((slidercontroller.calculate(SlideFinalPos, slidertarget)+ sliderff)) , -0.9, 0.9);
             ElevateLeft.setPower(power);
             ElevateRight.setPower(power);
@@ -153,7 +153,7 @@ public class APOC extends LinearOpMode {
 
             //Field centric drive
             Pose2d poseEstimate = drive.getPoseEstimate();
-            Vector2d input = new Vector2d(Math.pow(-gamepad1.left_stick_y, 3), Math.pow(-gamepad1.left_stick_x, 3)).rotated(-poseEstimate.getHeading());
+            Vector2d input = new Vector2d(Math.pow(Range.clip(-gamepad1.left_stick_y, -1, 1), 3), Math.pow(Range.clip(-gamepad1.left_stick_x,-1,1), 3)).rotated(-poseEstimate.getHeading());
 
             drive.setWeightedDrivePower(new Pose2d(input.getX() * speed, input.getY() * speed, -gamepad1.right_stick_x * turn));
             drive.update();
