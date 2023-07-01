@@ -27,7 +27,7 @@ public class APOC extends LinearOpMode {
     private PIDController elevatorcontroller;
     private PIDController slidercontroller;
     public static double elevatorp = 0.006, elevatori = 0, elevatord = 0, elevatorff = -0.14;
-    public static double sliderp = 0.008, slideri = 0, sliderd = 0, sliderff = 0.14;
+    public static double sliderp = 0.008, slideri = 0, sliderd = 0, sliderff = -0.2;
 
     public static int elevatortarget = 0;
     public static int HIGH = 660;   // HIGH POLE
@@ -144,7 +144,7 @@ public class APOC extends LinearOpMode {
             int ElevateFinalPos = ElevateRight.getCurrentPosition();
             int SlideFinalPos = SlideRight.getCurrentPosition();
             double elevatorpower = Range.clip(((elevatorcontroller.calculate(ElevateFinalPos, elevatortarget)+ elevatorff)) , -0.9, 1);
-            double sliderpower =  Range.clip(((slidercontroller.calculate(SlideFinalPos, slidertarget)+ sliderff)) , -0.9, 0.9);
+            double sliderpower =  Range.clip(((slidercontroller.calculate(SlideFinalPos, slidertarget)+ sliderff)) , -0.8, 0.9);
             ElevateLeft.setPower(elevatorpower);
             ElevateRight.setPower(elevatorpower);
             SlideLeft.setPower(sliderpower);
