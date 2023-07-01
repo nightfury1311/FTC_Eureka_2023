@@ -16,7 +16,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.CurrentUnit;
         //    public final int[] POSITIONS = {0, 600, 1130, 1765, 20};     //OLD VALUES at 9:1 elevator ratio
 //        public final int[] POSITIONS = {0, 330, 700, 1110, 30};       //NEW VALUES at 5:1 elevator ratio
 //        public final int[] POSITIONS = {0, 228, 484, 750, 30};       //NEW VALUES at 4:1 elevator ratio
-            public final int[] POSITIONS = {0, 183, 387, 600, 10};       //NEW VALUES at 3:1 elevator ratio 1.24
+            public final int[] POSITIONS = {0, 183, 387, 630, 10};       //NEW VALUES at 3:1 elevator ratio 1.24
 
     public Elevator(final HardwareMap hardwareMap, Telemetry telemetry) {
         ElevateLeft = hardwareMap.get(DcMotorEx.class, "ElevateLeft");

@@ -103,7 +103,7 @@ public class LeftSafeHigh extends LinearOpMode
 //                .lineToLinearHeading(new Pose2d(12,-20, Math.toRadians(196)))  // dropping position
 
                 .lineToLinearHeading(new Pose2d(-12, -58, Math.toRadians(0)))
-                .addTemporalMarker(()->Servos.Arm.goInit())
+                .addTemporalMarker(()->{Servos.Arm.goInit();Servos.Gripper.openGripper();})
                 .lineToLinearHeading(new Pose2d(-12,-20, Math.toRadians(-16)))
                 .addTemporalMarker(()->elevator.extendTo(elevator.POSITIONS[elevator.HIGH_POLE]))
                 .waitSeconds(0.7)

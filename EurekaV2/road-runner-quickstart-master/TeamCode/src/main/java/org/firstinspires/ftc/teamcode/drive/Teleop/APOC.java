@@ -24,18 +24,18 @@ public class APOC extends LinearOpMode {
 
     Servos servos = null;
 
-    private PIDController controller;
+    private PIDController elevatorcontroller;
     private PIDController slidercontroller;
-    public static double elevatorp = 0.004, elevatori = 0, elevatord = 0, elevatorff = 0.14;
+    public static double elevatorp = 0.006, elevatori = 0, elevatord = 0, elevatorff = -0.14;
     public static double sliderp = 0.008, slideri = 0, sliderd = 0, sliderff = 0.14;
 
-    public static int target = 0;
-    public static int HIGH = 630;   // HIGH POLE
-    public static int MID = 410;   // MID POLE
+    public static int elevatortarget = 0;
+    public static int HIGH = 660;   // HIGH POLE
+    public static int MID = 400;   // MID POLE
     public static int LOW = 183;   // LOW POLE
     public static int slidertarget = 0;
 
-    public static int MAX = 690; //Slider long extension
+    public static int MAX = 600; //Slider long extension
     public static int TEST = 275;   // slider small extension
     public static int HOME = 0;     // slider + elevator home
 
@@ -55,12 +55,13 @@ public class APOC extends LinearOpMode {
 
     boolean B1Flag = false; // Locking
 
+    boolean START1Flag = false;  // Cycle Flag
     @Override
     public void runOpMode() throws InterruptedException {
 
         servos = new Servos(hardwareMap, telemetry);
-        slidercontroller = new PIDController(elevatorp,elevatori,elevatord);
-        controller= new PIDController(sliderp,slideri,sliderd);
+        elevatorcontroller = new PIDController(elevatorp,elevatori,elevatord);
+        slidercontroller= new PIDController(sliderp,slideri,sliderd);
 
         telemetry= new MultipleTelemetry(telemetry, FtcDashboard.getInstance().getTelemetry());
 
@@ -127,25 +128,25 @@ public class APOC extends LinearOpMode {
                 .waitSeconds(0.1)
                 .addTemporalMarker(()->{Servos.Rotate.rotatePick();Servos.Arm.goActivePick();})
                 .waitSeconds(0.2)
-                .addTemporalMarker(()->{target=HIGH;})
+                .addTemporalMarker(()->{elevatortarget=HIGH;})
                 .waitSeconds(0.7)
                 .addTemporalMarker(()->{slidertarget=TEST-200;})
-                .addTemporalMarker(()->{target=HOME;Servos.Gripper.Unlock();})
+                .addTemporalMarker(()->{elevatortarget=HOME;Servos.Gripper.Unlock();})
                 .waitSeconds(0.2)
                 .addTemporalMarker(()->{slidertarget=TEST;})
                 .build();
 
 
         while (opModeIsActive()) {
-            controller.setPID(elevatorp, elevatori, elevatord);
+            elevatorcontroller.setPID(elevatorp, elevatori, elevatord);
             slidercontroller.setPID(sliderp, slideri, sliderd);
 
             int ElevateFinalPos = ElevateRight.getCurrentPosition();
             int SlideFinalPos = SlideRight.getCurrentPosition();
-            double power = Range.clip(((controller.calculate(ElevateFinalPos, target)+ elevatorff)) , -0.8, 1);
+            double elevatorpower = Range.clip(((elevatorcontroller.calculate(ElevateFinalPos, elevatortarget)+ elevatorff)) , -0.9, 1);
             double sliderpower =  Range.clip(((slidercontroller.calculate(SlideFinalPos, slidertarget)+ sliderff)) , -0.9, 0.9);
-            ElevateLeft.setPower(power);
-            ElevateRight.setPower(power);
+            ElevateLeft.setPower(elevatorpower);
+            ElevateRight.setPower(elevatorpower);
             SlideLeft.setPower(sliderpower);
             SlideRight.setPower(sliderpower);
 
@@ -188,7 +189,7 @@ public class APOC extends LinearOpMode {
                 Servos.Arm.goActiveStable();
                 Servos.Arm.goInit();
                 Servos.Rotate.rotatePick();
-                target=HOME;
+                elevatortarget=HOME;
                 slidertarget=HOME;
 
             }
@@ -198,8 +199,8 @@ public class APOC extends LinearOpMode {
                 speed = 0.4;
                 turn = 0.2;
             } else {
-                speed = 0.9;
-                turn = 0.5;
+                speed = 1;
+                turn = 0.8;
             }
 
 
@@ -288,20 +289,20 @@ public class APOC extends LinearOpMode {
 
             if (A1) {                 //ELEVATOR LOW
 
-                target=LOW;
+                elevatortarget=LOW;
             }
 
             if (Y1) {                 //ELEVATOR MID
 
-                target=MID;
+                elevatortarget=MID;
             }
 
             if (UP1) {                //ELEVATOR HIGH
-                target=HIGH;
+                elevatortarget=HIGH;
             }
 
             if (DOWN1) {              //ELEVATOR HOME
-                target=HOME;
+                elevatortarget=HOME;
                 Servos.Gripper.Unlock();
             }
 
@@ -321,13 +322,27 @@ public class APOC extends LinearOpMode {
                 slidertarget=HOME;
             }
 
-            // FLAGS FOR TOGGLE COMMANDS
+
             // High junction cycle
 
-            if (START1) {             // TRANSFER CYCLE
-                drive.followTrajectorySequenceAsync(cycle);
+            if (START1 && !START1Flag) {             // TRANSFER CYCLE
+                START1Flag = true;
+                if (Servos.Arm.armState == "INIT" && SlideFinalPos > 60) {
+                    Servos.Gripper.Unlock();
+                    Servos.Arm.goActivePick();
+                    Servos.Rotate.rotatePick();
+                    Servos.Gripper.openGripper();
+                    sleep(300);
+                    Servos.Arm.goPickTele();
+                    sleep(300);
+                    slidertarget=TEST;
+                }
+                else if (Servos.Arm.armState == "PICKTELE"){
+                    drive.followTrajectorySequenceAsync(cycle);
+                }
+
             }
-            // Flags
+            // // FLAGS FOR TOGGLE COMMANDS\
             if (!B1) {                //CONE TOGGLE FLAG
                 B1Flag = false;
             }
@@ -344,8 +359,12 @@ public class APOC extends LinearOpMode {
                 RB1Flag = 0;
             }
 
+            if (!START1){
+                START1Flag = false;
+            }
+
             telemetry.addData("ElevateFinalPos", ElevateFinalPos);
-            telemetry.addData("Elevatetarget", target);
+            telemetry.addData("Elevatetarget", elevatortarget);
             telemetry.addData("SliderFinalPos", SlideFinalPos);
             telemetry.addData("Slidetarget", slidertarget);
             telemetry.addData("Current ElevateRight", ElevateRight.getCurrent(CurrentUnit.AMPS));

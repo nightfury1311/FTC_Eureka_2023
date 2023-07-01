@@ -88,7 +88,7 @@ RightMid extends LinearOpMode
         elevator.reset();
         slide.reset();
         Servos.Gripper.Lock();
-        Servos.Gripper.openGripper();
+        Servos.Gripper.closeGripper();
         Servos.Arm.goActiveStable();
         Servos.Arm.goDrop();
         Servos.Rotate.rotatePick();
@@ -186,6 +186,7 @@ RightMid extends LinearOpMode
 
         //preload
         elevator.extendTo(elevator.POSITIONS[elevator.MID_POLE]);
+        Servos.Gripper.openGripper();
         Servos.Arm.goActivePick1();
         Servos.Arm.goPickCone1();
         sleep(400);

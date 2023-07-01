@@ -87,7 +87,7 @@ public class LeftContestedHigh extends LinearOpMode
         elevator.reset();
         slide.reset();
         Servos.Gripper.Lock();
-        Servos.Gripper.openGripper();
+        Servos.Gripper.closeGripper();
         Servos.Arm.goActiveStable();
         Servos.Arm.goDrop();
         Servos.Rotate.rotatePick();
@@ -101,8 +101,6 @@ public class LeftContestedHigh extends LinearOpMode
         TrajectorySequence pre =drive.trajectorySequenceBuilder(startPose)
 
                 .lineToLinearHeading(new Pose2d(-35,-54, Math.toRadians(0)))  // dropping position
-
-                .waitSeconds(3)
                 .lineToLinearHeading(new Pose2d(-36.5, -4,Math.toRadians(15)))
                 .build();
         TrajectorySequence lock1 =drive.trajectorySequenceBuilder(pre.end())
@@ -184,17 +182,18 @@ public class LeftContestedHigh extends LinearOpMode
         }
         drive.followTrajectorySequence(pre);
         elevator.extendTo(elevator.POSITIONS[elevator.HIGH_POLE]);
+        Servos.Gripper.openGripper();
         Servos.Arm.goActivePick1();
         Servos.Arm.goPickCone1();
         sleep(400);
         slide.extendTo(slide.POSITIONS[slide.UNSAFE]);
         sleep(400);
-        elevator.extendTo(elevator.POSITIONS[elevator.HOME]);
-        sleep(10);
-        Servos.Gripper.Unlock();
-        sleep(400);
+
         slide.extendTo(slide.POSITIONS[slide.MICRO]);
-        sleep(200);
+        elevator.extendTo(elevator.POSITIONS[elevator.HOME]);
+        sleep(50);
+        Servos.Gripper.Unlock();
+        sleep(150);
 
         Servos.Gripper.closeGripper();
         sleep(200);
@@ -219,12 +218,13 @@ public class LeftContestedHigh extends LinearOpMode
         sleep(400);
         slide.extendTo(slide.POSITIONS[slide.UNSAFE]);
         sleep(400);
-        elevator.extendTo(elevator.POSITIONS[elevator.HOME]);
-        sleep(10);
-        Servos.Gripper.Unlock();
-        sleep(400);
+//        Servos.Gripper.Unlock();
+//        sleep(100);
         slide.extendTo(slide.POSITIONS[slide.MIN]);
-        sleep(200);
+        elevator.extendTo(elevator.POSITIONS[elevator.HOME]);
+        sleep(50);
+        Servos.Gripper.Unlock();
+        sleep(150);
 
         Servos.Gripper.closeGripper();
         sleep(200);
@@ -249,12 +249,13 @@ public class LeftContestedHigh extends LinearOpMode
         sleep(400);
         slide.extendTo(slide.POSITIONS[slide.UNSAFE]);
         sleep(400);
-        elevator.extendTo(elevator.POSITIONS[elevator.HOME]);
-        sleep(10);
-        Servos.Gripper.Unlock();
-        sleep(400);
+//        Servos.Gripper.Unlock();
+//        sleep(100);
         slide.extendTo(slide.POSITIONS[slide.MIN]);
-        sleep(200);
+        elevator.extendTo(elevator.POSITIONS[elevator.HOME]);
+        sleep(50);
+        Servos.Gripper.Unlock();
+        sleep(150);
 
         Servos.Gripper.closeGripper();
         sleep(200);
@@ -273,18 +274,18 @@ public class LeftContestedHigh extends LinearOpMode
         sleep(100);
         Servos.Rotate.rotatePick();
         Servos.Arm.goActivePick4();
-
         drive.followTrajectorySequence(lock1);
         elevator.extendTo(elevator.POSITIONS[elevator.HIGH_POLE]);
         sleep(400);
         slide.extendTo(slide.POSITIONS[slide.UNSAFE]);
         sleep(400);
-        elevator.extendTo(elevator.POSITIONS[elevator.HOME]);
-        sleep(10);
-        Servos.Gripper.Unlock();
-        sleep(400);
+//        Servos.Gripper.Unlock();
+//        sleep(100);
         slide.extendTo(slide.POSITIONS[slide.MIN]);
-        sleep(200);
+        elevator.extendTo(elevator.POSITIONS[elevator.HOME]);
+        sleep(50);
+        Servos.Gripper.Unlock();
+        sleep(150);
 
         Servos.Gripper.closeGripper();
         sleep(200);
@@ -303,18 +304,18 @@ public class LeftContestedHigh extends LinearOpMode
         sleep(100);
         Servos.Rotate.rotatePick();
         Servos.Arm.goActivePick();
-
         drive.followTrajectorySequence(lock2);
         elevator.extendTo(elevator.POSITIONS[elevator.HIGH_POLE]);
         sleep(400);
         slide.extendTo(slide.POSITIONS[slide.UNSAFE]);
         sleep(400);
-        elevator.extendTo(elevator.POSITIONS[elevator.HOME]);
-        sleep(10);
-        Servos.Gripper.Unlock();
-        sleep(400);
+//        Servos.Gripper.Unlock();
+//        sleep(100);
         slide.extendTo(slide.POSITIONS[slide.MIN]);
-        sleep(200);
+        elevator.extendTo(elevator.POSITIONS[elevator.HOME]);
+        sleep(50);
+        Servos.Gripper.Unlock();
+        sleep(150);
 
         Servos.Gripper.closeGripper();
         sleep(200);
@@ -333,10 +334,11 @@ public class LeftContestedHigh extends LinearOpMode
         sleep(100);
         Servos.Rotate.rotatePick();
         Servos.Arm.goActiveStable();
-
         drive.followTrajectorySequence(lock1);
         elevator.extendTo(elevator.POSITIONS[elevator.HIGH_POLE]);
         sleep(800);
+//        Servos.Gripper.Unlock();
+//        sleep(100);
         elevator.extendTo(elevator.POSITIONS[elevator.HOME]);
         sleep(50);
         Servos.Gripper.Unlock();
@@ -378,7 +380,5 @@ public class LeftContestedHigh extends LinearOpMode
         telemetry.addLine(String.format("Rotation Pitch: %.2f degrees", Math.toDegrees(detection.pose.pitch)));
         telemetry.addLine(String.format("Rotation Roll: %.2f degrees", Math.toDegrees(detection.pose.roll)));
     }
-
-
 
 }
