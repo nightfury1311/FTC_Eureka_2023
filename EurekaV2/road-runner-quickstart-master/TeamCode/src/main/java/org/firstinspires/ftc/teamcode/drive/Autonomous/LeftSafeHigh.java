@@ -87,7 +87,7 @@ public class LeftSafeHigh extends LinearOpMode
         elevator.reset();
         slide.reset();
         Servos.Gripper.Lock();
-        Servos.Gripper.openGripper();
+        Servos.Gripper.closeGripper();
         Servos.Arm.goActiveStable();
         Servos.Arm.goDrop();
         Servos.Rotate.rotatePick();
@@ -108,8 +108,9 @@ public class LeftSafeHigh extends LinearOpMode
                 .addTemporalMarker(()->elevator.extendTo(elevator.POSITIONS[elevator.HIGH_POLE]))
                 .waitSeconds(0.7)
                 .addTemporalMarker(()->{Servos.Gripper.Unlock();Servos.Arm.goActivePick1();})
-                .waitSeconds(0.05)
                 .addTemporalMarker(()->elevator.extendTo(elevator.POSITIONS[elevator.HOME]))
+                .waitSeconds(0.05)
+                .addTemporalMarker(()->{Servos.Gripper.Unlock();})
 
 
                 ////// GO TO PICK CONE 1
@@ -132,8 +133,9 @@ public class LeftSafeHigh extends LinearOpMode
                 .addTemporalMarker(()->elevator.extendTo(elevator.POSITIONS[elevator.HIGH_POLE]))
                 .waitSeconds(0.9)
                 .addTemporalMarker(()->{Servos.Gripper.Unlock();Servos.Arm.goActivePick2();})
-                .waitSeconds(0.05)
                 .addTemporalMarker(()->elevator.extendTo(elevator.POSITIONS[elevator.HOME]))
+                .waitSeconds(0.05)
+                .addTemporalMarker(()->{Servos.Gripper.Unlock();})
 
                 ////// GO TO PICK CONE 2
                 .lineToLinearHeading(new Pose2d(-19,-12, Math.toRadians(0)))
@@ -154,8 +156,9 @@ public class LeftSafeHigh extends LinearOpMode
                 .addTemporalMarker(()->elevator.extendTo(elevator.POSITIONS[elevator.HIGH_POLE]))
                 .waitSeconds(0.9)
                 .addTemporalMarker(()->{Servos.Gripper.Unlock();Servos.Arm.goActivePick3();})
-                .waitSeconds(0.05)
                 .addTemporalMarker(()->elevator.extendTo(elevator.POSITIONS[elevator.HOME]))
+                .waitSeconds(0.05)
+                .addTemporalMarker(()->{Servos.Gripper.Unlock();})
 
                 ////// GO TO PICK CONE 3
                 .lineToLinearHeading(new Pose2d(-19,-12, Math.toRadians(0)))
@@ -176,8 +179,9 @@ public class LeftSafeHigh extends LinearOpMode
                 .addTemporalMarker(()->elevator.extendTo(elevator.POSITIONS[elevator.HIGH_POLE]))
                 .waitSeconds(0.9)
                 .addTemporalMarker(()->{Servos.Gripper.Unlock();Servos.Arm.goActivePick4();})
-                .waitSeconds(0.05)
                 .addTemporalMarker(()->elevator.extendTo(elevator.POSITIONS[elevator.HOME]))
+                .waitSeconds(0.05)
+                .addTemporalMarker(()->{Servos.Gripper.Unlock();})
 
                 ////// GO TO PICK CONE 4
                 .lineToLinearHeading(new Pose2d(-19,-12, Math.toRadians(0)))
@@ -198,8 +202,9 @@ public class LeftSafeHigh extends LinearOpMode
                 .addTemporalMarker(()->elevator.extendTo(elevator.POSITIONS[elevator.HIGH_POLE]))
                 .waitSeconds(0.9)
                 .addTemporalMarker(()->{Servos.Gripper.Unlock();Servos.Arm.goActivePick();})
-                .waitSeconds(0.05)
                 .addTemporalMarker(()->elevator.extendTo(elevator.POSITIONS[elevator.HOME]))
+                .waitSeconds(0.05)
+                .addTemporalMarker(()->{Servos.Gripper.Unlock();})
 
 
                 ////// GO TO PICK CONE 5
@@ -221,8 +226,9 @@ public class LeftSafeHigh extends LinearOpMode
                 .addTemporalMarker(()->elevator.extendTo(elevator.POSITIONS[elevator.HIGH_POLE]))
                 .waitSeconds(0.9)
                 .addTemporalMarker(()->{Servos.Gripper.Unlock();Servos.Arm.goActiveStable();})
-                .waitSeconds(0.05)
                 .addTemporalMarker(()->elevator.extendTo(elevator.POSITIONS[elevator.HOME]))
+                .waitSeconds(0.05)
+                .addTemporalMarker(()->{Servos.Gripper.Unlock();})
                 .waitSeconds(0.1)
                 .lineToLinearHeading(new Pose2d(-12,-12.001, Math.toRadians(90)))
 

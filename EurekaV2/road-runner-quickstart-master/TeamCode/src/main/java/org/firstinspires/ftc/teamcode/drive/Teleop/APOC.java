@@ -31,7 +31,7 @@ public class APOC extends LinearOpMode {
 
     public static int elevatortarget = 0;
     public static int HIGH = 660;   // HIGH POLE
-    public static int MID = 400;   // MID POLE
+    public static int MID = 410;   // MID POLE
     public static int LOW = 183;   // LOW POLE
     public static int slidertarget = 0;
 
@@ -93,6 +93,7 @@ public class APOC extends LinearOpMode {
         }
 
         TrajectorySequence transfer = drive.trajectorySequenceBuilder(new Pose2d())
+                .addTemporalMarker(()->{Servos.Gripper.Unlock();})
                 .addTemporalMarker(()->{slidertarget=MAX+50;})
                 .waitSeconds(0.1)
                 .addTemporalMarker(()->{Servos.Gripper.closeGripper();})
@@ -231,6 +232,7 @@ public class APOC extends LinearOpMode {
                 }
                 else if (SlideFinalPos < 100 && Servos.Arm.armState  == "PICKTELE") {   // Picking without extension
                     RB1Flag = 2;
+                    Servos.Gripper.Unlock();
                     Servos.Gripper.closeGripper();
                     sleep(200);
                     Servos.Rotate.rotateDrop();
@@ -247,6 +249,7 @@ public class APOC extends LinearOpMode {
                 }
                 else if (Servos.Arm.armState == "ActiveLow" || Servos.Arm.armState == "ActiveStable") {   // Dropping from arm home position
                     RB1Flag = 3;
+                    Servos.Gripper.Unlock();
                     Servos.Rotate.rotateDrop();
                     Servos.Arm.goActiveDrop();
                     sleep(200);
