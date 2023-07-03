@@ -43,7 +43,7 @@ public class APOC extends LinearOpMode {
     private DcMotorEx SlideLeft, SlideRight;
 
     public static double speed = 1;
-    public static double turn = 0.8;
+    public static double turn = 0.6;
 
     // Flags for toggle commands
 
@@ -201,7 +201,7 @@ public class APOC extends LinearOpMode {
                 turn = 0.2;
             } else {
                 speed = 1;
-                turn = 0.8;
+                turn = 0.6;
             }
 
 
@@ -374,6 +374,10 @@ public class APOC extends LinearOpMode {
             telemetry.addData("Current ElevateLeft", ElevateLeft.getCurrent(CurrentUnit.AMPS));
             telemetry.addData("Current SlideRight", SlideRight.getCurrent(CurrentUnit.AMPS));
             telemetry.addData("Current SlideLeft", SlideLeft.getCurrent(CurrentUnit.AMPS));
+            telemetry.addData("LeftFront", drive.leftFront.getCurrent(CurrentUnit.AMPS));
+            telemetry.addData("RightFront", drive.rightFront.getCurrent(CurrentUnit.AMPS));
+            telemetry.addData("LeftRear", drive.leftRear.getCurrent(CurrentUnit.AMPS));
+            telemetry.addData("RightRear", drive.rightRear.getCurrent(CurrentUnit.AMPS));
             telemetry.update();
 
         }
