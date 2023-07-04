@@ -20,6 +20,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.CurrentUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 
 import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
+@Disabled
 @Config
 @TeleOp(name = "ElevatorTest")
 public class ElevatorTest extends LinearOpMode {

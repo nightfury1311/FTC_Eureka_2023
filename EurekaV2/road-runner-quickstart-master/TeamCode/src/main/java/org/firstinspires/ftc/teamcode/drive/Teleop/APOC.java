@@ -86,7 +86,7 @@ public class APOC extends LinearOpMode {
         while ((opModeInInit())) {
             // Initialization - resetting all motors and servos
             Servos.Gripper.Unlock();
-            Servos.Gripper.openGripper();
+            Servos.Gripper.closeGripper();
             Servos.Arm.goActiveStable();
             Servos.Arm.goInit();
             Servos.Rotate.rotatePick();
@@ -97,14 +97,14 @@ public class APOC extends LinearOpMode {
                 .addTemporalMarker(()->{slidertarget=MAX+50;})
                 .waitSeconds(0.1)
                 .addTemporalMarker(()->{Servos.Gripper.closeGripper();})
-                .waitSeconds(0.1)
+                .waitSeconds(0.2)
                 .addTemporalMarker(()->{Servos.Arm.goInit();Servos.Arm.goActiveStable();slidertarget=HOME;})
                 .waitSeconds(0.2)
                 .addTemporalMarker(()->{Servos.Arm.goActiveDrop();Servos.Rotate.rotateDrop();})
                 .waitSeconds(0.4)
                 .addTemporalMarker(()->{Servos.Arm.goDrop();})
                 .waitSeconds(0.5)
-                .addTemporalMarker(()->{Servos.Gripper.openGripper();})
+                .addTemporalMarker(()->{Servos.Gripper.openGripperTele();})
                 .waitSeconds(0.1)
                 .addTemporalMarker(()->{Servos.Gripper.Lock();Servos.Arm.goInit();})
                 .waitSeconds(0.1)
@@ -123,7 +123,7 @@ public class APOC extends LinearOpMode {
                 .waitSeconds(0.4)
                 .addTemporalMarker(()->{Servos.Arm.goDrop();})
                 .waitSeconds(0.5)
-                .addTemporalMarker(()->{Servos.Gripper.openGripper();})
+                .addTemporalMarker(()->{Servos.Gripper.openGripperTele();})
                 .waitSeconds(0.1)
                 .addTemporalMarker(()->{Servos.Gripper.Lock();Servos.Arm.goPickTele();})
                 .waitSeconds(0.1)
@@ -208,20 +208,20 @@ public class APOC extends LinearOpMode {
             if (RTG1 > 0.7 && !RTG1Flag) {       // GRIPPER OPEN CLOSE
                 RTG1Flag = true;
                 if (Servos.Gripper.gripperState == "CLOSE") {   // If closed, then open
-                    Servos.Gripper.openGripper();
+                    Servos.Gripper.openGripperTele();
                 } else if (Servos.Gripper.gripperState == "OPEN") {     // If open, then close
                     Servos.Gripper.closeGripper();
                 }
             }
 
             if (LB1) {      // GOTO PICK CONES WITH SLIDERS
-                Servos.Gripper.Unlock();
+//                Servos.Gripper.Unlock();
                 Servos.Arm.goActivePick();
                 Servos.Rotate.rotatePick();
-                Servos.Gripper.openGripper();
+                Servos.Gripper.openGripperTele();
                 sleep(300);
                 Servos.Arm.goPickTele();
-                sleep(300);
+                sleep(100);
                 slidertarget=MAX;
             }
 
@@ -239,7 +239,7 @@ public class APOC extends LinearOpMode {
                     Servos.Arm.goActiveDrop();
                     Servos.Arm.goDrop();
                     sleep(800);
-                    Servos.Gripper.openGripper();
+                    Servos.Gripper.openGripperTele();
                     sleep(100);
                     Servos.Arm.goInit();
                     Servos.Gripper.Lock();
@@ -255,7 +255,7 @@ public class APOC extends LinearOpMode {
                     sleep(200);
                     Servos.Arm.goDrop();
                     sleep(300);
-                    Servos.Gripper.openGripper();
+                    Servos.Gripper.openGripperTele();
                     sleep(100);
                     Servos.Gripper.Lock();
                     Servos.Arm.goInit();
@@ -310,7 +310,7 @@ public class APOC extends LinearOpMode {
             }
 
             if (LEFT1) {              //CONE GRIPPING POSITION WITHOUT SLIDERS
-                Servos.Gripper.openGripper();
+                Servos.Gripper.openGripperTele();
                 Servos.Arm.goActivePick();
                 Servos.Rotate.rotatePick();
                 sleep(200);
@@ -330,11 +330,11 @@ public class APOC extends LinearOpMode {
 
             if (START1 && !START1Flag) {             // TRANSFER CYCLE
                 START1Flag = true;
-                if (Servos.Arm.armState == "INIT" && SlideFinalPos > 60) {
+                if (Servos.Arm.armState == "INIT" && SlideFinalPos < 60) {
                     Servos.Gripper.Unlock();
                     Servos.Arm.goActivePick();
                     Servos.Rotate.rotatePick();
-                    Servos.Gripper.openGripper();
+                    Servos.Gripper.openGripperTele();
                     sleep(300);
                     Servos.Arm.goPickTele();
                     sleep(300);
