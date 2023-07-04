@@ -70,6 +70,7 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
         public static String rotateState = "PICK";
         public static final double rotateDrop = 0.82;
         public static final double rotatePick = 0.17;
+        public static final double rotatePickLM = 0.3;
 
         public static void rotateDrop() {
             rotateState = "DROP";
@@ -78,6 +79,10 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
         public static void rotatePick() {
             rotateState = "PICK";
             servoRotate.setPosition(rotatePick);
+        }
+        public static void rotatePickLM() {
+            rotateState = "PICKLM";
+            servoRotate.setPosition(rotatePickLM);
         }
     }
     public static class Arm {

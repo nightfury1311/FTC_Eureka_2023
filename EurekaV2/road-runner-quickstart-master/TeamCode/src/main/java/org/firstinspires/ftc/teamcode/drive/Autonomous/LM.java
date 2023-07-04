@@ -20,7 +20,7 @@ import org.openftc.easyopencv.OpenCvCameraRotation;
 import java.util.ArrayList;
 
 @Autonomous
-public class LeftMid extends LinearOpMode
+public class LM extends LinearOpMode
 {
     Elevator elevator = null;
     Servos servos = null;
@@ -90,7 +90,7 @@ public class LeftMid extends LinearOpMode
         Servos.Gripper.closeGripper();
         Servos.Arm.goActiveStable();
         Servos.Arm.goDrop();
-        Servos.Rotate.rotatePick();
+        Servos.Rotate.rotatePickLM();
         slide.extendTo(slide.POSITIONS[slide.HOME]);
 
 
@@ -101,7 +101,7 @@ public class LeftMid extends LinearOpMode
         TrajectorySequence pre =drive.trajectorySequenceBuilder(startPose)
                 .lineToLinearHeading(new Pose2d(-34,-54, Math.toRadians(0)))  // dropping position
                 .waitSeconds(0.5)
-                .lineToLinearHeading(new Pose2d(-34, -18.5,Math.toRadians(-13)))
+                .lineToLinearHeading(new Pose2d(-34, -18,Math.toRadians(-16.5)))
                 .build();
 
         TrajectorySequence lock1 =drive.trajectorySequenceBuilder(pre.end())
@@ -214,7 +214,7 @@ public class LeftMid extends LinearOpMode
         Servos.Gripper.Lock();
         Servos.Arm.goPickCone2();
         sleep(100);
-        Servos.Rotate.rotatePick();
+        Servos.Rotate.rotatePickLM();
         Servos.Arm.goActivePick2();
 
 //        drive.followTrajectorySequence(lock1);
@@ -245,7 +245,7 @@ public class LeftMid extends LinearOpMode
         Servos.Gripper.Lock();
         Servos.Arm.goPickCone3();
         sleep(100);
-        Servos.Rotate.rotatePick();
+        Servos.Rotate.rotatePickLM();
         Servos.Arm.goActivePick3();
 
 //        drive.followTrajectorySequence(lock2);
@@ -276,7 +276,7 @@ public class LeftMid extends LinearOpMode
         Servos.Gripper.Lock();
         Servos.Arm.goPickCone4();
         sleep(100);
-        Servos.Rotate.rotatePick();
+        Servos.Rotate.rotatePickLM();
         Servos.Arm.goActivePick4();
 //        drive.followTrajectorySequence(lock1);
         elevator.extendTo(elevator.POSITIONS[elevator.MID_POLE]);
@@ -306,7 +306,7 @@ public class LeftMid extends LinearOpMode
         Servos.Gripper.Lock();
         Servos.Arm.goPick();
         sleep(100);
-        Servos.Rotate.rotatePick();
+        Servos.Rotate.rotatePickLM();
         Servos.Arm.goActivePick();
 //        drive.followTrajectorySequence(lock2);
         elevator.extendTo(elevator.POSITIONS[elevator.MID_POLE]);
@@ -336,7 +336,7 @@ public class LeftMid extends LinearOpMode
         Servos.Gripper.Lock();
         Servos.Arm.goInit();
         sleep(100);
-        Servos.Rotate.rotatePick();
+        Servos.Rotate.rotatePickLM();
         Servos.Arm.goActiveStable();
 //        drive.followTrajectorySequence(lock1);
         elevator.extendTo(elevator.POSITIONS[elevator.MID_POLE]);
