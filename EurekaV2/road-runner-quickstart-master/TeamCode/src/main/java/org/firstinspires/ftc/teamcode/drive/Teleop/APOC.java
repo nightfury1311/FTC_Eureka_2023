@@ -30,8 +30,8 @@ public class APOC extends LinearOpMode {
     public static double sliderp = 0.008, slideri = 0, sliderd = 0, sliderff = -0.2;
 
     public static int elevatortarget = 0;
-    public static int HIGH = 660;   // HIGH POLE
-    public static int MID = 410;   // MID POLE
+    public static int HIGH = 670;   // HIGH POLE
+    public static int MID = 420;   // MID POLE
     public static int LOW = 183;   // LOW POLE
     public static int slidertarget = 0;
 
@@ -43,7 +43,7 @@ public class APOC extends LinearOpMode {
     private DcMotorEx SlideLeft, SlideRight;
 
     public static double speed = 1;
-    public static double turn = 0.6;
+    public static double turn = 0.5;
 
     // Flags for toggle commands
 
@@ -340,7 +340,7 @@ public class APOC extends LinearOpMode {
                     sleep(300);
                     slidertarget=TEST;
                 }
-                else if (Servos.Arm.armState == "PICKTELE"){
+                else {
                     drive.followTrajectorySequenceAsync(cycle);
                 }
 
