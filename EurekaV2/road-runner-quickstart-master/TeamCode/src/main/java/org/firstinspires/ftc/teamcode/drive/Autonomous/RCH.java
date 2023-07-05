@@ -94,7 +94,7 @@ public class RCH extends LinearOpMode
         Servos.Arm.goActiveStable();
         Servos.Arm.goDrop();
         Servos.Rotate.rotatePick();
-        slide.extendTo(slide.POSITIONS[slide.HOME]);
+        slide.goTo(slide.POSITIONS[slide.HOME],1000,1000);
 
 
 //        SampleMecanumDrive drive = new SampleMecanumDrive(hardwareMap, telemetry);
@@ -187,16 +187,16 @@ public class RCH extends LinearOpMode
             sleep(20);
         }
         drive.followTrajectorySequence(pre);
-        elevator.goTo(elevator.POSITIONS[elevator.HIGH_POLE],10000,6500);
+        elevator.goTo(elevator.POSITIONS[elevator.HIGH_POLE],6000,6500);
         Servos.Gripper.openGripper();
         Servos.Arm.goActivePick1();
         Servos.Arm.goPickCone1();
         sleep(400);
-        slide.extendTo(slide.POSITIONS[slide.UNSAFE]);
+        slide.goTo(slide.POSITIONS[slide.UNSAFE],4000,5000);
         sleep(400);
 
         slide.extendTo(slide.POSITIONS[slide.MICRO]);
-        elevator.goTo(elevator.POSITIONS[elevator.HOME],10000,6500);
+        elevator.goTo(elevator.POSITIONS[elevator.HOME],6000,6500);
         sleep(50);
         Servos.Gripper.Unlock();
         sleep(150);
@@ -207,7 +207,7 @@ public class RCH extends LinearOpMode
         sleep(300);
         Servos.Rotate.rotateDrop();
         Servos.Arm.goActiveDrop();
-        slide.extendTo(slide.POSITIONS[slide.HOME]);
+        slide.goTo(slide.POSITIONS[slide.HOME],4000,5000);
         sleep(400);
         Servos.Arm.goDrop();
         sleep(400);
@@ -220,14 +220,14 @@ public class RCH extends LinearOpMode
         Servos.Arm.goActivePick2();
 
         drive.followTrajectorySequence(lock1);
-        elevator.goTo(elevator.POSITIONS[elevator.HIGH_POLE],10000,6500);
+        elevator.goTo(elevator.POSITIONS[elevator.HIGH_POLE],6000,6500);
         sleep(400);
-        slide.extendTo(slide.POSITIONS[slide.UNSAFE]);
+        slide.goTo(slide.POSITIONS[slide.UNSAFE],4000,5000);
         sleep(400);
 //        Servos.Gripper.Unlock();
 //        sleep(100);
-        slide.extendTo(slide.POSITIONS[slide.MIN]);
-        elevator.goTo(elevator.POSITIONS[elevator.HOME],10000,6500);
+        slide.goTo(slide.POSITIONS[slide.MIN],4000,5000);
+        elevator.goTo(elevator.POSITIONS[elevator.HOME],6000,6500);
         sleep(50);
         Servos.Gripper.Unlock();
         sleep(150);
@@ -238,7 +238,7 @@ public class RCH extends LinearOpMode
         sleep(300);
         Servos.Rotate.rotateDrop();
         Servos.Arm.goActiveDrop();
-        slide.extendTo(slide.POSITIONS[slide.HOME]);
+        slide.goTo(slide.POSITIONS[slide.HOME],4000,5000);
         sleep(400);
         Servos.Arm.goDrop();
         sleep(400);
@@ -251,14 +251,14 @@ public class RCH extends LinearOpMode
         Servos.Arm.goActivePick3();
 
         drive.followTrajectorySequence(lock2);
-        elevator.goTo(elevator.POSITIONS[elevator.HIGH_POLE],10000,6500);
+        elevator.goTo(elevator.POSITIONS[elevator.HIGH_POLE],6000,6500);
         sleep(400);
-        slide.extendTo(slide.POSITIONS[slide.UNSAFE]);
+        slide.goTo(slide.POSITIONS[slide.UNSAFE],4000,5000);
         sleep(400);
 //        Servos.Gripper.Unlock();
 //        sleep(100);
-        slide.extendTo(slide.POSITIONS[slide.MIN]);
-        elevator.goTo(elevator.POSITIONS[elevator.HOME],10000,6500);
+        slide.goTo(slide.POSITIONS[slide.MIN],4000,5000);
+        elevator.goTo(elevator.POSITIONS[elevator.HOME],6000,6500);
         sleep(50);
         Servos.Gripper.Unlock();
         sleep(150);
@@ -269,7 +269,7 @@ public class RCH extends LinearOpMode
         sleep(300);
         Servos.Rotate.rotateDrop();
         Servos.Arm.goActiveDrop();
-        slide.extendTo(slide.POSITIONS[slide.HOME]);
+        slide.goTo(slide.POSITIONS[slide.HOME],4000,5000);
         sleep(600);
         Servos.Arm.goDrop();
         sleep(300);
@@ -281,14 +281,14 @@ public class RCH extends LinearOpMode
         Servos.Rotate.rotatePick();
         Servos.Arm.goActivePick4();
         drive.followTrajectorySequence(lock1);
-        elevator.goTo(elevator.POSITIONS[elevator.HIGH_POLE],10000,6500);
+        elevator.goTo(elevator.POSITIONS[elevator.HIGH_POLE],6000,6500);
         sleep(400);
-        slide.extendTo(slide.POSITIONS[slide.UNSAFE]);
+        slide.goTo(slide.POSITIONS[slide.UNSAFE],4000,5000);
         sleep(400);
 //        Servos.Gripper.Unlock();
 //        sleep(100);
-        slide.extendTo(slide.POSITIONS[slide.MIN]);
-        elevator.goTo(elevator.POSITIONS[elevator.HOME],10000,6500);
+        slide.goTo(slide.POSITIONS[slide.MIN],4000,5000);
+        elevator.goTo(elevator.POSITIONS[elevator.HOME],6000,6500);
         sleep(50);
         Servos.Gripper.Unlock();
         sleep(150);
@@ -299,7 +299,7 @@ public class RCH extends LinearOpMode
         sleep(300);
         Servos.Rotate.rotateDrop();
         Servos.Arm.goActiveDrop();
-        slide.extendTo(slide.POSITIONS[slide.HOME]);
+        slide.goTo(slide.POSITIONS[slide.HOME],4000,5000);
         sleep(400);
         Servos.Arm.goDrop();
         sleep(250);
@@ -311,14 +311,14 @@ public class RCH extends LinearOpMode
         Servos.Rotate.rotatePick();
         Servos.Arm.goActivePick();
         drive.followTrajectorySequence(lock2);
-        elevator.goTo(elevator.POSITIONS[elevator.HIGH_POLE],10000,6500);
+        elevator.goTo(elevator.POSITIONS[elevator.HIGH_POLE],6000,6500);
         sleep(400);
-        slide.extendTo(slide.POSITIONS[slide.UNSAFE]);
+        slide.goTo(slide.POSITIONS[slide.UNSAFE],4000,5000);
         sleep(400);
 //        Servos.Gripper.Unlock();
 //        sleep(100);
-        slide.extendTo(slide.POSITIONS[slide.MIN]);
-        elevator.goTo(elevator.POSITIONS[elevator.HOME],10000,6500);
+        slide.goTo(slide.POSITIONS[slide.MIN],4000,5000);
+        elevator.goTo(elevator.POSITIONS[elevator.HOME],6000,6500);
         sleep(50);
         Servos.Gripper.Unlock();
         sleep(150);
@@ -329,7 +329,7 @@ public class RCH extends LinearOpMode
         sleep(100);
         Servos.Rotate.rotateDrop();
         Servos.Arm.goActiveDrop();
-        slide.extendTo(slide.POSITIONS[slide.HOME]);
+        slide.goTo(slide.POSITIONS[slide.HOME],4000,5000);
         sleep(600);
         Servos.Arm.goDrop();
         sleep(400);
@@ -341,11 +341,11 @@ public class RCH extends LinearOpMode
         Servos.Rotate.rotatePick();
         Servos.Arm.goActiveStable();
         drive.followTrajectorySequence(lock1);
-        elevator.goTo(elevator.POSITIONS[elevator.HIGH_POLE],10000,6500);
+        elevator.goTo(elevator.POSITIONS[elevator.HIGH_POLE],6000,6500);
         sleep(800);
 //        Servos.Gripper.Unlock();
 //        sleep(100);
-        elevator.goTo(elevator.POSITIONS[elevator.HOME],10000,6500);
+        elevator.goTo(elevator.POSITIONS[elevator.HOME],6000,6500);
         sleep(50);
         Servos.Gripper.Unlock();
         sleep(400);
