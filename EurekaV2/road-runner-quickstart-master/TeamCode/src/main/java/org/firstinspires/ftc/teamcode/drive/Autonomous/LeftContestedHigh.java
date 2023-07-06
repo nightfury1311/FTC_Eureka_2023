@@ -95,7 +95,7 @@ public class LeftContestedHigh extends LinearOpMode
 
 
         SampleMecanumDrive drive = new SampleMecanumDrive(hardwareMap, telemetry);
-        Pose2d startPose = new Pose2d(-30, -62, Math.toRadians(90));
+        Pose2d startPose = new Pose2d(-30.75, -64, Math.toRadians(90));
         drive.setPoseEstimate(startPose);
 
         TrajectorySequence pre =drive.trajectorySequenceBuilder(startPose)

@@ -18,7 +18,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.MotionDetection;
 public class ElevatorEx extends SubsystemBase {
     public DcMotorEx ElevateLeft, ElevateRight;
 
-    public ElapsedTime timer;
+    public ElapsedTime timer1;
     public double targetX;
 
     MotionProfile motionProfilex;
@@ -36,7 +36,7 @@ public class ElevatorEx extends SubsystemBase {
         ElevateLeft.setDirection(DcMotorEx.Direction.REVERSE);
         ElevateRight.setDirection(DcMotorEx.Direction.REVERSE);
 
-        timer = new ElapsedTime();
+        timer1 = new ElapsedTime();
     }
     public void extendTo(int position){
         ElevateLeft.setTargetPosition(position);
@@ -49,10 +49,10 @@ public class ElevatorEx extends SubsystemBase {
     }
 
     public void set(double elevatorPower) {
+        elevatorPower = Range.clip(elevatorPower, -1, 1);
         ElevateLeft.setPower(elevatorPower);
         ElevateRight.setPower(elevatorPower);
 
-        elevatorPower = Range.clip(elevatorPower, -1, 1);
     }
 
     public void extendToSlow(int position){
@@ -80,7 +80,7 @@ public class ElevatorEx extends SubsystemBase {
     }
 
     //Motion Profiling
-    public void goTo(double x, double maxVel, double maxAccel) {
+    public void goToElevator(double x, double maxVel, double maxAccel) {
         targetX = x;
         double currentx = ElevateRight.getCurrentPosition();
         motionProfilex = MotionProfileGenerator.generateSimpleMotionProfile(
@@ -89,12 +89,13 @@ public class ElevatorEx extends SubsystemBase {
                 maxVel,
                 maxAccel
         );
-        timer.reset();
+        timer1.reset();
     }
+
 
     public double update() {
         if (motionProfilex != null) {
-            MotionState xState = motionProfilex.get(timer.seconds());
+            MotionState xState = motionProfilex.get(timer1.seconds());
 
             return xState.getX();
         }

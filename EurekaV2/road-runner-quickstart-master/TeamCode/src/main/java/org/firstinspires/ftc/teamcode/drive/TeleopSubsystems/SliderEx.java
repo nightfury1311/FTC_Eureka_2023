@@ -31,6 +31,8 @@ public class SliderEx extends SubsystemBase {
         SlideRight = hardwareMap.get(DcMotorEx.class, "SlideRight");
         SlideRight.setDirection(DcMotorEx.Direction.REVERSE);
 //        SlideLeft.setDirection(DcMotorSimple.Direction.REVERSE);
+
+        timer = new ElapsedTime();
     }
     public void extendTo(int position){
 
@@ -44,10 +46,11 @@ public class SliderEx extends SubsystemBase {
     }
 
     public void set(double sliderPower) {
+        sliderPower = Range.clip(sliderPower, -1, 1);
         SlideLeft.setPower(sliderPower);
         SlideRight.setPower(sliderPower);
 
-        sliderPower = Range.clip(sliderPower, -1, 1);
+
     }
     public void extendToSlow(int position){
 
@@ -73,7 +76,7 @@ public class SliderEx extends SubsystemBase {
     }
 
     //Motion Profiling
-    public void goTo(double x, double maxVel, double maxAccel) {
+    public void goToSlider(double x, double maxVel, double maxAccel) {
         targetX = x;
         double currentx = SlideRight.getCurrentPosition();
         motionProfilex = MotionProfileGenerator.generateSimpleMotionProfile(

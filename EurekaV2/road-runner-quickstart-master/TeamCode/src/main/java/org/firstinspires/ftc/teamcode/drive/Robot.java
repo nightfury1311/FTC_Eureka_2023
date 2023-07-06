@@ -67,7 +67,7 @@ public class Robot extends SampleMecanumDrive {
         elevatorPower = Range.clip(elevatorPower,-1,1);
 
         robotElevator.set(elevatorPower);
-
+//
         sliderExController.setPID(Kp_slider, Ki_slider, Kd_slider);
         double currentSliderPosition = robotSlider.getPositionEx();
         double SliderPID = sliderExController.calculate(currentSliderPosition, robotSlider.update());
