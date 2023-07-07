@@ -15,58 +15,16 @@ public class MeepMeepTesting {
                 .setDimensions(14.3, 17)
                 .setConstraints(60, 60, Math.toRadians(180), Math.toRadians(180), 11.8)
                 .followTrajectorySequence(drive ->
-                                drive.trajectorySequenceBuilder(new Pose2d(-30, -62, Math.toRadians(90)))
-                                        .lineToLinearHeading(new Pose2d(-35,-54, Math.toRadians(0)))  // dropping position
-                                        .waitSeconds(0.5)
-                                        .lineToLinearHeading(new Pose2d(-35, -19,Math.toRadians(-15)))
-                                        .waitSeconds(5)
-
-
-                                        //PRELOAD
+                                drive.trajectorySequenceBuilder(new Pose2d(-31, -64, Math.toRadians(90)))
+                                        .lineToLinearHeading(new Pose2d(-12, -58, Math.toRadians(0)))
+                                        .lineToLinearHeading(new Pose2d(-12,-20, Math.toRadians(-16)))
+                                        .waitSeconds(1)
+                                        .setReversed(true)
+                                        .splineTo(new Vector2d(-37, -12), Math.toRadians(-12))
+                                        .splineTo(new Vector2d(-60, -12), Math.toRadians(0.00))
+//                                        .splineToLinearHeading(new Pose2d(30, -10, Math.toRadians(180)), Math.toRadians(196))
 //
-//                                        .waitSeconds(1)
-//
-//
-//                                        .lineToLinearHeading(new Pose2d(14,-12, Math.toRadians(180)))
-//                                        //1st Cone Pick
-//                                        .waitSeconds(2)
-//                                        .lineToLinearHeading(new Pose2d(12,-20, Math.toRadians(196)))
-//                                        //1st Cone Drop
-//                                        .waitSeconds(1)
-//
-//                                        .lineToLinearHeading(new Pose2d(14,-12, Math.toRadians(180)))
-//                                        //2nd Cone Pick
-//                                        .waitSeconds(2)
-//                                        .lineToLinearHeading(new Pose2d(12,-20, Math.toRadians(196)))
-//                                        //2nd Cone Drop
-//                                        .waitSeconds(1)
-//
-//                                        .lineToLinearHeading(new Pose2d(14,-12, Math.toRadians(180)))
-//                                        //3rd Cone Pick
-//                                        .waitSeconds(2)
-//                                        .lineToLinearHeading(new Pose2d(12,-20, Math.toRadians(196)))
-//                                        //3rd Cone Drop
-//                                        .waitSeconds(1)
-//
-//                                        .lineToLinearHeading(new Pose2d(14,-12, Math.toRadians(180)))
-//                                        //4th Cone Pick
-//                                        .waitSeconds(2)
-//                                        .lineToLinearHeading(new Pose2d(12,-20, Math.toRadians(196)))
-//                                        //4th Cone Drop
-//                                        .waitSeconds(1)
-//
-//                                        .lineToLinearHeading(new Pose2d(14,-12, Math.toRadians(180)))
-//                                        //5th Cone Pick
-//                                        .waitSeconds(2)
-//                                        .lineToLinearHeading(new Pose2d(12,-20, Math.toRadians(196)))
-//                                        //5th Cone Drop
-//                                        .waitSeconds(1)
-//
-//                                        .build()
-
-//                        drive.trajectorySequenceBuilder(new Pose2d(32, -62, Math.toRadians(180)))
-//                                .lineToConstantHeading(new Vector2d(12, -60))
-//                                .lineToLinearHeading(new Pose2d(12,-20, Math.toRadians(196)))
+//                                        .splineToSplineHeading(new Vector2d(60,-14, Math.toRadians(180)))
                                 .build()
                 );
 
