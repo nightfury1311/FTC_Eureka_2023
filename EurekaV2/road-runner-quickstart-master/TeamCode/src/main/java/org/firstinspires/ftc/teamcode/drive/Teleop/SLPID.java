@@ -21,7 +21,7 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.robotcore.external.navigation.CurrentUnit;
 import org.firstinspires.ftc.teamcode.drive.TeleopSubsystems.Servos;
 
-//@Disabled
+@Disabled
 @Config
 @TeleOp
 public class SLPID extends OpMode {

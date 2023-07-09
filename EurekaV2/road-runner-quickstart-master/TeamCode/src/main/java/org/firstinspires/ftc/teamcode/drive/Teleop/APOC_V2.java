@@ -18,7 +18,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.CurrentUnit;
 import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
 import org.firstinspires.ftc.teamcode.drive.TeleopSubsystems.Servos;
 import org.firstinspires.ftc.teamcode.trajectorysequence.TrajectorySequence;
-@Disabled
+//@Disabled
 @Config
 @TeleOp(name = "APOC_V2")
 public class APOC_V2 extends LinearOpMode {
@@ -57,6 +57,8 @@ public class APOC_V2 extends LinearOpMode {
     boolean B1Flag = false; // Locking
 
     boolean START1Flag = false;  // Cycle Flag
+
+    boolean RIGHT1Flag = false; // Low Pole + Stak 3 and 4 cone
     @Override
     public void runOpMode() throws InterruptedException {
 
@@ -212,7 +214,7 @@ public class APOC_V2 extends LinearOpMode {
 
             }
 
-            if (LTG1 > 0.7 || (Servos.Arm.armState  == "PICKTELE" && Servos.Gripper.gripperState == "CLOSE") )    // SLOW MODE
+            if (LTG1 > 0.7 || (Servos.Arm.armState  == "PICKTELE" && Servos.Gripper.gripperState == "CLOSE") || Servos.Arm.armState == "ONE" || Servos.Arm.armState == "TWO" || Servos.Arm.armState == "THREE" || Servos.Arm.armState == "FOUR" )    // SLOW MODE
             {
                 speed = 0.4;
                 turn = 0.2;
@@ -334,12 +336,32 @@ public class APOC_V2 extends LinearOpMode {
                 Servos.Arm.goPickTele();
             }
 
-            if (RIGHT1) {             //GOTO LOW POLE
-                Servos.Gripper.closeGripper();
-                sleep(200);
-                Servos.Arm.goInit();
-                Servos.Arm.goActiveLow();
-                slidertarget=HOME;
+//            if (RIGHT1) {             //GOTO LOW POLE
+//                Servos.Gripper.closeGripper();
+//                sleep(200);
+//                Servos.Arm.goInit();
+//                Servos.Arm.goActiveLow();
+//                slidertarget=HOME;
+//            }
+
+            if (RIGHT1 && !RIGHT1Flag) {    //GROUND JUNCTION TOGGLE
+                RIGHT1Flag = true;
+                if (Servos.Arm.armState == "THREE" || Servos.Arm.armState == "FOUR"  ) {
+                    Servos.Gripper.closeGripper();
+                    sleep(200);
+                    Servos.Arm.goPickCone2();
+                    slidertarget=HOME;
+                    sleep(100);
+                    Servos.Arm.goInit();
+                    Servos.Arm.goActiveLow();
+                } else{                             // Go to low pole + stack cone 1 and 2
+                    Servos.Gripper.closeGripper();
+                    sleep(200);
+                    Servos.Arm.goInit();
+                    Servos.Arm.goActiveLow();
+                    slidertarget=HOME;
+                   
+                }
             }
 
 
@@ -363,33 +385,67 @@ public class APOC_V2 extends LinearOpMode {
 
             }
 
-            while (LEFT2) {
-              slidertarget=slidertarget-5;
-              sleep(500);
+            //GAMEPAD 2 CONTROLS
+
+            if (LEFT2) {
+              slidertarget+=10;
+
             }
 
-            while (RIGHT2) {
-                slidertarget=slidertarget+5;
-                sleep(500);
+            if (RIGHT2) {
+                slidertarget-=10;
+
             }
 
-            while (UP2) {
-                elevatortarget=elevatortarget+5;
-                sleep(500);
+            if (UP2) {
+                elevatortarget+=5;
+
             }
 
-            while (DOWN2) {
-                elevatortarget=elevatortarget-5;
-                sleep(500);
+            if (DOWN2) {
+                elevatortarget-=10;
             }
 
-            if (BACK2){
+            if (Y2) {
+                Servos.Rotate.rotatePick();
+                Servos.Gripper.openGripperTele();
+                sleep(300);
+                Servos.Arm.goActivePick1();
+                Servos.Arm.goPickCone1();
+            } else if (B2) {
+                Servos.Rotate.rotatePick();
+                Servos.Gripper.openGripperTele();
+                sleep(300);
+                Servos.Arm.goActivePick2();
+                Servos.Arm.goPickCone2();
             }
-            // // FLAGS FOR TOGGLE COMMANDS\
+            else if (A2) {
+                Servos.Rotate.rotatePick();
+                Servos.Gripper.openGripperTele();
+                sleep(300);
+                Servos.Arm.goActivePick3();
+                Servos.Arm.goPickCone3();
+            }
+            else if (X2) {
+                Servos.Rotate.rotatePick();
+                Servos.Gripper.openGripperTele();
+                sleep(300);
+                Servos.Arm.goActivePick4();
+                Servos.Arm.goPickCone4();
+            }
+
+
+//            if (BACK2){
+//                ElevateLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+//                ElevateRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+//            }
+            // // FLAGS FOR TOGGLE COMMANDS
             if (!B1) {                //CONE TOGGLE FLAG
                 B1Flag = false;
             }
-
+            if (!RIGHT1) {                //LOW POLE FLAG || STACK 3 & 4
+               RIGHT1Flag = false;
+            }
             if (!X1) {                //GROUND JUNCTION TOGGLE FLAG
                 X1Flag = false;
             }
