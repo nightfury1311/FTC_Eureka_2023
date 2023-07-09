@@ -219,7 +219,7 @@ public class LSH extends LinearOpMode
                 .UNSTABLE_addTemporalMarkerOffset(0.6,()->Servos.Arm.goDrop())
                 .UNSTABLE_addTemporalMarkerOffset(0.8,()->Servos.Gripper.openGripper())
                 .UNSTABLE_addTemporalMarkerOffset(0.9,()->{Servos.Gripper.Lock();Servos.Arm.goInit();Servos.Rotate.rotatePick();Servos.Arm.goActiveStable();})
-                .lineToLinearHeading(new Pose2d(-12,-19, Math.toRadians(-16)))
+                .lineToLinearHeading(new Pose2d(-12,-19, Math.toRadians(-25)))
 
                 ///// DROP CONE 5
                 .waitSeconds(0.2)
@@ -230,15 +230,20 @@ public class LSH extends LinearOpMode
                 .waitSeconds(0.05)
                 .addTemporalMarker(()->{Servos.Gripper.Unlock();})
                 .waitSeconds(0.1)
-                .lineToLinearHeading(new Pose2d(-12,-12.001, Math.toRadians(90)))
 
                 .build();
 
 
         TrajectorySequence goToP1 = drive.trajectorySequenceBuilder((pre.end()))
-                .lineToLinearHeading(new Pose2d(-12,-12, Math.toRadians(90)))
-                .waitSeconds(0.001)
-                .lineToConstantHeading(new Vector2d(-60,-12))
+//                .lineToLinearHeading(new Pose2d(-12,-12, Math.toRadians(90)))
+//                .waitSeconds(0.001)
+//                .lineToConstantHeading(new Vector2d(-60,-12))
+//                .build();
+                .waitSeconds(0.2)
+                .setReversed(true)
+                .splineTo(new Vector2d(-37.89, -12.09), Math.toRadians(185))
+                .splineTo(new Vector2d(-59, -12.09), Math.toRadians(180.00))
+                .UNSTABLE_addTemporalMarkerOffset(0.6,()->{slide.extendTo(slide.POSITIONS[slide.HOME]);Servos.Arm.goDrop();})
                 .build();
 
         TrajectorySequence goToP2 = drive.trajectorySequenceBuilder((pre.end()))
