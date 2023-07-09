@@ -122,7 +122,7 @@ RightMid extends LinearOpMode
                 .build();
 
         TrajectorySequence goToP2 = drive.trajectorySequenceBuilder((park.end()))
-                .lineToConstantHeading(new Vector2d(36,-12))
+                .lineToConstantHeading(new Vector2d(36.001,-12))
                 .addTemporalMarker(()->slide.extendTo(slide.POSITIONS[slide.HOME]))
                 .build();
 
