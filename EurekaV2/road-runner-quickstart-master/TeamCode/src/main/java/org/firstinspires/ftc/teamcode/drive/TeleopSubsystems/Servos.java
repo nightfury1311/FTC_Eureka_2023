@@ -34,7 +34,7 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
     public static class Gripper {
         public static String gripperState = "OPEN";
         public static String lockState = "UNLOCK";
-        public static final double gripperOpenPosition = 0.5;
+        public static final double gripperOpenPosition = 0.51;
 
         public static final double gripperOpenTele = 0.47;
         public static final double gripperClosePosition = 0.7;

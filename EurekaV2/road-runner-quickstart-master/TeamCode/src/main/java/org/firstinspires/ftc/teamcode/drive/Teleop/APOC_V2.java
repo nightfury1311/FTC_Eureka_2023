@@ -360,7 +360,7 @@ public class APOC_V2 extends LinearOpMode {
                     Servos.Arm.goInit();
                     Servos.Arm.goActiveLow();
                     slidertarget=HOME;
-                   
+
                 }
             }
 

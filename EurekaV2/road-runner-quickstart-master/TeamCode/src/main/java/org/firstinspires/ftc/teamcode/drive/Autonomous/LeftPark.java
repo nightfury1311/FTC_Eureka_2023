@@ -3,7 +3,6 @@ package org.firstinspires.ftc.teamcode.drive.Autonomous;
 import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.acmerobotics.roadrunner.geometry.Vector2d;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
@@ -19,14 +18,13 @@ import org.openftc.easyopencv.OpenCvCameraFactory;
 import org.openftc.easyopencv.OpenCvCameraRotation;
 
 import java.util.ArrayList;
-@Disabled
+
 @Autonomous
-public class LeftMid extends LinearOpMode
+public class LeftPark extends LinearOpMode
 {
     Elevator elevator = null;
     Servos servos = null;
     Slide slide = null;
-
 
     OpenCvCamera camera;
     org.firstinspires.ftc.teamcode.Vision.AprilTagDetectionPipeline AprilTagDetectionPipeline;
@@ -56,8 +54,8 @@ public class LeftMid extends LinearOpMode
     @Override
     public void runOpMode() throws InterruptedException
     {
-        Pose2d PARKING1 = new Pose2d(13, -36, Math.toRadians(90));
-        Pose2d PARKING2 = new Pose2d(37.5, -27, Math.toRadians(90));
+        Pose2d PARKING1 = new Pose2d(12, -36, Math.toRadians(90));
+        Pose2d PARKING2 = new Pose2d(36, -27, Math.toRadians(90));
         Pose2d PARKING3 = new Pose2d(60, -24, Math.toRadians(90));
 
         int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
@@ -94,41 +92,30 @@ public class LeftMid extends LinearOpMode
         Servos.Rotate.rotatePick();
         slide.extendTo(slide.POSITIONS[slide.HOME]);
 
-
         SampleMecanumDrive drive = new SampleMecanumDrive(hardwareMap, telemetry);
         Pose2d startPose = new Pose2d(-30, -62, Math.toRadians(90));
         drive.setPoseEstimate(startPose);
 
-        TrajectorySequence pre =drive.trajectorySequenceBuilder(startPose)
-                .lineToLinearHeading(new Pose2d(-34,-54, Math.toRadians(0)))  // dropping position
-                .waitSeconds(0.5)
-                .lineToLinearHeading(new Pose2d(-34, -18.5,Math.toRadians(-13)))
-                .build();
+        TrajectorySequence park =drive.trajectorySequenceBuilder(startPose)
 
-        TrajectorySequence lock1 =drive.trajectorySequenceBuilder(pre.end())
-                .lineToLinearHeading(new Pose2d(-34.00001, -19.5001, Math.toRadians(-15)))
-                .build();
-        TrajectorySequence lock2 =drive.trajectorySequenceBuilder(lock1.end())
-                .lineToLinearHeading(new Pose2d(-34.001, -19.5, Math.toRadians(-15)))
-                .build();
-        TrajectorySequence park =drive.trajectorySequenceBuilder(lock1.end())
-
-                .lineToLinearHeading(new Pose2d(-36, -12,Math.toRadians(90)))
+                .lineToConstantHeading(new Vector2d(-35,-62))
+                .addTemporalMarker(()->slide.extendTo(slide.POSITIONS[slide.HOME]))
+                .lineToConstantHeading(new Vector2d(-35, -36))
                 .addTemporalMarker(()->{slide.extendTo(slide.POSITIONS[slide.HOME]);Servos.Arm.goDrop();})
                 .build();
 
         TrajectorySequence goToP1 = drive.trajectorySequenceBuilder((park.end()))
-                .lineToConstantHeading(new Vector2d(-60,-12))
+                .lineToConstantHeading(new Vector2d(-60, -36))
                 .addTemporalMarker(()->slide.extendTo(slide.POSITIONS[slide.HOME]))
                 .build();
 
         TrajectorySequence goToP2 = drive.trajectorySequenceBuilder((park.end()))
-                .lineToConstantHeading(new Vector2d(-36,-12))
+                .lineToConstantHeading(new Vector2d(-35.0001,-36))
                 .addTemporalMarker(()->slide.extendTo(slide.POSITIONS[slide.HOME]))
                 .build();
 
         TrajectorySequence goToP3 = drive.trajectorySequenceBuilder((park.end()))
-                .lineToConstantHeading(new Vector2d(-12,-12))
+                .lineToConstantHeading(new Vector2d(-12,-36))
                 .addTemporalMarker(()->slide.extendTo(slide.POSITIONS[slide.HOME]))
                 .build();
 
@@ -182,174 +169,8 @@ public class LeftMid extends LinearOpMode
             telemetry.update();
             sleep(20);
         }
-        drive.followTrajectorySequence(pre);
-
-        //preload
-        elevator.extendTo(elevator.POSITIONS[elevator.MID_POLE]);
-        Servos.Gripper.openGripper();
-        Servos.Arm.goActivePick1();
-        Servos.Arm.goPickCone1();
-        sleep(400);
-        slide.extendToSlow(slide.POSITIONS[slide.MIDMICRO]);
-        sleep(400);
-
-        slide.extendToSlow(slide.POSITIONS[slide.MID]);
-        elevator.extendTo(elevator.POSITIONS[elevator.HOME]);
-        sleep(50);
-        Servos.Gripper.Unlock();
-        sleep(150);
-
-        Servos.Gripper.closeGripper();
-        sleep(200);
-        Servos.Arm.goInit();
-        sleep(300);
-        Servos.Rotate.rotateDrop();
-        Servos.Arm.goActiveDrop();
-        slide.extendTo(slide.POSITIONS[slide.HOME]);
-        sleep(400);
-        Servos.Arm.goDrop();
-        sleep(400);
-        Servos.Gripper.openGripper();
-        sleep(100);
-        Servos.Gripper.Lock();
-        Servos.Arm.goPickCone2();
-        sleep(100);
-        Servos.Rotate.rotatePick();
-        Servos.Arm.goActivePick2();
-
-//        drive.followTrajectorySequence(lock1);
-        elevator.extendTo(elevator.POSITIONS[elevator.MID_POLE]);
-        sleep(400);
-        slide.extendToSlow(slide.POSITIONS[slide.MIDMICRO]);
-        sleep(400);
-//        Servos.Gripper.Unlock();
-//        sleep(100);
-        slide.extendToSlow(slide.POSITIONS[slide.MID]);
-        elevator.extendTo(elevator.POSITIONS[elevator.HOME]);
-        sleep(50);
-        Servos.Gripper.Unlock();
-        sleep(150);
-
-        Servos.Gripper.closeGripper();
-        sleep(200);
-        Servos.Arm.goInit();
-        sleep(300);
-        Servos.Rotate.rotateDrop();
-        Servos.Arm.goActiveDrop();
-        slide.extendTo(slide.POSITIONS[slide.HOME]);
-        sleep(400);
-        Servos.Arm.goDrop();
-        sleep(400);
-        Servos.Gripper.openGripper();
-        sleep(100);
-        Servos.Gripper.Lock();
-        Servos.Arm.goPickCone3();
-        sleep(100);
-        Servos.Rotate.rotatePick();
-        Servos.Arm.goActivePick3();
-
-//        drive.followTrajectorySequence(lock2);
-        elevator.extendTo(elevator.POSITIONS[elevator.MID_POLE]);
-        sleep(400);
-        slide.extendToSlow(slide.POSITIONS[slide.MIDMICRO]);
-        sleep(400);
-//        Servos.Gripper.Unlock();
-//        sleep(100);
-        slide.extendToSlow(slide.POSITIONS[slide.MID]);
-        elevator.extendTo(elevator.POSITIONS[elevator.HOME]);
-        sleep(50);
-        Servos.Gripper.Unlock();
-        sleep(150);
-
-        Servos.Gripper.closeGripper();
-        sleep(200);
-        Servos.Arm.goInit();
-        sleep(300);
-        Servos.Rotate.rotateDrop();
-        Servos.Arm.goActiveDrop();
-        slide.extendTo(slide.POSITIONS[slide.HOME]);
-        sleep(400);
-        Servos.Arm.goDrop();
-        sleep(250);
-        Servos.Gripper.openGripper();
-        sleep(100);
-        Servos.Gripper.Lock();
-        Servos.Arm.goPickCone4();
-        sleep(100);
-        Servos.Rotate.rotatePick();
-        Servos.Arm.goActivePick4();
-//        drive.followTrajectorySequence(lock1);
-        elevator.extendTo(elevator.POSITIONS[elevator.MID_POLE]);
-        sleep(400);
-        slide.extendToSlow(slide.POSITIONS[slide.MIDMICRO]);
-        sleep(400);
-//        Servos.Gripper.Unlock();
-//        sleep(100);
-        slide.extendToSlow(slide.POSITIONS[slide.MID]);
-        elevator.extendTo(elevator.POSITIONS[elevator.HOME]);
-        sleep(50);
-        Servos.Gripper.Unlock();
-        sleep(150);
-
-        Servos.Gripper.closeGripper();
-        sleep(200);
-        Servos.Arm.goInit();
-        sleep(300);
-        Servos.Rotate.rotateDrop();
-        Servos.Arm.goActiveDrop();
-        slide.extendTo(slide.POSITIONS[slide.HOME]);
-        sleep(400);
-        Servos.Arm.goDrop();
-        sleep(250);
-        Servos.Gripper.openGripper();
-        sleep(100);
-        Servos.Gripper.Lock();
-        Servos.Arm.goPick();
-        sleep(100);
-        Servos.Rotate.rotatePick();
-        Servos.Arm.goActivePick();
-//        drive.followTrajectorySequence(lock2);
-        elevator.extendTo(elevator.POSITIONS[elevator.MID_POLE]);
-        sleep(400);
-        slide.extendToSlow(slide.POSITIONS[slide.MIDMICRO]);
-        sleep(400);
-//        Servos.Gripper.Unlock();
-//        sleep(100);
-        slide.extendToSlow(slide.POSITIONS[slide.MID]);
-        elevator.extendTo(elevator.POSITIONS[elevator.HOME]);
-        sleep(50);
-        Servos.Gripper.Unlock();
-        sleep(150);
-
-        Servos.Gripper.closeGripper();
-        sleep(200);
-        Servos.Arm.goInit();
-        sleep(100);
-        Servos.Rotate.rotateDrop();
-        Servos.Arm.goActiveDrop();
-        slide.extendTo(slide.POSITIONS[slide.HOME]);
-        sleep(600);
-        Servos.Arm.goDrop();
-        sleep(400);
-        Servos.Gripper.openGripper();
-        sleep(100);
-        Servos.Gripper.Lock();
-        Servos.Arm.goInit();
-        sleep(100);
-        Servos.Rotate.rotatePick();
-        Servos.Arm.goActiveStable();
-//        drive.followTrajectorySequence(lock1);
-        elevator.extendTo(elevator.POSITIONS[elevator.MID_POLE]);
-        sleep(800);
-//        Servos.Gripper.Unlock();
-//        sleep(100);
-        elevator.extendTo(elevator.POSITIONS[elevator.HOME]);
-        sleep(50);
-        Servos.Gripper.Unlock();
-        sleep(400);
 
         drive.followTrajectorySequence(park);
-
 
         /*
          * The START command just came in: now work off the latest snapshot acquired
@@ -384,7 +205,5 @@ public class LeftMid extends LinearOpMode
         telemetry.addLine(String.format("Rotation Pitch: %.2f degrees", Math.toDegrees(detection.pose.pitch)));
         telemetry.addLine(String.format("Rotation Roll: %.2f degrees", Math.toDegrees(detection.pose.roll)));
     }
-
-
 
 }

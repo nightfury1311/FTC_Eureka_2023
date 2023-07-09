@@ -114,7 +114,7 @@ public class LeftSafeHigh extends LinearOpMode
 
 
                 ////// GO TO PICK CONE 1
-                .lineToLinearHeading(new Pose2d(-20.5,-12, Math.toRadians(0)))                 //picking position
+                .lineToLinearHeading(new Pose2d(-20,-12, Math.toRadians(0)))                 //picking position
                 .UNSTABLE_addTemporalMarkerOffset(-0.9,()->{slide.extendTo(slide.POSITIONS[slide.CONE1]);Servos.Arm.goPickCone1();})
 
                 .addTemporalMarker(()->{slide.extendTo(slide.POSITIONS[slide.CONE2]);Servos.Gripper.closeGripper();})
@@ -124,7 +124,7 @@ public class LeftSafeHigh extends LinearOpMode
                 .addTemporalMarker(()->{slide.extendTo(slide.POSITIONS[slide.HOME]);Servos.Rotate.rotateDrop();Servos.Arm.goActiveDrop();})
                 .UNSTABLE_addTemporalMarkerOffset(0.6,()->Servos.Arm.goDrop())
                 .UNSTABLE_addTemporalMarkerOffset(0.8,()->Servos.Gripper.openGripper())
-                .UNSTABLE_addTemporalMarkerOffset(0.85,()->{Servos.Gripper.Lock();Servos.Arm.goInit();Servos.Rotate.rotatePick();})
+                .UNSTABLE_addTemporalMarkerOffset(0.9,()->{Servos.Gripper.Lock();Servos.Arm.goInit();Servos.Rotate.rotatePick();Servos.Arm.goActiveStable();})
                 .lineToLinearHeading(new Pose2d(-12,-20, Math.toRadians(-16)))
 
 
@@ -138,7 +138,7 @@ public class LeftSafeHigh extends LinearOpMode
                 .addTemporalMarker(()->{Servos.Gripper.Unlock();})
 
                 ////// GO TO PICK CONE 2
-                .lineToLinearHeading(new Pose2d(-20,-12, Math.toRadians(0)))
+                .lineToLinearHeading(new Pose2d(-19,-12, Math.toRadians(0)))
                 .UNSTABLE_addTemporalMarkerOffset(-0.9,()->{slide.extendTo(slide.POSITIONS[slide.CONE2]);Servos.Arm.goPickCone2();})
 
                 .addTemporalMarker(()->{slide.extendTo(slide.POSITIONS[slide.CONE3]);Servos.Gripper.closeGripper();})
@@ -148,7 +148,7 @@ public class LeftSafeHigh extends LinearOpMode
                 .addTemporalMarker(()->{slide.extendTo(slide.POSITIONS[slide.HOME]);Servos.Rotate.rotateDrop();Servos.Arm.goActiveDrop();})
                 .UNSTABLE_addTemporalMarkerOffset(0.6,()->Servos.Arm.goDrop())
                 .UNSTABLE_addTemporalMarkerOffset(0.8,()->Servos.Gripper.openGripper())
-                .UNSTABLE_addTemporalMarkerOffset(0.87,()->{Servos.Gripper.Lock();Servos.Arm.goInit();Servos.Rotate.rotatePick();})
+                .UNSTABLE_addTemporalMarkerOffset(0.87,()->{Servos.Gripper.Lock();Servos.Arm.goInit();Servos.Rotate.rotatePick();Servos.Arm.goActiveStable();})
                 .lineToLinearHeading(new Pose2d(-12,-20, Math.toRadians(-16)))
 
                 ///// DROP CONE 2
@@ -161,7 +161,7 @@ public class LeftSafeHigh extends LinearOpMode
                 .addTemporalMarker(()->{Servos.Gripper.Unlock();})
 
                 ////// GO TO PICK CONE 3
-                .lineToLinearHeading(new Pose2d(-20,-11.3, Math.toRadians(0)))
+                .lineToLinearHeading(new Pose2d(-19,-12, Math.toRadians(0)))
                 .UNSTABLE_addTemporalMarkerOffset(-0.9,()->{slide.extendTo(slide.POSITIONS[slide.CONE3]);Servos.Arm.goPickCone3();})
 
                 .addTemporalMarker(()->{slide.extendTo(slide.POSITIONS[slide.CONE4]);Servos.Gripper.closeGripper();})
@@ -171,8 +171,8 @@ public class LeftSafeHigh extends LinearOpMode
                 .addTemporalMarker(()->{slide.extendTo(slide.POSITIONS[slide.HOME]);Servos.Rotate.rotateDrop();Servos.Arm.goActiveDrop();})
                 .UNSTABLE_addTemporalMarkerOffset(0.6,()->Servos.Arm.goDrop())
                 .UNSTABLE_addTemporalMarkerOffset(0.8,()->Servos.Gripper.openGripper())
-                .UNSTABLE_addTemporalMarkerOffset(0.87,()->{Servos.Gripper.Lock();Servos.Arm.goInit();Servos.Rotate.rotatePick();})
-                .lineToLinearHeading(new Pose2d(-12,-19, Math.toRadians(-16)))
+                .UNSTABLE_addTemporalMarkerOffset(0.9,()->{Servos.Gripper.Lock();Servos.Arm.goInit();Servos.Rotate.rotatePick();Servos.Arm.goActiveStable();})
+                .lineToLinearHeading(new Pose2d(-12,-20, Math.toRadians(-16)))
 
                 ///// DROP CONE 3
                 .waitSeconds(0.2)
@@ -184,7 +184,7 @@ public class LeftSafeHigh extends LinearOpMode
                 .addTemporalMarker(()->{Servos.Gripper.Unlock();})
 
                 ////// GO TO PICK CONE 4
-                .lineToLinearHeading(new Pose2d(-20,-11, Math.toRadians(0)))
+                .lineToLinearHeading(new Pose2d(-19,-12, Math.toRadians(0)))
                 .UNSTABLE_addTemporalMarkerOffset(-0.9,()->{slide.extendTo(slide.POSITIONS[slide.CONE4]);Servos.Arm.goPickCone4();})
 
                 .addTemporalMarker(()->{slide.extendTo(slide.POSITIONS[slide.CONE4]);Servos.Gripper.closeGripper();})
@@ -194,8 +194,8 @@ public class LeftSafeHigh extends LinearOpMode
                 .addTemporalMarker(()->{slide.extendTo(slide.POSITIONS[slide.HOME]);Servos.Rotate.rotateDrop();Servos.Arm.goActiveDrop();})
                 .UNSTABLE_addTemporalMarkerOffset(0.6,()->Servos.Arm.goDrop())
                 .UNSTABLE_addTemporalMarkerOffset(0.8,()->Servos.Gripper.openGripper())
-                .UNSTABLE_addTemporalMarkerOffset(0.9,()->{Servos.Gripper.Lock();Servos.Arm.goInit();Servos.Rotate.rotatePick();})
-                .lineToLinearHeading(new Pose2d(-12,-19, Math.toRadians(-16)))
+                .UNSTABLE_addTemporalMarkerOffset(0.9,()->{Servos.Gripper.Lock();Servos.Arm.goInit();Servos.Rotate.rotatePick();Servos.Arm.goActiveStable();})
+                .lineToLinearHeading(new Pose2d(-12,-20, Math.toRadians(-16)))
 
                 ///// DROP CONE 4
                 .waitSeconds(0.25)
@@ -208,7 +208,7 @@ public class LeftSafeHigh extends LinearOpMode
 
 
                 ////// GO TO PICK CONE 5
-                .lineToLinearHeading(new Pose2d(-20,-11, Math.toRadians(0)))
+                .lineToLinearHeading(new Pose2d(-19,-12, Math.toRadians(0)))
                 .UNSTABLE_addTemporalMarkerOffset(-0.9,()->{slide.extendTo(slide.POSITIONS[slide.CONE5]);Servos.Arm.goPick();})
                 .waitSeconds(0.25)
                 .addTemporalMarker(()->{Servos.Gripper.closeGripper();})
@@ -218,8 +218,8 @@ public class LeftSafeHigh extends LinearOpMode
                 .addTemporalMarker(()->{slide.extendTo(slide.POSITIONS[slide.HOME]);Servos.Rotate.rotateDrop();Servos.Arm.goActiveDrop();})
                 .UNSTABLE_addTemporalMarkerOffset(0.6,()->Servos.Arm.goDrop())
                 .UNSTABLE_addTemporalMarkerOffset(0.8,()->Servos.Gripper.openGripper())
-                .UNSTABLE_addTemporalMarkerOffset(0.9,()->{Servos.Gripper.Lock();Servos.Arm.goInit();Servos.Rotate.rotatePick();})
-                .lineToLinearHeading(new Pose2d(-12,-19, Math.toRadians(-16)))
+                .UNSTABLE_addTemporalMarkerOffset(0.9,()->{Servos.Gripper.Lock();Servos.Arm.goInit();Servos.Rotate.rotatePick();Servos.Arm.goActiveStable();})
+                .lineToLinearHeading(new Pose2d(-12,-20, Math.toRadians(-16)))
 
                 ///// DROP CONE 5
                 .waitSeconds(0.2)
@@ -229,16 +229,16 @@ public class LeftSafeHigh extends LinearOpMode
                 .addTemporalMarker(()->elevator.extendTo(elevator.POSITIONS[elevator.HOME]))
                 .waitSeconds(0.05)
                 .addTemporalMarker(()->{Servos.Gripper.Unlock();})
-                .waitSeconds(0.1)
-                .lineToLinearHeading(new Pose2d(-12,-12.001, Math.toRadians(90)))
 
                 .build();
 
 
         TrajectorySequence goToP1 = drive.trajectorySequenceBuilder((pre.end()))
-                .lineToLinearHeading(new Pose2d(-12,-12, Math.toRadians(90)))
-                .waitSeconds(0.001)
-                .lineToConstantHeading(new Vector2d(-60,-12))
+                .waitSeconds(0.2)
+                .setReversed(true)
+                .splineTo(new Vector2d(-37.89, -12.09), Math.toRadians(185))
+                .splineTo(new Vector2d(-59, -12.09), Math.toRadians(180.00))
+                .addTemporalMarker(()->{slide.extendTo(slide.POSITIONS[slide.HOME]);Servos.Arm.goDrop();})
                 .build();
 
         TrajectorySequence goToP2 = drive.trajectorySequenceBuilder((pre.end()))
@@ -249,7 +249,7 @@ public class LeftSafeHigh extends LinearOpMode
 
         TrajectorySequence goToP3 = drive.trajectorySequenceBuilder((pre.end()))
                 .waitSeconds(0.3)
-                .lineToLinearHeading(new Pose2d(-13,-20, Math.toRadians(90)))
+                .lineToLinearHeading(new Pose2d(-12.001,-20, Math.toRadians(90)))
                 .build();
 
         while (!isStarted() && !isStopRequested())

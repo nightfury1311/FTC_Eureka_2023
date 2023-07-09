@@ -124,7 +124,7 @@ public class RSH extends LinearOpMode
                 .addTemporalMarker(()->{slide.extendTo(slide.POSITIONS[slide.HOME]);Servos.Rotate.rotateDrop();Servos.Arm.goActiveDrop();})
                 .UNSTABLE_addTemporalMarkerOffset(0.6,()->Servos.Arm.goDrop())
                 .UNSTABLE_addTemporalMarkerOffset(0.8,()->Servos.Gripper.openGripper())
-                .UNSTABLE_addTemporalMarkerOffset(0.9,()->{Servos.Gripper.Lock();Servos.Arm.goInit();Servos.Rotate.rotatePick();})
+                .UNSTABLE_addTemporalMarkerOffset(0.9,()->{Servos.Gripper.Lock();Servos.Arm.goInit();Servos.Rotate.rotatePick();Servos.Arm.goActiveStable();})
                 .lineToLinearHeading(new Pose2d(12,-20, Math.toRadians(196)))
 
 
@@ -148,7 +148,7 @@ public class RSH extends LinearOpMode
                 .addTemporalMarker(()->{slide.extendTo(slide.POSITIONS[slide.HOME]);Servos.Rotate.rotateDrop();Servos.Arm.goActiveDrop();})
                 .UNSTABLE_addTemporalMarkerOffset(0.6,()->Servos.Arm.goDrop())
                 .UNSTABLE_addTemporalMarkerOffset(0.8,()->Servos.Gripper.openGripper())
-                .UNSTABLE_addTemporalMarkerOffset(0.9,()->{Servos.Gripper.Lock();Servos.Arm.goInit();Servos.Rotate.rotatePick();})
+                .UNSTABLE_addTemporalMarkerOffset(0.9,()->{Servos.Gripper.Lock();Servos.Arm.goInit();Servos.Rotate.rotatePick();Servos.Arm.goActiveStable();})
                 .lineToLinearHeading(new Pose2d(12,-20, Math.toRadians(196)))
 
                 ///// DROP CONE 2
@@ -171,7 +171,7 @@ public class RSH extends LinearOpMode
                 .addTemporalMarker(()->{slide.extendTo(slide.POSITIONS[slide.HOME]);Servos.Rotate.rotateDrop();Servos.Arm.goActiveDrop();})
                 .UNSTABLE_addTemporalMarkerOffset(0.6,()->Servos.Arm.goDrop())
                 .UNSTABLE_addTemporalMarkerOffset(0.8,()->Servos.Gripper.openGripper())
-                .UNSTABLE_addTemporalMarkerOffset(0.9,()->{Servos.Gripper.Lock();Servos.Arm.goInit();Servos.Rotate.rotatePick();})
+                .UNSTABLE_addTemporalMarkerOffset(0.9,()->{Servos.Gripper.Lock();Servos.Arm.goInit();Servos.Rotate.rotatePick();Servos.Arm.goActiveStable();})
                 .lineToLinearHeading(new Pose2d(12,-20, Math.toRadians(196)))
 
                 ///// DROP CONE 3
@@ -194,7 +194,7 @@ public class RSH extends LinearOpMode
                 .addTemporalMarker(()->{slide.extendTo(slide.POSITIONS[slide.HOME]);Servos.Rotate.rotateDrop();Servos.Arm.goActiveDrop();})
                 .UNSTABLE_addTemporalMarkerOffset(0.6,()->Servos.Arm.goDrop())
                 .UNSTABLE_addTemporalMarkerOffset(0.8,()->Servos.Gripper.openGripper())
-                .UNSTABLE_addTemporalMarkerOffset(0.9,()->{Servos.Gripper.Lock();Servos.Arm.goInit();Servos.Rotate.rotatePick();})
+                .UNSTABLE_addTemporalMarkerOffset(0.9,()->{Servos.Gripper.Lock();Servos.Arm.goInit();Servos.Rotate.rotatePick();Servos.Arm.goActiveStable();})
                 .lineToLinearHeading(new Pose2d(12,-20, Math.toRadians(196)))
 
                 ///// DROP CONE 4
@@ -218,13 +218,13 @@ public class RSH extends LinearOpMode
                 .addTemporalMarker(()->{slide.extendTo(slide.POSITIONS[slide.HOME]);Servos.Rotate.rotateDrop();Servos.Arm.goActiveDrop();})
                 .UNSTABLE_addTemporalMarkerOffset(0.6,()->Servos.Arm.goDrop())
                 .UNSTABLE_addTemporalMarkerOffset(0.8,()->Servos.Gripper.openGripper())
-                .UNSTABLE_addTemporalMarkerOffset(0.9,()->{Servos.Gripper.Lock();Servos.Arm.goInit();Servos.Rotate.rotatePick();})
-                .lineToLinearHeading(new Pose2d(12,-20, Math.toRadians(205)))
+                .UNSTABLE_addTemporalMarkerOffset(0.9,()->{Servos.Gripper.Lock();Servos.Arm.goInit();Servos.Rotate.rotatePick();Servos.Arm.goActiveStable();})
+                .lineToLinearHeading(new Pose2d(12,-20, Math.toRadians(196)))
 
                 ///// DROP CONE 5
                 .waitSeconds(0.2)
                 .addTemporalMarker(()->elevator.extendTo(elevator.POSITIONS[elevator.HIGH_POLE]))
-                .waitSeconds(0.9)
+                .waitSeconds(0.8)
                 .addTemporalMarker(()->{Servos.Arm.goActiveStable();})
                 .addTemporalMarker(()->elevator.extendTo(elevator.POSITIONS[elevator.HOME]))
                 .waitSeconds(0.05)
@@ -236,14 +236,9 @@ public class RSH extends LinearOpMode
         TrajectorySequence goToP1 = drive.trajectorySequenceBuilder((pre.end()))
                 .waitSeconds(0.2)
                 .lineToLinearHeading(new Pose2d(12,-12.001, Math.toRadians(90)))
-                .waitSeconds(0.001)
-                .lineToLinearHeading(new Pose2d(13,-20, Math.toRadians(90)))
                 .build();
 
         TrajectorySequence goToP2 = drive.trajectorySequenceBuilder((pre.end()))
-                .waitSeconds(0.2)
-                .lineToLinearHeading(new Pose2d(12,-12.001, Math.toRadians(90)))
-                .waitSeconds(0.001)
                 .lineToLinearHeading(new Pose2d(12,-12, Math.toRadians(90)))
                 .waitSeconds(0.001)
                 .lineToConstantHeading(new Vector2d(36,-12))
@@ -254,6 +249,7 @@ public class RSH extends LinearOpMode
                 .setReversed(true)
                 .splineTo(new Vector2d(37.89, -12.09), Math.toRadians(7.34))
                 .splineTo(new Vector2d(60.28, -11.49), Math.toRadians(0.00))
+                .UNSTABLE_addTemporalMarkerOffset(0.6,()->{slide.extendTo(slide.POSITIONS[slide.HOME]);Servos.Arm.goDrop();})
                 .build();
 
         while (!isStarted() && !isStopRequested())

@@ -112,22 +112,22 @@ public class LeftContestedHigh extends LinearOpMode
         TrajectorySequence park =drive.trajectorySequenceBuilder(lock1.end())
 
                 .lineToLinearHeading(new Pose2d(-36, -12,Math.toRadians(90)))
+                .addTemporalMarker(()->{slide.extendTo(slide.POSITIONS[slide.HOME]);Servos.Arm.goDrop();})
                 .build();
 
         TrajectorySequence goToP1 = drive.trajectorySequenceBuilder((park.end()))
                 .lineToConstantHeading(new Vector2d(-60,-12))
-                .waitSeconds(0.001)
-                .lineToConstantHeading(new Vector2d(-60,-24))
+                .addTemporalMarker(()->slide.extendTo(slide.POSITIONS[slide.HOME]))
                 .build();
 
         TrajectorySequence goToP2 = drive.trajectorySequenceBuilder((park.end()))
-                .lineToConstantHeading(new Vector2d(-36,-24))
+                .lineToConstantHeading(new Vector2d(-36,-12.0001))
+                .addTemporalMarker(()->slide.extendTo(slide.POSITIONS[slide.HOME]))
                 .build();
 
         TrajectorySequence goToP3 = drive.trajectorySequenceBuilder((park.end()))
                 .lineToConstantHeading(new Vector2d(-12,-12))
-                .waitSeconds(0.001)
-                .lineToConstantHeading(new Vector2d(-12,-24))
+                .addTemporalMarker(()->slide.extendTo(slide.POSITIONS[slide.HOME]))
                 .build();
 
         while (!isStarted() && !isStopRequested())
