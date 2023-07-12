@@ -101,6 +101,7 @@ public class RightContestedHigh extends LinearOpMode
         TrajectorySequence pre =drive.trajectorySequenceBuilder(startPose)
 
                 .lineToLinearHeading(new Pose2d(35,-54, Math.toRadians(180)))  // dropping position
+                .waitSeconds(2)
                 .lineToLinearHeading(new Pose2d(37, -4,Math.toRadians(165)))
                 .build();
         TrajectorySequence lock1 =drive.trajectorySequenceBuilder(pre.end())

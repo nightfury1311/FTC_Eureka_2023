@@ -101,7 +101,7 @@ RightMid extends LinearOpMode
 
         TrajectorySequence pre =drive.trajectorySequenceBuilder(startPose)
                 .lineToLinearHeading(new Pose2d(35,-54, Math.toRadians(180)))  // dropping position
-                .waitSeconds(0.5)
+                .waitSeconds(2)
                 .lineToLinearHeading(new Pose2d(35, -19,Math.toRadians(195)))
                 .build();
         TrajectorySequence lock1 =drive.trajectorySequenceBuilder(pre.end())

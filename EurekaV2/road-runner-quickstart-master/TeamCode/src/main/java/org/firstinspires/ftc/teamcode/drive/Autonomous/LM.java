@@ -100,7 +100,7 @@ public class LM extends LinearOpMode
 
         TrajectorySequence pre =drive.trajectorySequenceBuilder(startPose)
                 .lineToLinearHeading(new Pose2d(-34,-54, Math.toRadians(0)))  // dropping position
-                .waitSeconds(0.5)
+                .waitSeconds(2)
                 .lineToLinearHeading(new Pose2d(-34, -18,Math.toRadians(-16.5)))
                 .build();
 
