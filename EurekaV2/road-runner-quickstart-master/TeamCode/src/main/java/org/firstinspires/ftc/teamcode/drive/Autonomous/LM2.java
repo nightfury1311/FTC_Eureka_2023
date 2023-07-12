@@ -200,7 +200,7 @@ public class LM2 extends LinearOpMode
         sleep(300);
 
         Servos.Gripper.closeGripper();
-        sleep(200);
+        sleep(300);
         Servos.Arm.goInit();
         sleep(300);
         Servos.Rotate.rotateDrop();
@@ -229,7 +229,7 @@ public class LM2 extends LinearOpMode
         sleep(300);
 
         Servos.Gripper.closeGripper();
-        sleep(200);
+        sleep(300);
         Servos.Arm.goInit();
         sleep(300);
         Servos.Rotate.rotateDrop();
@@ -287,7 +287,7 @@ public class LM2 extends LinearOpMode
         sleep(300);
 
         Servos.Gripper.closeGripper();
-        sleep(200);
+        sleep(300);
         Servos.Arm.goInit();
         sleep(300);
         Servos.Rotate.rotateDrop();
@@ -299,10 +299,10 @@ public class LM2 extends LinearOpMode
         Servos.Gripper.openGripper();
         sleep(100);
         Servos.Gripper.Lock();
-        Servos.Arm.goPick();
+        Servos.Arm.goInit();
         sleep(100);
-        Servos.Rotate.rotatePickLM();
-        Servos.Arm.goActivePick();
+        Servos.Rotate.rotatePick();
+        Servos.Arm.goActiveStable();
 
         elevator.extendTo(elevator.POSITIONS[elevator.MID_POLE]);
         sleep(1000);

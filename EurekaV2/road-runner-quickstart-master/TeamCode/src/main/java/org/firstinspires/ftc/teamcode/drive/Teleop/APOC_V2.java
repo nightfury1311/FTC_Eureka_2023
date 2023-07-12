@@ -28,7 +28,10 @@ public class APOC_V2 extends LinearOpMode {
     private PIDController elevatorcontroller;
     private PIDController slidercontroller;
     public static double elevatorp = 0.006, elevatori = 0, elevatord = 0, elevatorff = -0.14;
-    public static double sliderp = 0.008, slideri = 0, sliderd = 0, sliderff = -0.2;
+//    public static double sliderp = 0.008, slideri = 0, sliderd = 0, sliderff = -0.2;
+
+    public static double sliderp = 0.0043, slideri = 0.0099, sliderd = 0, sliderff = -0.145;//Sydney
+
 
     public static int elevatortarget = 0;
     public static int HIGH = 670;   // HIGH POLE
