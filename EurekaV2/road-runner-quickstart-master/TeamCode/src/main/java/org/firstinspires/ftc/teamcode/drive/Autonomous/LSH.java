@@ -219,7 +219,7 @@ public class LSH extends LinearOpMode
                 .UNSTABLE_addTemporalMarkerOffset(0.6,()->Servos.Arm.goDrop())
                 .UNSTABLE_addTemporalMarkerOffset(0.8,()->Servos.Gripper.openGripper())
                 .UNSTABLE_addTemporalMarkerOffset(0.9,()->{Servos.Gripper.Lock();Servos.Arm.goInit();Servos.Rotate.rotatePick();Servos.Arm.goActiveStable();})
-                .lineToLinearHeading(new Pose2d(-12,-19, Math.toRadians(-25)))
+                .lineToLinearHeading(new Pose2d(-12,-17, Math.toRadians(-25)))
 
                 ///// DROP CONE 5
                 .waitSeconds(0.2)

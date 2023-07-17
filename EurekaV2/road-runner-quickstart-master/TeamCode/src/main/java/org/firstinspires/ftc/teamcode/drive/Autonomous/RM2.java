@@ -183,8 +183,6 @@ RM2 extends LinearOpMode
         }
         drive.followTrajectorySequence(pre);
 
-        //preload
-        drive.followTrajectorySequence(pre);
 
         //preload
         elevator.extendTo(elevator.POSITIONS[elevator.MID_POLE]);
@@ -192,13 +190,13 @@ RM2 extends LinearOpMode
         Servos.Arm.goActivePick1();
         Servos.Arm.goPickCone1();
         sleep(400);
-        slide.extendToSlow(slide.POSITIONS[slide.MIDMICRO]);
+        slide.extendTo(slide.POSITIONS[slide.MIDMICRO]);
         sleep(600);
         elevator.extendTo(elevator.POSITIONS[elevator.HOME]);
         sleep(50);
         Servos.Gripper.Unlock();
         sleep(700);
-        slide.extendToSlow(slide.POSITIONS[slide.MID]);
+        slide.extendTo(slide.POSITIONS[slide.MID]);
         sleep(300);
 
         Servos.Gripper.closeGripper();
@@ -221,13 +219,13 @@ RM2 extends LinearOpMode
 
         elevator.extendTo(elevator.POSITIONS[elevator.MID_POLE]);
         sleep(400);
-        slide.extendToSlow(slide.POSITIONS[slide.MIDMICRO]);
+        slide.extendTo(slide.POSITIONS[slide.MIDMICRO]);
         sleep(600);
         elevator.extendTo(elevator.POSITIONS[elevator.HOME]);
         sleep(50);
         Servos.Gripper.Unlock();
         sleep(700);
-        slide.extendToSlow(slide.POSITIONS[slide.MID]);
+        slide.extendTo(slide.POSITIONS[slide.MID]);
         sleep(300);
 
         Servos.Gripper.closeGripper();
@@ -250,13 +248,13 @@ RM2 extends LinearOpMode
 
         elevator.extendTo(elevator.POSITIONS[elevator.MID_POLE]);
         sleep(400);
-        slide.extendToSlow(slide.POSITIONS[slide.MIDMICRO]);
+        slide.extendTo(slide.POSITIONS[slide.MIDMICRO]);
         sleep(600);
         elevator.extendTo(elevator.POSITIONS[elevator.HOME]);
         sleep(50);
         Servos.Gripper.Unlock();
         sleep(700);
-        slide.extendToSlow(slide.POSITIONS[slide.MID]);
+        slide.extendTo(slide.POSITIONS[slide.MID]);
         sleep(300);
 
         Servos.Gripper.closeGripper();
@@ -279,13 +277,42 @@ RM2 extends LinearOpMode
 
         elevator.extendTo(elevator.POSITIONS[elevator.MID_POLE]);
         sleep(400);
-        slide.extendToSlow(slide.POSITIONS[slide.MIDMICRO]);
+        slide.extendTo(slide.POSITIONS[slide.MIDMICRO]);
         sleep(600);
         elevator.extendTo(elevator.POSITIONS[elevator.HOME]);
         sleep(50);
         Servos.Gripper.Unlock();
         sleep(700);
-        slide.extendToSlow(slide.POSITIONS[slide.MID]);
+        slide.extendTo(slide.POSITIONS[slide.MID]);
+        sleep(300);
+
+        Servos.Gripper.closeGripper();
+        sleep(300);
+        Servos.Arm.goInit();
+        sleep(300);
+        Servos.Rotate.rotateDrop();
+        Servos.Arm.goActiveDrop();
+        slide.extendTo(slide.POSITIONS[slide.HOME]);
+        sleep(400);
+        Servos.Arm.goDrop();
+        sleep(400);
+        Servos.Gripper.openGripper();
+        sleep(100);
+        Servos.Gripper.Lock();
+        Servos.Arm.goPick();
+        sleep(100);
+        Servos.Rotate.rotatePick();
+        Servos.Arm.goActivePick();
+
+        elevator.extendTo(elevator.POSITIONS[elevator.MID_POLE]);
+        sleep(400);
+        slide.extendTo(slide.POSITIONS[slide.MIDMICRO]);
+        sleep(600);
+        elevator.extendTo(elevator.POSITIONS[elevator.HOME]);
+        sleep(50);
+        Servos.Gripper.Unlock();
+        sleep(700);
+        slide.extendTo(slide.POSITIONS[slide.MID]);
         sleep(300);
 
         Servos.Gripper.closeGripper();
@@ -311,7 +338,7 @@ RM2 extends LinearOpMode
         elevator.extendTo(elevator.POSITIONS[elevator.HOME]);
         sleep(50);
         Servos.Gripper.Unlock();
-        sleep(400);
+        sleep(300);
 
         drive.followTrajectorySequence(park);
 

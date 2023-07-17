@@ -411,27 +411,27 @@ public class APOC_V2 extends LinearOpMode {
 
             if (Y2) {
                 Servos.Rotate.rotatePick();
-                Servos.Gripper.openGripperTele();
+                Servos.Gripper.closeGripper();
                 sleep(300);
                 Servos.Arm.goActivePick1();
                 Servos.Arm.goPickCone1();
             } else if (B2) {
                 Servos.Rotate.rotatePick();
-                Servos.Gripper.openGripperTele();
+                Servos.Gripper.closeGripper();
                 sleep(300);
                 Servos.Arm.goActivePick2();
                 Servos.Arm.goPickCone2();
             }
             else if (A2) {
                 Servos.Rotate.rotatePick();
-                Servos.Gripper.openGripperTele();
+                Servos.Gripper.closeGripper();
                 sleep(300);
                 Servos.Arm.goActivePick3();
                 Servos.Arm.goPickCone3();
             }
             else if (X2) {
                 Servos.Rotate.rotatePick();
-                Servos.Gripper.openGripperTele();
+                Servos.Gripper.closeGripper();
                 sleep(300);
                 Servos.Arm.goActivePick4();
                 Servos.Arm.goPickCone4();
